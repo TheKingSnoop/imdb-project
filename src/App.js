@@ -8,7 +8,9 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <MovieContainer/>
+      <body className="main">
+      <MovieContainer />
+      </body>
     </div>
   );
 }

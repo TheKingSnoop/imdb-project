@@ -1,0 +1,14 @@
+.movie_card {
+    border: 2px solid red;
+    padding: 5px;
+    min-height: 700px;
+    max-height: 700px;
+    overflow: scroll;
+}
+
+.movie_card_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
