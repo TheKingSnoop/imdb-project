@@ -3,6 +3,8 @@ import React from 'react';
 import Navbar from './components/navbar/Navbar';
 import MovieContainer from './components/movieContainer/MovieContainer';
 import {createTheme, colors, ThemeProvider}  from '@mui/material'
+import SearchBar from './components/searchBar/SearchBar';
+import { useState } from 'react';
 
 const theme = createTheme({
     palette: {
@@ -20,14 +22,15 @@ const theme = createTheme({
   })
 
 function App() {
-
+  const [movies, setMovies] = useState([]);
   
   return (
     <ThemeProvider theme={theme}>
     <div className="App">
       <Navbar/>
       <body className="main">
-      <MovieContainer />
+      <SearchBar  movies={movies} setMovies={setMovies}/>
+      <MovieContainer movies={movies} setMovies={setMovies} />
       </body>
       </div>
  </ThemeProvider> );
