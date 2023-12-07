@@ -5,6 +5,7 @@ import MovieContainer from './components/movieContainer/MovieContainer';
 import {createTheme, colors, ThemeProvider}  from '@mui/material'
 import SearchBar from './components/searchBar/SearchBar';
 import { useState } from 'react';
+import Footer from './components/footer/Footer';
 
 const theme = createTheme({
     palette: {
@@ -32,6 +33,7 @@ function App() {
       <SearchBar  movies={movies} setMovies={setMovies}/>
       <MovieContainer movies={movies} setMovies={setMovies} />
       </body>
+      <Footer/>
       </div>
  </ThemeProvider> );
 }

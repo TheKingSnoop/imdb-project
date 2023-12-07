@@ -1,5 +1,6 @@
 import { TextField } from '@mui/material'
 import React, {useState} from 'react'
+import './searchBar.css'
 
 const SearchBar = ({movies, setMovies}) => {
     const [userInput, setUserInput] = useState("");
@@ -15,9 +16,10 @@ const SearchBar = ({movies, setMovies}) => {
         getMovie()
     }
   return (
-    <>
-    <form onSubmit={handleSubmit}>
-        <TextField fullWidth label="Search movie" variant='outlined' onChange={(e) => {setUserInput(e.target.value)}}/></form>
+    <><div className='search_container'>
+    <form className='search_input' onSubmit={handleSubmit}>
+        <TextField fullWidth label="Search movie" variant='outlined' onChange={(e) => {setUserInput(e.target.value)}}/>
+        </form></div>
     </>
   )
 }
