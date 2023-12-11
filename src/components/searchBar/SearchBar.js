@@ -2,7 +2,7 @@ import { TextField } from '@mui/material'
 import React, {useState} from 'react'
 import './searchBar.css'
 
-const SearchBar = ({movies, setMovies}) => {
+const SearchBar = ({setMovies}) => {
     const [userInput, setUserInput] = useState("");
 
     function handleSubmit (e) {
