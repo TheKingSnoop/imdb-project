@@ -6,9 +6,7 @@ import MyMovies from './pages/MyMovies';
 import SignUp from './pages/SignUp';
 import NoPage from './pages/NoPage';
 import Navbar from './components/navbar/Navbar';
-import MovieContainer from './components/movieContainer/MovieContainer';
 import { createTheme, colors, ThemeProvider } from '@mui/material'
-import SearchBar from './components/searchBar/SearchBar';
 import { useState } from 'react';
 import Footer from './components/footer/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -34,9 +32,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Navbar />
+        
         <body className="main">
-          <BrowserRouter>
+          <BrowserRouter><Navbar />
             <Routes>
               <Route index element={<Home movies={movies} setMovies={setMovies} />} />
               <Route path="/home" element={<Home movies={movies} setMovies={setMovies} />} />

@@ -4,6 +4,7 @@ import "./NavBar.css"
 import TheatersIcon from '@mui/icons-material/Theaters';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, CssBaseline, Typography, Toolbar, Box, Button, IconButton, Container, Stack, Menu, MenuList, MenuItem } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     const [anchorNav, setAnchorNav] = useState(null);
@@ -19,15 +20,22 @@ const Navbar = () => {
             <AppBar position='static' color='secondary'>
                 <Toolbar>
                     <div className='navbar_container'>
-                        <IconButton size="large" edge="start" color="inherit" aria-label="logo">
+                    <NavLink to='/'>
+                        <IconButton size="large" edge="start" sx={{color:'white'}} aria-label="logo">
+                            
                             <TheatersIcon />
-                        </IconButton>
+                        </IconButton></NavLink>
                         {/* Desktop Navigation */}
                         <Typography variant='h6' component="div" sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>SEEN IT</Typography>
                         <Box sx={{ display: { xs: "none", md: "flex" } }}>
                             <Stack direction='row' spacing={2}>
-                                <Button variant="contained" sx={{backgroundColor: "secondary.light"}}>SIGN IN</Button>
-                                <Button variant="contained" sx={{backgroundColor: "secondary.dark"}}>DARK MODE</Button>
+                                <NavLink to='/login'>
+                                <Button variant="contained" sx={{backgroundColor: "secondary.light"}}>LOG IN</Button>
+                                </NavLink>
+                                <NavLink to='/signup'>
+                                <Button variant="contained" sx={{backgroundColor: "secondary.light"}}>SIGN UP</Button>
+                                </NavLink>
+                                <Button variant="contained" sx={{backgroundColor: "secondary.dark"}} onClick={()=>alert("in production")}>DARK MODE</Button>
                             </Stack>
                         </Box>
                         {/* Mobile Navigation */}
