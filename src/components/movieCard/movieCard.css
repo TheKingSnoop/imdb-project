@@ -1,0 +1,8 @@
+.rating {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+}
