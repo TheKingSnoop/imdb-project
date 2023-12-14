@@ -30,7 +30,7 @@ const Navbar = ({currentUser}) => {
                         <>
                             {/* Mobile View */}
                             {currentUser && <Typography sx={{marginLeft: 'auto'}}>Hello  {currentUser.name}</Typography>}
-                            <DrawerComp currentUser={currentUser}/>
+                            <DrawerComp currentUser={currentUser} logout={logout}/>
                         </>
                     ) : <>
                         {/* Desktop View */}
@@ -42,7 +42,7 @@ const Navbar = ({currentUser}) => {
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Sign Up</Button>
                         </NavLink> </>:<>
                         <Typography sx={{display: 'flex', alignItems: 'center'}}>Hello {currentUser.name}</Typography>
-                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '60px' }}>Logout</Button>
+                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '60px' }}>Log out</Button>
                        
                        </>}
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.dark', marginLeft: '10px' }}>Dark Mode</Button>

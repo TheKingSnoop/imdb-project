@@ -3,25 +3,33 @@ import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText } 
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom'
 
-const DrawerComp = ({currentUser}) => {
+const DrawerComp = ({ currentUser, logout }) => {
     const [openDrawer, setOpenDrawer] = useState(false);
-    const PAGES = [{ button: "LOGIN", link: "/login" }, { button: "SIGN UP", link: "/signup" }, { button: "DARK MODE" }, {
-        button: "LOG OUT", link:"/", currentUser: currentUser
-    }];
     return (
         <React.Fragment>
             <Drawer open={openDrawer} anchor='right' onClose={() => setOpenDrawer(false)}>
                 <List>
-                    {PAGES.map((page, index) => {
-                        return (
-                            <ListItemButton key={index} onClick={() => setOpenDrawer(false)}>
-                                {currentUser&&<NavLink to={page.link}>
-                                    <ListItemIcon >
-                                        <ListItemText>{page.button}</ListItemText>
-                                    </ListItemIcon></NavLink>}
-                                
-                            </ListItemButton>)
-                    })}
+                    <ListItemButton onClick={() => setOpenDrawer(false)} sx={{display: 'flex', flexDirection:'column', alignItems: 'flex-start'}}>
+                        {!currentUser? <><NavLink to='/login'>
+                            <ListItemIcon >
+                                <ListItemText>LOGIN</ListItemText>
+                            </ListItemIcon>
+                        </NavLink>
+                        <NavLink to='/signup'>
+                            <ListItemIcon >
+                                <ListItemText>SIGN UP</ListItemText>
+                            </ListItemIcon>
+                        </NavLink></>:
+                        <NavLink to='/' onClick={logout}>
+                            <ListItemIcon >
+                                <ListItemText>LOG OUT</ListItemText>
+                            </ListItemIcon>
+                        </NavLink>}
+                        <ListItemIcon >
+                                <ListItemText>DARK MODE</ListItemText>
+                            </ListItemIcon>
+                    </ListItemButton>
+
 
                 </List>
             </Drawer>
