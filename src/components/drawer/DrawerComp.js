@@ -3,9 +3,11 @@ import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText } 
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom'
 
-const PAGES = [{ button: "LOGIN", link: "/login" }, { button: "SIGN UP", link: "/signup" }, { button: "DARK MODE" }];
-const DrawerComp = () => {
+const DrawerComp = ({currentUser}) => {
     const [openDrawer, setOpenDrawer] = useState(false);
+    const PAGES = [{ button: "LOGIN", link: "/login" }, { button: "SIGN UP", link: "/signup" }, { button: "DARK MODE" }, {
+        button: "LOG OUT", link:"/", currentUser: currentUser
+    }];
     return (
         <React.Fragment>
             <Drawer open={openDrawer} anchor='right' onClose={() => setOpenDrawer(false)}>
@@ -13,10 +15,11 @@ const DrawerComp = () => {
                     {PAGES.map((page, index) => {
                         return (
                             <ListItemButton key={index} onClick={() => setOpenDrawer(false)}>
-                                <NavLink to={page.link}>
+                                {currentUser&&<NavLink to={page.link}>
                                     <ListItemIcon >
                                         <ListItemText>{page.button}</ListItemText>
-                                    </ListItemIcon></NavLink>
+                                    </ListItemIcon></NavLink>}
+                                
                             </ListItemButton>)
                     })}
 

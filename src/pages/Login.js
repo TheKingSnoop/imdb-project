@@ -23,7 +23,6 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(userInput)
 
     const login = async () => {
       const response = await fetch('http://localhost:3001/auth/login', {
@@ -36,11 +35,9 @@ const Login = () => {
         "Content-Type": "application/json"
       }
       })
-      console.log(response)
       const token = await response.json()
-      console.log(token)
 
-      cookies.set('jwt', token, { maxAge: 1000 * 60 * 60 * 6, httpOnly: false});
+      cookies.set('jwt',token, { maxAge: 1000 * 60 * 60 * 6, httpOnly: false});
       navigate('/')
       navigate(0);
     }

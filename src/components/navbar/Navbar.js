@@ -25,24 +25,26 @@ const Navbar = ({currentUser}) => {
             <AppBar position='static' color='secondary'>
                 <Toolbar>
                     <NavLink to='/'>
-                        <TheatersIcon sx={{ color: "white" }} /></NavLink>
+                        <TheatersIcon sx={{ color: "white", display: 'flex', alignItems: 'center'}} /></NavLink>
                     {isMatch ? (
                         <>
                             {/* Mobile View */}
-                            <DrawerComp />
+                            {currentUser && <Typography sx={{marginLeft: 'auto'}}>Hello  {currentUser.name}</Typography>}
+                            <DrawerComp currentUser={currentUser}/>
                         </>
                     ) : <>
                         {/* Desktop View */}
                         <Typography sx={{ marginLeft: '10px' }}>SEEN IT</Typography>
                         <Stack direction='row' sx={{marginLeft: 'auto'}}>
-                        {!currentUser? <NavLink to='/login'>
+                        {!currentUser? <><NavLink to='/login'>
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.light'}}>Login</Button>
-                        </NavLink> :
-                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Logout</Button>}
-                       
-                        <NavLink to='/signup'>
+                        </NavLink> <NavLink to='/signup'>
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Sign Up</Button>
-                        </NavLink>
+                        </NavLink> </>:<>
+                        <Typography sx={{display: 'flex', alignItems: 'center'}}>Hello {currentUser.name}</Typography>
+                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '60px' }}>Logout</Button>
+                       
+                       </>}
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.dark', marginLeft: '10px' }}>Dark Mode</Button>
                     </Stack>
                     </>}

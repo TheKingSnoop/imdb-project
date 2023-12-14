@@ -10,6 +10,7 @@ import { createTheme, colors, ThemeProvider } from '@mui/material';
 import Footer from './components/footer/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie'
+import { jwtDecode } from "jwt-decode";
 
 const theme = createTheme({
   palette: {
@@ -31,15 +32,20 @@ function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const cookies = new Cookies()
 
+  const getCurrentUser = () => {
+    const token = cookies.get('jwt')
+    if(token) {
+      return {name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId}
+    }
+  }
   useEffect(() => {
-    const getCurrentUser = () => {
-      return cookies.get('jwt')
-    }
-const user = getCurrentUser();
-    if(user) {
-      setCurrentUser(user);
-    }
-  }, []);
+    const user = getCurrentUser() 
+      if(user) {
+        setCurrentUser(user)
+        console.log('currentUser', currentUser)
+  } 
+    
+  },[]);
 
   return (
     <ThemeProvider theme={theme}>
