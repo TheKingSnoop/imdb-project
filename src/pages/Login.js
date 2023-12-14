@@ -45,7 +45,9 @@ const Login = () => {
     }
     login()
     navigate('/');
-    window.location.reload();
+    setTimeout(()=>{
+      navigate(0)
+    }, 1000)
   }
 
   const margin = { margin: '10px 0px' }

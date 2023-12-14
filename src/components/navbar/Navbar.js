@@ -14,11 +14,11 @@ const Navbar = ({currentUser}) => {
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 
-    // const logout = () => {
-    //     cookies.remove('jwt');
-    //     navigate('/');
-    // window.location.reload();
-    // } 
+    const logout = () => {
+        cookies.remove('jwt');
+        navigate('/');
+    window.location.reload();
+    } 
     return (
         <React.Fragment>
             <CssBaseline />
@@ -38,7 +38,7 @@ const Navbar = ({currentUser}) => {
                         {!currentUser? <NavLink to='/login'>
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.light'}}>Login</Button>
                         </NavLink> :
-                        <Button  variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Logout</Button>}
+                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Logout</Button>}
                        
                         <NavLink to='/signup'>
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Sign Up</Button>
