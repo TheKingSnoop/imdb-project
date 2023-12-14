@@ -5,8 +5,8 @@ import './movieCard.css'
 
 
 const MovieCard = (props) => {
-  const userLoggedIn = false
-
+  const userLoggedIn = true
+  const releaseYear = props.release_date.slice(0,4)
   let colourRating = "black"
 
   if(props.rating <= 6){
@@ -26,7 +26,7 @@ const MovieCard = (props) => {
           <Stack direction="row" spacing={1}> <div className='rating'>
             <StarOutlineIcon sx={{color: colourRating}} /><Typography variant='body2' sx={{color: colourRating}}>{props.rating}</Typography>
           </div></Stack>
-          <Typography variant='body2'>Release Date:{props.release_date}</Typography>
+          <Typography variant='body2'>{releaseYear}</Typography>
         </CardContent>
         {userLoggedIn ? <CardActions>
           <Button size='small'>Seen It?</Button>

@@ -8,7 +8,7 @@ const Login = () => {
   //initialise react navigator
   const navigate = useNavigate()
   //initialise cookies
-  const cookies = new Cookies()
+  const cookies = new Cookies();
   const [userInput, setUserInput] = useState({
     email: '',
     password: ''
@@ -44,7 +44,8 @@ const Login = () => {
       
     }
     login()
-    //navigate('/')
+    navigate('/');
+    window.location.reload();
   }
 
   const margin = { margin: '10px 0px' }

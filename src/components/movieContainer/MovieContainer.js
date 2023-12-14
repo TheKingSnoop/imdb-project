@@ -17,7 +17,7 @@ const MovieContainer = ({ movies, setMovies }) => {
     console.log(movies);
     return (
         <>
-            <Grid container spacing={3} sx={{ maxWidth: "900px", minWidth: "200px"}}>
+            <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px"}}>
                 {movies.map(movie => {
                     return <Grid item md={3} >
                         <MovieCard title={movie.title} rating={movie.rating} description={movie.description} release_date={movie.release_date} image={movie.image} />
