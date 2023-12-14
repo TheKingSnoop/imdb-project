@@ -49,8 +49,8 @@ const user = getCurrentUser();
           <BrowserRouter>
           <Navbar currentUser= {currentUser}/>
             <Routes>
-              <Route index element={<Home movies={movies} setMovies={setMovies} />} />
-              <Route path="/home" element={<Home movies={movies} setMovies={setMovies} />} />
+              <Route index element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser}/>} />
+              <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
               <Route path="/mymovies" element={<MyMovies />} />

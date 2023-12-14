@@ -41,13 +41,10 @@ const Login = () => {
       console.log(token)
 
       cookies.set('jwt', token, { maxAge: 1000 * 60 * 60 * 6, httpOnly: false});
-      
+      navigate('/')
+      navigate(0);
     }
     login()
-    navigate('/');
-    setTimeout(()=>{
-      navigate(0)
-    }, 1000)
   }
 
   const margin = { margin: '10px 0px' }

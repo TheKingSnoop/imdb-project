@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import MovieCard from '../movieCard/MovieCard';
 import Grid from '@mui/material/Grid';
 
-const MovieContainer = ({ movies, setMovies }) => {
+const MovieContainer = ({ movies, setMovies, currentUser }) => {
 
     useEffect(() => {
         async function getTop20Movies() {
@@ -20,7 +20,7 @@ const MovieContainer = ({ movies, setMovies }) => {
             <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px"}}>
                 {movies.map(movie => {
                     return <Grid item md={3} >
-                        <MovieCard title={movie.title} rating={movie.rating} description={movie.description} release_date={movie.release_date} image={movie.image} />
+                        <MovieCard currentUser={currentUser} title={movie.title} rating={movie.rating} description={movie.description} release_date={movie.release_date} image={movie.image} />
                     </Grid>
                 })}
             </Grid>

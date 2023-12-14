@@ -5,7 +5,6 @@ import './movieCard.css'
 
 
 const MovieCard = (props) => {
-  const userLoggedIn = true
   const releaseYear = props.release_date.slice(0,4)
   let colourRating = "black"
 
@@ -28,7 +27,7 @@ const MovieCard = (props) => {
           </div></Stack>
           <Typography variant='body2'>{releaseYear}</Typography>
         </CardContent>
-        {userLoggedIn ? <CardActions>
+        {props.currentUser ? <CardActions>
           <Button size='small'>Seen It?</Button>
         </CardActions> : ""}
       </Card>
