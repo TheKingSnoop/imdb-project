@@ -9,7 +9,6 @@ const MovieCard = (props) => {
   const colourRating = dynamicRating(props)
 
   const handleSubmit = () => {
-    //console.log(props.currentUser.id)
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async() => {
       const response = await fetch('http://localhost:3001/movie/addMovie', {
@@ -21,6 +20,9 @@ const MovieCard = (props) => {
       })
       const data = await response.json()
       console.log(data)
+      if(data.errors) {
+        alert(data.errors[0].msg)
+      }
     }
     addToMovieDatabase()
   }

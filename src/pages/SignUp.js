@@ -26,25 +26,25 @@ const SignUp = () => {
     e.preventDefault()
     console.log(userInput)
 
-    // const signUp = async () => {
-    //   const response = await fetch('http://localhost:3001/auth/signup', {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       email: userInput.email,
-    //       password: userInput.createPassword,
-    //       username: userInput.username,
-    //       name: userInput.name,
-    //       surname: userInput.surname
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     }
-    //   })
-    //   console.log(response)
-    //   const data = await response.json();
-    //   console.log(data)
-    // }
-    // signUp();
+    const signUp = async () => {
+      const response = await fetch('http://localhost:3001/auth/signup', {
+        method: "POST",
+        body: JSON.stringify({
+          email: userInput.email,
+          password: userInput.createPassword,
+          username: userInput.username,
+          name: userInput.name,
+          surname: userInput.surname
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      console.log(response)
+      const data = await response.json();
+      console.log(data)
+    }
+    signUp();
     alert('Successfully created an acount, redirecting you to the login page.')
     navigate('/login')
   }
