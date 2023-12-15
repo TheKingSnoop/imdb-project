@@ -5,6 +5,7 @@ import './movieCard.css'
 
 
 const MovieCard = (props) => {
+  console.log(props)
   const releaseYear = props.release_date.slice(0,4)
   let colourRating = "black"
 
@@ -12,6 +13,18 @@ const MovieCard = (props) => {
     colourRating = "brown"
   } else {
     colourRating = "gold"
+  }
+
+  function addToSeenIt() {
+    const addMovie = {
+      tmdb_id: props.movies[props.index].tmdb_id,
+      title: props.movies[props.index].title,
+      description: props.movies[props.index].description,
+      rating: props.movies[props.index].rating,
+      image: props.movies[props.index].image,
+      release_date: props.movies[props.index].release_date
+    }
+    console.log(addMovie)
   }
   return (
 
@@ -26,6 +39,8 @@ const MovieCard = (props) => {
             <StarOutlineIcon sx={{color: colourRating}} /><Typography variant='body2' sx={{color: colourRating}}>{props.rating}</Typography>
           </div></Stack>
           <Typography variant='body2'>{releaseYear}</Typography>
+          {/* Remove this- Testing Only */}
+          <Button onClick={addToSeenIt}>Seen It TEST</Button>
         </CardContent>
         {props.currentUser ? <CardActions>
           <Button size='small'>Seen It?</Button>
