@@ -14,7 +14,6 @@ const MovieContainer = ({ movies, setMovies, currentUser }) => {
         };
         getTop20Movies();
     }, [])
-    console.log(movies);
     return (
         <>
             <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px"}}>
