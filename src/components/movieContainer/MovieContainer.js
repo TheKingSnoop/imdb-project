@@ -1,19 +1,10 @@
-import { Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import MovieCard from '../movieCard/MovieCard';
 import Grid from '@mui/material/Grid';
 
-const MovieContainer = ({ movies, setMovies, currentUser }) => {
+const MovieContainer = ({ movies, currentUser }) => {
 
-    useEffect(() => {
-        async function getTop20Movies() {
-            const response = await fetch("http://localhost:3001/tmdb");
-            const data = await response.json();
-            //console.log('data', data);
-            setMovies(data.payload);
-        };
-        getTop20Movies();
-    }, [])
+    
     return (
         <>
             <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px"}}>

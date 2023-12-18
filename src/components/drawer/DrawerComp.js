@@ -10,7 +10,8 @@ const DrawerComp = ({ currentUser, logout }) => {
             <Drawer open={openDrawer} anchor='right' onClose={() => setOpenDrawer(false)}>
                 <List>
                     <ListItemButton onClick={() => setOpenDrawer(false)} sx={{display: 'flex', flexDirection:'column', alignItems: 'flex-start'}}>
-                        {!currentUser? <><NavLink to='/login'>
+                        {!currentUser? <>
+                        <NavLink to='/login'>
                             <ListItemIcon >
                                 <ListItemText>LOGIN</ListItemText>
                             </ListItemIcon>
@@ -19,12 +20,20 @@ const DrawerComp = ({ currentUser, logout }) => {
                             <ListItemIcon >
                                 <ListItemText>SIGN UP</ListItemText>
                             </ListItemIcon>
-                        </NavLink></>:
-                        <NavLink to='/' onClick={logout}>
+                        </NavLink>
+                        </>:
+                        <>
+                        <NavLink to='/mymovies'>
+                            <ListItemIcon >
+                                <ListItemText>MY MOVIES</ListItemText>
+                            </ListItemIcon>
+                        </NavLink>
+                         <NavLink to='/' onClick={logout}>
                             <ListItemIcon >
                                 <ListItemText>LOG OUT</ListItemText>
                             </ListItemIcon>
-                        </NavLink>}
+                        </NavLink>
+                        </>}
                         <ListItemIcon >
                                 <ListItemText>DARK MODE</ListItemText>
                             </ListItemIcon>
