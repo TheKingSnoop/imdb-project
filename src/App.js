@@ -32,20 +32,21 @@ function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const cookies = new Cookies()
 
+  useEffect(() => {
+    const user = getCurrentUser() 
+      if(user) {
+        setCurrentUser(user)
+      } 
+      console.log('currentUser', currentUser)
+      
+  },[]);
+  
   const getCurrentUser = () => {
     const token = cookies.get('jwt')
     if(token) {
       return {name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId}
     }
   }
-  useEffect(() => {
-    const user = getCurrentUser() 
-      if(user) {
-        setCurrentUser(user)
-        console.log('currentUser', currentUser)
-  } 
-    
-  },[]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -59,7 +60,7 @@ function App() {
               <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
-              <Route path="/mymovies" element={<MyMovies />} />
+              <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies} />} />
               <Route path="*" element={<NoPage/>}/>
             </Routes>
           </BrowserRouter>

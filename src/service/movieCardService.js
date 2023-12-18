@@ -1,7 +1,7 @@
 export function addToSeenIt(props) {
     const addMovie = {
       user_Id: props.currentUser.id,
-      tmdb_Id: props.movies[props.index].tmdb_id,
+      tmdb_Id: props.movies[props.index].tmdb_Id,
       title: props.movies[props.index].title,
       description: props.movies[props.index].description,
       rating: props.movies[props.index].rating,

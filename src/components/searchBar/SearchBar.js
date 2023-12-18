@@ -10,6 +10,7 @@ const SearchBar = ({setMovies}) => {
         const getMovie = async() => {
             const response = await fetch(`http://localhost:3001/tmdb/${userInput}`)
             const data = await response.json();
+            console.log('searchbox',data)
             setMovies(data.payload)
         }
         getMovie()

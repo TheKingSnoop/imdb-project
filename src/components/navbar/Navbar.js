@@ -24,6 +24,7 @@ const Navbar = ({currentUser}) => {
             <CssBaseline />
             <AppBar position='static' color='secondary'>
                 <Toolbar>
+                    
                     <NavLink to='/'>
                         <TheatersIcon sx={{ color: "white", display: 'flex', alignItems: 'center'}} /></NavLink>
                     {isMatch ? (
