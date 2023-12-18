@@ -24,6 +24,7 @@ const Navbar = ({currentUser}) => {
             <CssBaseline />
             <AppBar position='static' color='secondary'>
                 <Toolbar>
+                    
                     <NavLink to='/'>
                         <TheatersIcon sx={{ color: "white", display: 'flex', alignItems: 'center'}} /></NavLink>
                     {isMatch ? (
@@ -36,13 +37,17 @@ const Navbar = ({currentUser}) => {
                         {/* Desktop View */}
                         <Typography sx={{ marginLeft: '10px' }}>SEEN IT</Typography>
                         <Stack direction='row' sx={{marginLeft: 'auto'}}>
-                        {!currentUser? <><NavLink to='/login'>
+                        {!currentUser? <>
+                        <NavLink to='/login'>
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.light'}}>Login</Button>
                         </NavLink> <NavLink to='/signup'>
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Sign Up</Button>
                         </NavLink> </>:<>
                         <Typography sx={{display: 'flex', alignItems: 'center'}}>Hello {currentUser.name}</Typography>
-                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '60px' }}>Log out</Button>
+                        <NavLink to='/mymovies'>
+                        <Button variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft:'60px'}}>my movies</Button>
+                        </NavLink>
+                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Log out</Button>
                        
                        </>}
                         <Button variant='contained' sx={{ backgroundColor: 'secondary.dark', marginLeft: '10px' }}>Dark Mode</Button>

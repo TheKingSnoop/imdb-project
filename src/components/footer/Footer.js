@@ -9,7 +9,6 @@ import Link from '@mui/material/Link';;
 const Footer = () => {
 
     return (
-      
         <Box sx={{ bgcolor: "secondary.main", color: "white", display:'flex', justifyContent: 'center', flexDirection: 'column', border: "2px solid pink", alignItems: 'center' }}>
                 <Stack spacing={2} direction='row' sx={{py:3}}>
                     <CopyrightIcon />
@@ -37,7 +36,6 @@ const Footer = () => {
                 </Grid>
             </Container>
         </Box>
-
 
     )
 }
