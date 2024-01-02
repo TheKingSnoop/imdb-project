@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: solid 2px green;
     margin-top: 56px;
     min-height: calc(100vh - 95px);
 }

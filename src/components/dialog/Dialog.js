@@ -1,8 +1,9 @@
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import FormComponent from '../form/FormComponent';
 
 
-const DialogComponent = ({name, dialogText, handleDelete, dialogTitle}) => {
+const DialogComponent = ({name, dialogText, handleSubmit, dialogTitle, form}) => {
     const [open, setOpen] = useState(false)
     return (
         <>
@@ -17,12 +18,13 @@ const DialogComponent = ({name, dialogText, handleDelete, dialogTitle}) => {
                         {dialogText}
                     </DialogContentText>
                 </DialogContent>
+                {form && <FormComponent setOpen={setOpen}/>}
                 <DialogActions>
                     <Button onClick={() => setOpen(false)}>
                         CANCEL
                     </Button>
-                    <Button autoFocus onClick={() => handleDelete() && setOpen(false)}>
-                        REMOVE
+                    <Button autoFocus onClick={() => handleSubmit() && setOpen(false)}>
+                        {name}
                     </Button>
                 </DialogActions>
             </Dialog>

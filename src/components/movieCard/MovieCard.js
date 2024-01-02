@@ -35,9 +35,10 @@ const MovieCard = (props) => {
   const handleDelete = () => {
     const token = cookies.get('jwt')
     const movie_Id = props.movies[props.index]._id
+    const review_Id = props.movies[props.index].userReviewId
 
     const deleteMovieFromDatabase = async () => {
-      const response = await fetch(`http://localhost:3001/movie/my-movies/delete/${movie_Id}`, {
+      const response = await fetch(`http://localhost:3001/movie/my-movies/delete/${movie_Id}/${review_Id}`, {
         method: 'DELETE',
         headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" }
       })
@@ -62,13 +63,21 @@ const MovieCard = (props) => {
           <Typography variant='body2'>{releaseYear}</Typography>
         </CardContent>
         {props.currentUser ? <CardActions>
+          {/* signed in and home page */}
           {!props.movies[props.index]._id && <Button onClick={handleSubmit} size='medium' sx={{
             color: "white", bgcolor: "secondary.main", '&:hover': {
               backgroundColor: 'primary.light'
             }
           }}>Seen It?</Button>}
-          {props.movies[props.index]._id && <DialogComponent name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleDelete={handleDelete} dialogTitle={'Remove Movie'} />}
-        </CardActions> : ""}
+          {/* myMovies page and signed in */}
+          {props.movies[props.index]._id && 
+          <Stack direction="row" spacing={1}>
+            <DialogComponent name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
+            <DialogComponent name={'REVIEW'} dialogTitle={'Add your review'} form={true}/>
+          </Stack>}
+        </CardActions> : 
+        // not signed in
+        ""}
       </Card>
     </Box>
   )
