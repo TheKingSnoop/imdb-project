@@ -20,12 +20,13 @@ const DialogComponent = ({name, dialogText, handleSubmit, dialogTitle, form}) =>
                 </DialogContent>
                 {form && <FormComponent setOpen={setOpen}/>}
                 <DialogActions>
-                    <Button onClick={() => setOpen(false)}>
+                    {!form && <><Button onClick={() => setOpen(false)}>
                         CANCEL
                     </Button>
                     <Button autoFocus onClick={() => handleSubmit() && setOpen(false)}>
                         {name}
                     </Button>
+                    </>}
                 </DialogActions>
             </Dialog>
         </>

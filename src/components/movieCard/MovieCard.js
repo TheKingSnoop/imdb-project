@@ -73,7 +73,7 @@ const MovieCard = (props) => {
           {props.movies[props.index]._id && 
           <Stack direction="row" spacing={1}>
             <DialogComponent name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
-            <DialogComponent name={'REVIEW'} dialogTitle={'Add your review'} form={true}/>
+            <DialogComponent name={'REVIEW'} form={true}/>
           </Stack>}
         </CardActions> : 
         // not signed in
