@@ -5,8 +5,9 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
+import { addReviewToDatabase } from '../../service/movieCardService';
 
-const FormComponent = ({ setOpen }) => {
+const FormComponent = ({ setOpen, movies, index }) => {
   const [userInput, setUserInput] = useState({
     rating: '',
     analysis: '',
@@ -23,7 +24,24 @@ const FormComponent = ({ setOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(userInput)
+    const review_Id = movies[index].userReviewId[0]
+    // console.log(userInput)
+    const addReviewToDatabase = async () => {
+      const response = await fetch(`http://localhost:3001/review/updateMyReview/${review_Id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          user_rating: userInput.rating,
+          user_analysis: userInput.analysis,
+          isFavourite: userInput.isFavourite
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      const data = await response.json()
+      console.log(data)
+    }
+    addReviewToDatabase()
     setOpen(false)
   }
 
@@ -47,7 +65,6 @@ const FormComponent = ({ setOpen }) => {
           <TextField onChange={handleInputChange} name='analysis' multiline rows={2} value={userInput.analysis} sx={margin} type={"text"} fullWidth label='Analysis' placeholder='For e.g. The ending of this movie was spectacular' />
           <Button sx={margin} type='submit' variant='contained' color='primary'>Add Review</Button>
       </form>
-      {/* </Paper> */}
     </Box>
   )
 }
