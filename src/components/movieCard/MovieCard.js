@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack } from '@mui/material';
+import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addToSeenIt, dynamicRating } from '../../service/movieCardService'
@@ -89,7 +89,7 @@ const MovieCard = (props) => {
           <Box>
             <CardContent>
             <Typography variant='h6'>My Review</Typography>
-            <Typography variant='body2'>{props.user_rating}</Typography>
+            <Rating value={props.user_rating} precision={0.5} size='large'/>
             <Typography variant='body2'>User analysis: {props.user_analysis}</Typography>
             <Typography variant='body2'>{props.isFavourite ? "Favourite": "Not Favourite"}</Typography>
             </CardContent>

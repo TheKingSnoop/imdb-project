@@ -2,7 +2,7 @@ import React from 'react'
 import { Paper, Grid, Typography, TextField, Button, Box, Stack } from '@mui/material'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
 import { addReviewToDatabase } from '../../service/movieCardService';
@@ -14,6 +14,8 @@ const FormComponent = ({ setOpen, movies, index }) => {
     isFavourite: false
   });
 
+  const navigate = useNavigate();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setUserInput({
@@ -23,10 +25,10 @@ const FormComponent = ({ setOpen, movies, index }) => {
   };
 
   const handleSubmit = (e) => {
-    //e.preventDefault()
+    e.preventDefault()
     const review_Id = movies[index].userReviewId[0]._id
     // console.log('review_Id', review_Id)
-    // console.log(userInput)
+    console.log(userInput)
     const addReviewToDatabase = async () => {
       const response = await fetch(`http://localhost:3001/review/updateMyReview/${review_Id}`, {
         method: 'PATCH',
@@ -41,9 +43,10 @@ const FormComponent = ({ setOpen, movies, index }) => {
       })
       const data = await response.json()
       console.log(data)
+      setOpen(false)
+      navigate(0);
     }
     addReviewToDatabase()
-    setOpen(false)
   }
 
   const margin = { margin: '10px 0px' }
