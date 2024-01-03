@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Typography, Stack, Grid, Container } from '@mui/material';
+import { Box, CssBaseline, Typography, Stack, Grid, Container, BottomNavigation } from '@mui/material';
 import React from 'react';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -9,12 +9,12 @@ import Link from '@mui/material/Link';;
 const Footer = () => {
 
     return (
-        <Box sx={{ bgcolor: "secondary.main", color: "white", display:'flex', justifyContent: 'center', flexDirection: 'column', border: "2px solid pink", alignItems: 'center' }}>
-                <Stack spacing={2} direction='row' sx={{py:3}}>
+        <BottomNavigation sx={{ bgcolor: "secondary.main", color: "white", display:'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', marginTop: 'auto'}}>
+                <Stack spacing={2} direction='row'>
                     <CopyrightIcon />
                     <Typography variant="body1">SEEN IT 2023</Typography>
                 </Stack>
-            <Container maxWidth='md' sx={{ py: 6, border:"2px solid green",  display:'flex', alignItems: "center", flexDirection: 'column'}}>
+            {/* <Container maxWidth='md' sx={{ py: 6, border:"2px solid green",  display:'flex', alignItems: "center", flexDirection: 'column'}}>
                 <Grid container spacing={4} width="100%" sx={{ border: "2px solid orange"}}>
                     <Grid item xs={12} md={6} sx={{border:"2px solid purple", display: "flex", justifyContent: "center"}}>
                         <Stack spacing={2}>
@@ -34,8 +34,8 @@ const Footer = () => {
                         </Stack>
                     </Grid>
                 </Grid>
-            </Container>
-        </Box>
+            </Container> */}
+        </BottomNavigation>
 
     )
 }

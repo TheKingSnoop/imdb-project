@@ -22,7 +22,7 @@ const Navbar = ({currentUser}) => {
     return (
         <React.Fragment>
             <CssBaseline />
-            <AppBar position='static' color='secondary'>
+            <AppBar color='secondary' height="500px">
                 <Toolbar>
                     
                     <NavLink to='/'>
