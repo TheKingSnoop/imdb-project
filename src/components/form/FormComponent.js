@@ -9,7 +9,7 @@ import { addReviewToDatabase } from '../../service/movieCardService';
 
 const FormComponent = ({ setOpen, movies, index }) => {
   const [userInput, setUserInput] = useState({
-    rating: '',
+    rating: null,
     analysis: '',
     isFavourite: false
   });
@@ -23,8 +23,9 @@ const FormComponent = ({ setOpen, movies, index }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const review_Id = movies[index].userReviewId[0]
+    //e.preventDefault()
+    const review_Id = movies[index].userReviewId[0]._id
+    // console.log('review_Id', review_Id)
     // console.log(userInput)
     const addReviewToDatabase = async () => {
       const response = await fetch(`http://localhost:3001/review/updateMyReview/${review_Id}`, {

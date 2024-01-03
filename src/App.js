@@ -54,7 +54,7 @@ function App() {
         
           <BrowserRouter>
           <Navbar currentUser= {currentUser}/>
-        <body className="main">
+        <main className="main">
             <Routes>
               <Route index element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser}/>} />
               <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} />} />
@@ -63,7 +63,7 @@ function App() {
               <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies} />} />
               <Route path="*" element={<NoPage/>}/>
             </Routes>
-          </body>
+          </main>
           </BrowserRouter>
         <Footer />
       
