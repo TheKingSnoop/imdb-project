@@ -2,10 +2,10 @@ import React from 'react'
 import MovieCard from '../movieCard/MovieCard';
 import Grid from '@mui/material/Grid';
 
-const MovieContainer = ({ movies, currentUser, filterUserInput }) => {
+const MovieContainer = ({ movies, currentUser, movieDescription }) => {
 
     return (
-            <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px"}}>
+            <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px", display:'flex'}}>
                 {movies.map((movie, index) => {
                     return <Grid key={index} item md={3} >
                         <MovieCard
@@ -21,6 +21,7 @@ const MovieContainer = ({ movies, currentUser, filterUserInput }) => {
                         user_rating={movie.userReviewId && movie.userReviewId[0].user_rating}
                         user_analysis={movie.userReviewId && movie.userReviewId[0].user_analysis}
                         isFavourite={movie.userReviewId && movie.userReviewId[0].isFavourite}
+                        movieDescription= {movieDescription}
                         />
                     </Grid>
                 })}

@@ -3,7 +3,9 @@ import MovieContainer from '../components/movieContainer/MovieContainer'
 import SearchBar from '../components/searchBar/SearchBar'
 import { Container, Box } from '@mui/material'
 
-const Home = ({movies, setMovies, currentUser}) => {
+const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescription}) => {
+  console.log(movieDescription)
+  setMovieDescription(true)
   useEffect(() => {
     async function getTop20Movies() {
         const response = await fetch("http://localhost:3001/tmdb");
@@ -17,7 +19,7 @@ const Home = ({movies, setMovies, currentUser}) => {
    <Box>
    <Container maxWidth='md' sx={{ py: 6 }}>
    <SearchBar setMovies={setMovies}/>
-   <MovieContainer movies={movies} currentUser={currentUser}/>
+   <MovieContainer movies={movies} currentUser={currentUser} movieDescription={movieDescription}/>
    </Container>
    </Box>
   )

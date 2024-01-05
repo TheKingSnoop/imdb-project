@@ -51,18 +51,18 @@ const FormComponent = ({ setOpen, movies, index }) => {
   const margin = { margin: '10px 0px' }
 
   return (
-    <Box align='center' sx={{ padding: '0 20px', width: { md: '450px', xs: '350px' } }}>
-      <Grid sx={{marginBottom:'50px'}}>
+    <Box align='center' sx={{ padding: '0 20px', width: { md: '450px', xs: '300px' } }}>
+      <Grid sx={{marginBottom:'50px', maxWidth:'100%'}}>
         <RateReviewIcon color='secondary' sx={{ marginBottom: '20px', fontSize: '50px' }} />
         <Typography variant='h5' sx={{ fontWeight: "bold" }}>Review</Typography>
         <Typography variant='caption'>Please fill in this form to add a review.</Typography>
       </Grid>
       <form onSubmit={handleSubmit}>
         <Stack direction='row' spacing={2} sx={{ display: 'flex', alignItems: 'center' }}>
-        <Typography>Rate this movie</Typography>
+        <Typography variant='body2'>Rate this movie</Typography>
           <RatingComponent userInput={userInput} setUserInput={setUserInput} />
           </Stack>
-          <Stack direction='row' spacing={2} sx={{ display: 'flex', alignItems: 'baseline' }}><Typography>Add to Favourites?</Typography>
+          <Stack direction='row' spacing={2} sx={{ display: 'flex', alignItems: 'baseline' }}><Typography variant='body2'>Add to Favourites?</Typography>
             <IsFavouriteButton userInput={userInput} setUserInput={setUserInput}/>
           </Stack>
           <TextField onChange={handleInputChange} name='analysis' multiline rows={2} value={userInput.analysis} sx={margin} type={"text"} fullWidth label='Analysis' placeholder='For e.g. The ending of this movie was spectacular' />

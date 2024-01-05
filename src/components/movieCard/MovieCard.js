@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating } from '@mui/material';
+import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addToSeenIt, dynamicRating } from '../../service/movieCardService'
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import DialogComponent from '../dialog/Dialog';
 
 const MovieCard = (props) => {
+  //console.log("loooook",props.movieDescription)
   const navigate = useNavigate();
   const cookies = new Cookies();
   const token = cookies.get('jwt')
@@ -57,18 +58,20 @@ const MovieCard = (props) => {
   return (
 
     <Box width='200'>
-      <Card sx={{ minHeight: "600px", maxHeight:'auto', bgcolor: "secondary.light" }}>
+      <Card sx={{ minHeight: "500px", maxHeight:'auto', bgcolor: "secondary.light"}}>
         <Box sx={{position: 'relative'}}>
-          <CardMedia component='img' height='320' width='200' image={props.image}/>
+        <Tooltip title={props.title}>
+          <CardMedia component='img' minHeight='auto' width='100%' image={props.image} sx={{objectFit: 'contain', maxWidth:'320px'}}/>
           {props.isFavourite && <FavoriteIcon sx={{position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'secondary.light'}}/>}
+        </Tooltip>
         </Box>
         <CardContent>
-          <Typography variant='h6' gutterBottom sx={{ height: "30px", overflow: "hidden" }}>{props.title}</Typography>
-          <Typography variant='body2' gutterBottom sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography>
+          {/* <Typography variant='h6' gutterBottom sx={{ height: "30px", overflow: "hidden" }}>{props.title}</Typography> */}
+          {props.movieDescription ? <Typography variant='body2' gutterBottom sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> : null}
           <Stack direction="row" spacing={1}>
             <div className='rating'>
             <StarOutlineIcon sx={{ color: colourRating }} />
-            <Typography variant='body2' sx={{ color: colourRating }}>{props.rating}</Typography>
+            <Typography variant='body2' sx={{ color: colourRating }}>{Math.round(props.rating * 10) / 10}</Typography>
             </div>
           </Stack>
           <Typography variant='body2'>{releaseYear}</Typography>

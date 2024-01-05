@@ -6,8 +6,9 @@ import { Box, Container } from '@mui/system';
 import SearchFilter from '../components/searchFilter/SearchFilter';
 import { Button } from '@mui/material';
 
-const MyMovies = ({ movies, setMovies, currentUser }) => {
+const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDescription }) => {
   const [filterUserInput, setFilterUserInput] = useState("")
+  setMovieDescription(false)
   const cookies = new Cookies()
   useEffect(() => {
     getMyMovies();
@@ -31,10 +32,10 @@ const MyMovies = ({ movies, setMovies, currentUser }) => {
 
   return (
     <Box sx={{display:'flex', flexDirection: 'column', alignItems:'center'}}>
-    <Button onClick={getMyMovies}>view all</Button>
+    <Button sx={{marginTop: '20px'}} onClick={getMyMovies}>view all</Button>
       <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies}/>
       <Container maxWidth='md' sx={{ py: 6 }}>
-        <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} filterUserInput={filterUserInput}/>
+        <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription}/>
       </Container>
     </Box>
   )

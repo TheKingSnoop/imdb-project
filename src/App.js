@@ -30,6 +30,7 @@ const theme = createTheme({
 function App() {
   const [movies, setMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [movieDescription, setMovieDescription] = useState(true);
   const cookies = new Cookies()
 
   useEffect(() => {
@@ -56,11 +57,11 @@ function App() {
           <Navbar currentUser= {currentUser}/>
         <main className="main">
             <Routes>
-              <Route index element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser}/>} />
-              <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} />} />
+              <Route index element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
+              <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
-              <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies} />} />
+              <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies}  movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="*" element={<NoPage/>}/>
             </Routes>
           </main>
