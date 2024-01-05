@@ -1,11 +1,10 @@
 import React from 'react'
-import { Paper, Grid, Typography, TextField, Button, Box, Stack } from '@mui/material'
+import { Grid, Typography, TextField, Button, Box, Stack } from '@mui/material'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
-import { addReviewToDatabase } from '../../service/movieCardService';
 
 const FormComponent = ({ setOpen, movies, index }) => {
   const [userInput, setUserInput] = useState({
@@ -27,8 +26,8 @@ const FormComponent = ({ setOpen, movies, index }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const review_Id = movies[index].userReviewId[0]._id
-    // console.log('review_Id', review_Id)
-    console.log(userInput)
+    //console.log('review_Id', review_Id)
+    //console.log(userInput)
     const addReviewToDatabase = async () => {
       const response = await fetch(`http://localhost:3001/review/updateMyReview/${review_Id}`, {
         method: 'PATCH',

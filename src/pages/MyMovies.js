@@ -3,9 +3,10 @@ import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 import MovieContainer from '../components/movieContainer/MovieContainer';
 import { Box, Container } from '@mui/system';
+import SearchFilter from '../components/searchFilter/SearchFilter';
 
 const MyMovies = ({ movies, setMovies, currentUser }) => {
-  //const [myMovies, setMyMovies] = useState(undefined);
+  const [filterUserInput, setFilterUserInput] = useState("")
   const cookies = new Cookies()
   useEffect(() => {
     async function getMyMovies() {
@@ -23,12 +24,14 @@ const MyMovies = ({ movies, setMovies, currentUser }) => {
     };
     getMyMovies();
   }, [])
+
   return (
     <Box>
-   <Container maxWidth='md' sx={{ py: 6 }}>
-   <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser}/>
-   </Container>
-   </Box>
+      <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}/>
+      <Container maxWidth='md' sx={{ py: 6 }}>
+        <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} filterUserInput={filterUserInput}/>
+      </Container>
+    </Box>
   )
 }
 

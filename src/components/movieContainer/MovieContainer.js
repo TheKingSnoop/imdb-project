@@ -2,13 +2,17 @@ import React from 'react'
 import MovieCard from '../movieCard/MovieCard';
 import Grid from '@mui/material/Grid';
 
-const MovieContainer = ({ movies, currentUser }) => {
+const MovieContainer = ({ movies, currentUser, filterUserInput }) => {
 
-    
     return (
-        <>
             <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px"}}>
-                {movies.map((movie, index) => {
+                {movies.filter(movie => {
+                    if(filterUserInput === "") {
+                        return movie;
+                    } else if(movie.title.toLowerCase().includes(filterUserInput.toLowerCase())) {
+                        return movie
+                    }
+                }).map((movie, index) => {
                     return <Grid key={index} item md={3} >
                         <MovieCard
                         movies={movies}
@@ -27,8 +31,6 @@ const MovieContainer = ({ movies, currentUser }) => {
                     </Grid>
                 })}
             </Grid>
-
-        </>
     )
 }
 
