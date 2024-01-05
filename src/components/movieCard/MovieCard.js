@@ -89,9 +89,8 @@ const MovieCard = (props) => {
           <Box>
             <CardContent>
             <Typography variant='h6'>My Review</Typography>
-            <Rating value={props.user_rating} precision={0.5} size='large'/>
-            <Typography variant='body2'>User analysis: {props.user_analysis}</Typography>
-            <Typography variant='body2'>{props.isFavourite ? "Favourite": "Not Favourite"}</Typography>
+            <Rating value={props.user_rating} precision={0.5} size='large' readOnly/>
+            <Typography variant='body2'>{props.user_analysis}</Typography>
             </CardContent>
           <Stack direction="row" spacing={1}>
             <CardActions sx={{display: 'flex', width: '100%', justifyContent: 'space-around'}}>
