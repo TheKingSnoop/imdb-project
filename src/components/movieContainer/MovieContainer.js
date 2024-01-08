@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 const MovieContainer = ({ movies, currentUser, movieDescription }) => {
 
     return (
-            <Grid container spacing={3} sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "200px", display:'flex'}}>
+            <Grid container spacing={3} sx={{ width: {md: "900px", xs: '320px'}, minWidth: "200px", display:'flex'}}>
                 {movies.map((movie, index) => {
                     return <Grid key={index} item md={3} >
                         <MovieCard
