@@ -1,6 +1,7 @@
 import React from 'react';
-import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack } from '@mui/material';
+import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addToSeenIt, dynamicRating } from '../../service/movieCardService'
 import './movieCard.css'
 import Cookies from 'universal-cookie'
@@ -8,8 +9,10 @@ import { useNavigate } from 'react-router-dom'
 import DialogComponent from '../dialog/Dialog';
 
 const MovieCard = (props) => {
+  //console.log("loooook",props.movieDescription)
   const navigate = useNavigate();
   const cookies = new Cookies();
+  const token = cookies.get('jwt')
 
   const releaseYear = props.release_date.slice(0, 4)
   const colourRating = dynamicRating(props)
@@ -21,6 +24,7 @@ const MovieCard = (props) => {
         method: 'POST',
         body: JSON.stringify(movieToAdd),
         headers: {
+          "Authorization": "Bearer " + token.token,
           "Content-Type": "application/json"
         }
       })
@@ -33,9 +37,11 @@ const MovieCard = (props) => {
   }
 
   const handleDelete = () => {
-    const token = cookies.get('jwt')
+    console.log(props.movies)
     const movie_Id = props.movies[props.index]._id
-    const review_Id = props.movies[props.index].userReviewId
+    const review_Id = props.movies[props.index].userReviewId[0]._id
+    console.log('movie_Id', movie_Id)
+    console.log('review_Id', review_Id)
 
     const deleteMovieFromDatabase = async () => {
       const response = await fetch(`http://localhost:3001/movie/my-movies/delete/${movie_Id}/${review_Id}`, {
@@ -52,30 +58,51 @@ const MovieCard = (props) => {
   return (
 
     <Box width='200'>
-      <Card sx={{ maxHeight: "600px", bgcolor: "secondary.light" }}>
-        <CardMedia component='img' height='320' width='200' image={props.image} />
-        <CardContent>
-          <Typography variant='h6' gutterBottom sx={{ height: "30px", overflow: "hidden" }}>{props.title}</Typography>
-          <Typography variant='body2' gutterBottom sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography>
-          <Stack direction="row" spacing={1}> <div className='rating'>
-            <StarOutlineIcon sx={{ color: colourRating }} /><Typography variant='body2' sx={{ color: colourRating }}>{props.rating}</Typography>
-          </div></Stack>
+      <Card sx={{ minHeight: "500px", maxHeight:'auto', minWidth: '200px', bgcolor: "secondary.light"}}>
+        <Box sx={{position: 'relative'}}>
+        <Tooltip title={props.title}>
+          <CardMedia component='img' minHeight='auto' width='100%' image={props.image} sx={{objectFit: 'contain', maxWidth:'320px'}}/>
+          {props.isFavourite && <FavoriteIcon sx={{position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'secondary.light'}}/>}
+        </Tooltip>
+        </Box>
+        <CardContent sx={{paddingBottom: '0px'}}>
+          {/* <Typography variant='h6' gutterBottom sx={{ height: "30px", overflow: "hidden" }}>{props.title}</Typography> */}
+          {props.movieDescription ? <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> : null}
+          <Stack direction="row" spacing={1}>
+            <div className='rating'>
+            <StarOutlineIcon sx={{ color: colourRating }} />
+            <Typography variant='body2' sx={{ color: colourRating }}>{Math.round(props.rating * 10) / 10}</Typography>
+            </div>
+          </Stack>
           <Typography variant='body2'>{releaseYear}</Typography>
         </CardContent>
-        {props.currentUser ? <CardActions>
+        {props.currentUser ? <>
           {/* signed in and home page */}
-          {!props.movies[props.index]._id && <Button onClick={handleSubmit} size='medium' sx={{
-            color: "white", bgcolor: "secondary.main", '&:hover': {
+          {!props.movies[props.index]._id &&
+          <CardActions>
+            <Button onClick={handleSubmit} size='medium' sx={{
+              color: "white", bgcolor: "secondary.main", '&:hover': {
               backgroundColor: 'primary.light'
             }
-          }}>Seen It?</Button>}
+          }}>Seen It?
+            </Button>
+          </CardActions>}
           {/* myMovies page and signed in */}
           {props.movies[props.index]._id && 
+          <Box>
+            <CardContent>
+            <Typography variant='h6'>My Review</Typography>
+            <Rating value={props.user_rating} precision={0.5} size='large' readOnly/>
+            <Typography variant='body2'>{props.user_analysis}</Typography>
+            </CardContent>
           <Stack direction="row" spacing={1}>
+            <CardActions sx={{display: 'flex', width: '100%', justifyContent: 'space-around'}}>
             <DialogComponent name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
             <DialogComponent name={'REVIEW'} form={true} movies={props.movies} index={props.index}/>
-          </Stack>}
-        </CardActions> : 
+            </CardActions>
+          </Stack>
+          </Box>}
+         </>: 
         // not signed in
         ""}
       </Card>

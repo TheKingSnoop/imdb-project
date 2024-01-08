@@ -20,12 +20,3 @@ export function addToSeenIt(props) {
     }
     return colourRating
   }
-
-  export function addReviewToDatabase(props) {
-    // const addReview = {
-    //   user_analysis: props.userInput.analysis,
-    //     user_rating: props.userInput.rating,
-    //     isFavourite: props.userInput.isFavourite
-    //   }
-    
-  }

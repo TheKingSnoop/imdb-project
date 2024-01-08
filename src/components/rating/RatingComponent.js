@@ -1,7 +1,7 @@
-import {Rating, Box} from '@mui/material'
-import React, {useState} from 'react'
+import { Rating, Box } from '@mui/material'
+import React, { useState } from 'react'
 
-const RatingComponent = ({userInput, setUserInput}) => {
+const RatingComponent = ({ userInput, setUserInput }) => {
 
   const handleChange = (event, newValue) => {
     setUserInput({
@@ -11,16 +11,16 @@ const RatingComponent = ({userInput, setUserInput}) => {
   }
   return (
     <>
-    <Box sx={{width: "auto"}}>
-    <Rating
-    value={userInput.rating}
-    precision={0.5}
-    size='large'
-    onChange={handleChange}/>
-    </Box>
+      <Box sx={{ width: "auto" }}>
+        <Rating
+          value={userInput.rating}
+          precision={0.5}
+          size='large'
+          onChange={handleChange}
+        />
+      </Box>
     </>
   )
 }
 
 export default RatingComponent
-       
