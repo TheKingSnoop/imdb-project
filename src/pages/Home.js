@@ -4,7 +4,6 @@ import SearchBar from '../components/searchBar/SearchBar'
 import { Container, Box } from '@mui/material'
 
 const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescription}) => {
-  console.log(movieDescription)
   setMovieDescription(true)
   useEffect(() => {
     async function getTop20Movies() {

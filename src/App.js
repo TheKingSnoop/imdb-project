@@ -51,8 +51,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      
-        
           <BrowserRouter>
           <Navbar currentUser= {currentUser}/>
         <main className="main">
