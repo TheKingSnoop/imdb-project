@@ -58,10 +58,10 @@ const MovieCard = (props) => {
   return (
 
     <Box width='200'>
-      <Card sx={{ minHeight: "500px", maxHeight:'auto', minWidth: '200px', bgcolor: "secondary.light"}}>
+      <Card sx={{ minHeight: "500px", maxHeight:'auto', minWidth: '200px', bgcolor: "primary.light"}}>
         <Tooltip title={props.title}><Box sx={{position: 'relative'}}>
           <CardMedia component='img' width='100%' image={props.image} sx={{objectFit: 'contain', maxWidth:'320px'}}/> 
-          {props.isFavourite && <FavoriteIcon sx={{position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'secondary.light'}}/>}
+          {props.isFavourite && <FavoriteIcon sx={{position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'primary.light'}}/>}
        
         </Box></Tooltip>
         <CardContent sx={{paddingBottom: '0px'}}>
@@ -79,9 +79,9 @@ const MovieCard = (props) => {
           {/* signed in and home page */}
           {!props.movies[props.index]._id &&
           <CardActions>
-            <Button onClick={handleSubmit} size='medium' sx={{
-              color: "white", bgcolor: "secondary.main", '&:hover': {
-              backgroundColor: 'primary.light'
+            <Button onClick={handleSubmit} size='medium' color= 'secondary' sx={{
+              bgcolor: "primary.main", '&:hover': {
+              backgroundColor: 'primary.dark'
             }
           }}>Seen It?
             </Button>

@@ -9,7 +9,7 @@ import Link from '@mui/material/Link';;
 const Footer = () => {
 
     return (
-        <BottomNavigation sx={{ bgcolor: "secondary.main", color: "white", display:'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', marginTop: 'auto'}}>
+        <BottomNavigation sx={{ bgcolor: "primary.main", color: "white", display:'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', marginTop: 'auto'}}>
                 <Stack spacing={2} direction='row'>
                     <CopyrightIcon />
                     <Typography variant="body1">SEEN IT 2023</Typography>

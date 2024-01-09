@@ -15,14 +15,14 @@ import { jwtDecode } from "jwt-decode";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#d500f9",
-      light: "#dd33fa",
-      dark: "#9500ae",
-    },
-    secondary: {
       main: "#d32f2f",
       light: "#ef5350",
       dark: "#c62828"
+    },
+    secondary: {
+      main: "#ebebeb",
+      light: "#ffffff",
+      dark: "#d6d6d6",
     }
   }
 });
@@ -32,12 +32,12 @@ const darkModeTheme = createTheme({
     primary: {
       main: "#1f1f1f",
       light: "#333333",
-      dark: "#0a0a0a",
+      dark: "#0a0a0a"
     },
     secondary: {
-      main: "#1f1f1f",
-      light: "#333333",
-      dark: "#0a0a0a"
+      main: "#ebebeb",
+      light: "#ffffff",
+      dark: "#d6d6d6",
     }
   }
 });
@@ -71,11 +71,11 @@ function App() {
           <Navbar currentUser= {currentUser} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
         <main className= {`main ${isDarkMode? "main_darkMode" : "" }`}>
             <Routes>
-              <Route index element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
-              <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
+              <Route index element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
+              <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
-              <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies}  movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
+              <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies}  isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="*" element={<NoPage/>}/>
             </Routes>
           </main>

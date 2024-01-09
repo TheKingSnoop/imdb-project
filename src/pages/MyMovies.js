@@ -6,7 +6,7 @@ import { Box, Container } from '@mui/system';
 import SearchFilter from '../components/searchFilter/SearchFilter';
 import { Button, Typography } from '@mui/material';
 
-const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDescription }) => {
+const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDescription, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("")
   setMovieDescription(false)
   const cookies = new Cookies()
@@ -31,8 +31,8 @@ const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDe
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Button sx={{ marginTop: '20px' }} onClick={getMyMovies}>view all</Button>
-      <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} />
+      <Button color={isDarkMode? 'secondary': 'primary'} sx={{ marginTop: '20px' }} onClick={getMyMovies}>View all</Button>
+      <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies}  isDarkMode={isDarkMode}/>
       <Container maxWidth='md' sx={{ py: 6 }}>
         {movies.length ? <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page.</Typography>}
       </Container>

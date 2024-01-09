@@ -3,8 +3,11 @@ import React from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 
-const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies }) => {
-    const cookies = new Cookies()
+const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode }) => {
+    const cookies = new Cookies();
+
+    const darkModeInputColour = 
+    {color: '#eee'}
 
     const handleInputChange = (e) => {
         setFilterUserInput(e.target.value)
@@ -26,7 +29,7 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies }) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <TextField sx={{ maxWidth: { md: "900px", xs: '320px' }, minWidth: "300px" }} onChange={handleInputChange} name='title' value={filterUserInput} type='text' label='filter'></TextField>
+            <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ maxWidth: { md: "900px", xs: '320px' }, minWidth: "300px", input: isDarkMode ? darkModeInputColour: "" }} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='filter'></TextField>
         </form>
 
     )

@@ -3,7 +3,7 @@ import MovieContainer from '../components/movieContainer/MovieContainer'
 import SearchBar from '../components/searchBar/SearchBar'
 import { Container, Box } from '@mui/material'
 
-const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescription}) => {
+const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescription, isDarkMode}) => {
   setMovieDescription(true)
   useEffect(() => {
     async function getTop20Movies() {
@@ -17,7 +17,7 @@ const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescrip
   return (
    <Box>
    <Container maxWidth='md' sx={{ py: 6 }}>
-   <SearchBar setMovies={setMovies}/>
+   <SearchBar setMovies={setMovies} isDarkMode={isDarkMode}/>
    <MovieContainer movies={movies} currentUser={currentUser} movieDescription={movieDescription}/>
    </Container>
    </Box>
