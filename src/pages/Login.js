@@ -37,7 +37,7 @@ const Login = () => {
       })
       const token = await response.json()
 
-      cookies.set('jwt',token, { maxAge: 1000 * 60 * 60 * 6, httpOnly: false});
+      cookies.set('jwt',token, { maxAge: 1000 * 60 * 60 * 2, httpOnly: false});
       navigate('/')
       navigate(0);
     }
