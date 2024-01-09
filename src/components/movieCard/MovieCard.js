@@ -59,12 +59,11 @@ const MovieCard = (props) => {
 
     <Box width='200'>
       <Card sx={{ minHeight: "500px", maxHeight:'auto', minWidth: '200px', bgcolor: "secondary.light"}}>
-        <Box sx={{position: 'relative'}}>
-        <Tooltip title={props.title}>
-          <CardMedia component='img' minHeight='auto' width='100%' image={props.image} sx={{objectFit: 'contain', maxWidth:'320px'}}/>
+        <Tooltip title={props.title}><Box sx={{position: 'relative'}}>
+          <CardMedia component='img' width='100%' image={props.image} sx={{objectFit: 'contain', maxWidth:'320px'}}/> 
           {props.isFavourite && <FavoriteIcon sx={{position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'secondary.light'}}/>}
-        </Tooltip>
-        </Box>
+       
+        </Box></Tooltip>
         <CardContent sx={{paddingBottom: '0px'}}>
           {/* <Typography variant='h6' gutterBottom sx={{ height: "30px", overflow: "hidden" }}>{props.title}</Typography> */}
           {props.movieDescription ? <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> : null}

@@ -6,7 +6,7 @@ import MyMovies from './pages/MyMovies';
 import SignUp from './pages/SignUp';
 import NoPage from './pages/NoPage';
 import Navbar from './components/navbar/Navbar';
-import { createTheme, colors, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import Footer from './components/footer/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie'
@@ -27,10 +27,26 @@ const theme = createTheme({
   }
 });
 
+const darkModeTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#1f1f1f",
+      light: "#333333",
+      dark: "#0a0a0a",
+    },
+    secondary: {
+      main: "#1f1f1f",
+      light: "#333333",
+      dark: "#0a0a0a"
+    }
+  }
+});
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [movieDescription, setMovieDescription] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false)
   const cookies = new Cookies()
 
   useEffect(() => {
@@ -38,7 +54,7 @@ function App() {
       if(user) {
         setCurrentUser(user)
       } 
-      console.log('currentUser', currentUser)
+      //console.log('currentUser', currentUser)
       
   },[]);
   
@@ -50,10 +66,10 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isDarkMode? darkModeTheme: theme }>
           <BrowserRouter>
-          <Navbar currentUser= {currentUser}/>
-        <main className="main">
+          <Navbar currentUser= {currentUser} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
+        <main className= {`main ${isDarkMode? "main_darkMode" : "" }`}>
             <Routes>
               <Route index element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />

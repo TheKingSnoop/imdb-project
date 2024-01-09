@@ -8,7 +8,7 @@ import { AppBar, CssBaseline, Typography, Toolbar, Button, useMediaQuery, useThe
 import { NavLink } from 'react-router-dom';
 import DrawerComp from '../drawer/DrawerComp';
 
-const Navbar = ({currentUser}) => {
+const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
     const cookies = new Cookies();
     const navigate = useNavigate();
     const theme = useTheme();
@@ -18,7 +18,8 @@ const Navbar = ({currentUser}) => {
         cookies.remove('jwt');
         navigate('/');
     window.location.reload();
-    } 
+    };
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -50,7 +51,7 @@ const Navbar = ({currentUser}) => {
                         <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Log out</Button>
                        
                        </>}
-                        <Button variant='contained' sx={{ backgroundColor: 'secondary.dark', marginLeft: '10px' }}>Dark Mode</Button>
+                        <Button onClick={() => setIsDarkMode(prev => !prev)} variant='contained' sx={{ backgroundColor: 'secondary.dark', marginLeft: '10px' }}>{isDarkMode? 'Light Mode' : 'Dark Mode'}</Button>
                     </Stack>
                     </>}
 
