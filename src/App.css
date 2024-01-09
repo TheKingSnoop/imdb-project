@@ -5,4 +5,10 @@
     align-items: center;
     margin-top: 56px;
     min-height: calc(100vh - 95px);
+    background-color: #eaf2e3;
+}
+
+.main_darkMode {
+    background-color: #141414;
+    /* color: white; */
 }

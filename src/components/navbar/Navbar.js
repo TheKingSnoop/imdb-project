@@ -8,7 +8,7 @@ import { AppBar, CssBaseline, Typography, Toolbar, Button, useMediaQuery, useThe
 import { NavLink } from 'react-router-dom';
 import DrawerComp from '../drawer/DrawerComp';
 
-const Navbar = ({currentUser}) => {
+const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
     const cookies = new Cookies();
     const navigate = useNavigate();
     const theme = useTheme();
@@ -18,11 +18,12 @@ const Navbar = ({currentUser}) => {
         cookies.remove('jwt');
         navigate('/');
     window.location.reload();
-    } 
+    };
+
     return (
         <React.Fragment>
             <CssBaseline />
-            <AppBar color='secondary' height="500px">
+            <AppBar color='primary' height="500px">
                 <Toolbar>
                     
                     <NavLink to='/'>
@@ -39,18 +40,18 @@ const Navbar = ({currentUser}) => {
                         <Stack direction='row' sx={{marginLeft: 'auto'}}>
                         {!currentUser? <>
                         <NavLink to='/login'>
-                        <Button variant='contained' sx={{ backgroundColor: 'secondary.light'}}>Login</Button>
+                        <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>Login</Button>
                         </NavLink> <NavLink to='/signup'>
-                        <Button variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Sign Up</Button>
+                        <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Sign Up</Button>
                         </NavLink> </>:<>
                         <Typography sx={{display: 'flex', alignItems: 'center'}}>Hello {currentUser.name}</Typography>
                         <NavLink to='/mymovies'>
-                        <Button variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft:'60px'}}>my movies</Button>
+                        <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft:'60px'}}>my movies</Button>
                         </NavLink>
-                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'secondary.light', marginLeft: '10px' }}>Log out</Button>
+                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Log out</Button>
                        
                        </>}
-                        <Button variant='contained' sx={{ backgroundColor: 'secondary.dark', marginLeft: '10px' }}>Dark Mode</Button>
+                        <Button onClick={() => setIsDarkMode(prev => !prev)} variant='contained' sx={{ backgroundColor: 'primary.dark', marginLeft: '10px', '&:hover' : {backgroundColor: 'primary.light'} }}>{isDarkMode? 'Light Mode' : 'Dark Mode'}</Button>
                     </Stack>
                     </>}
 

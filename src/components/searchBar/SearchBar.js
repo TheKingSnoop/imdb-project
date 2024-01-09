@@ -1,8 +1,14 @@
 import { TextField } from '@mui/material'
 import React, {useState} from 'react'
 
-const SearchBar = ({setMovies}) => {
+const SearchBar = ({setMovies, isDarkMode}) => {
     const [userInput, setUserInput] = useState("");
+
+    const darkModeInputColour = 
+      {color: '#fff'}
+
+      const lightModeInputColour = 
+      {color: '#0a0a0a'}
 
     function handleSubmit (e) {
         e.preventDefault();
@@ -18,7 +24,7 @@ const SearchBar = ({setMovies}) => {
   return (
     <>
     <form onSubmit={handleSubmit}>
-        <TextField sx={{ maxWidth: {md: "900px", xs: '320px'}, minWidth: "300px", paddingBottom: '30px'}} fullWidth label="Search movie" variant='outlined' onChange={(e) => {setUserInput(e.target.value)}}/>
+    <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ maxWidth: {md: "900px", xs: '320px'}, input: isDarkMode ? darkModeInputColour: lightModeInputColour, minWidth: "300px", marginBottom: '30px'}} fullWidth label="Search movie" variant='outlined' focused onChange={(e) => {setUserInput(e.target.value)}}/>
         </form>
     </>
   )

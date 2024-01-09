@@ -6,7 +6,8 @@ const MovieContainer = ({ movies, currentUser, movieDescription }) => {
 
     return (
             <Grid container spacing={3} sx={{ width: {md: "900px", xs: '320px'}, minWidth: "200px", display:'flex'}}>
-                {movies.map((movie, index) => {
+                {movies.filter(movie => movie.description && movie.rating && !movie.image.endsWith('null'))
+                .map((movie, index) => {
                     return <Grid key={index} item md={3} >
                         <MovieCard
                         movies={movies}
