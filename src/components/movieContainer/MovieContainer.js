@@ -22,6 +22,7 @@ const MovieContainer = ({ movies, currentUser, movieDescription }) => {
                         user_rating={movie.userReviewId && movie.userReviewId[0].user_rating}
                         user_analysis={movie.userReviewId && movie.userReviewId[0].user_analysis}
                         isFavourite={movie.userReviewId && movie.userReviewId[0].isFavourite}
+                        dateWatched={movie.userReviewId && movie.userReviewId[0].dateWatched}
                         movieDescription= {movieDescription}
                         />
                     </Grid>

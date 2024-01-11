@@ -11,6 +11,9 @@ import Footer from './components/footer/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns'
+import enGB from 'date-fns/locale/en-GB';
 
 const theme = createTheme({
   palette: {
@@ -66,6 +69,7 @@ function App() {
   }
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
     <ThemeProvider theme={isDarkMode? darkModeTheme: theme }>
           <BrowserRouter>
           <Navbar currentUser= {currentUser} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
@@ -81,8 +85,9 @@ function App() {
           </main>
           </BrowserRouter>
         <Footer />
-      
-    </ThemeProvider>);
+    </ThemeProvider>
+    </LocalizationProvider>
+    );
 }
 
 export default App;

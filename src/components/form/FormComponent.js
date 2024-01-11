@@ -5,12 +5,14 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
+import DatePickerComponent from '../datePickerComponent/DatePickerComponent';
 
 const FormComponent = ({ setOpen, movies, index }) => {
   const [userInput, setUserInput] = useState({
     rating: null,
     analysis: '',
-    isFavourite: false
+    isFavourite: false,
+    dateWatched: new Date()
   });
 
   const navigate = useNavigate();
@@ -27,14 +29,15 @@ const FormComponent = ({ setOpen, movies, index }) => {
     e.preventDefault()
     const review_Id = movies[index].userReviewId[0]._id
     //console.log('review_Id', review_Id)
-    //console.log(userInput)
+    console.log(userInput)
     const addReviewToDatabase = async () => {
       const response = await fetch(`http://localhost:3001/review/updateMyReview/${review_Id}`, {
         method: 'PATCH',
         body: JSON.stringify({
           user_rating: userInput.rating,
           user_analysis: userInput.analysis,
-          isFavourite: userInput.isFavourite
+          isFavourite: userInput.isFavourite,
+          dateWatched: userInput.dateWatched
         }),
         headers: {
           "Content-Type": "application/json"
@@ -53,7 +56,7 @@ const FormComponent = ({ setOpen, movies, index }) => {
   return (
     <Box align='center' sx={{ padding: '0 20px', width: { md: '450px', xs: '300px' } }}>
       <Grid sx={{marginBottom:'50px', maxWidth:'100%'}}>
-        <RateReviewIcon color='secondary' sx={{ marginBottom: '20px', fontSize: '50px' }} />
+        <RateReviewIcon color='primary' sx={{ marginBottom: '20px', fontSize: '50px' }} />
         <Typography variant='h5' sx={{ fontWeight: "bold" }}>Review</Typography>
         <Typography variant='caption'>Please fill in this form to add a review.</Typography>
       </Grid>
@@ -62,8 +65,12 @@ const FormComponent = ({ setOpen, movies, index }) => {
         <Typography variant='body2'>Rate this movie</Typography>
           <RatingComponent userInput={userInput} setUserInput={setUserInput} />
           </Stack>
-          <Stack direction='row' spacing={2} sx={{ display: 'flex', alignItems: 'baseline' }}><Typography variant='body2'>Add to Favourites?</Typography>
-            <IsFavouriteButton userInput={userInput} setUserInput={setUserInput}/>
+          <Stack direction='row' spacing={2} sx={{ display: 'flex', alignItems: 'baseline', justifyContent:'space-between'}}>
+            <Stack direction='row' spacing={2} sx={{ display: 'flex', alignItems: 'baseline'}}>
+              <Typography variant='body2'>Add to Favourites?</Typography>
+              <IsFavouriteButton userInput={userInput} setUserInput={setUserInput}/>
+            </Stack>
+            <DatePickerComponent userInput={userInput} setUserInput={setUserInput}/>
           </Stack>
           <TextField onChange={handleInputChange} name='analysis' multiline rows={2} value={userInput.analysis} sx={margin} type={"text"} fullWidth label='Analysis' placeholder='For e.g. The ending of this movie was spectacular' />
           <Button sx={margin} type='submit' variant='contained' color='primary'>Add Review</Button>
