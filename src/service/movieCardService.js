@@ -19,4 +19,25 @@ export function addToSeenIt(props) {
       colourRating = "gold"
     }
     return colourRating
-  }
+  };
+
+  export function formatDate (props) {
+    if (props.dateWatched) {
+      let ukDateFormat = new Date(props.dateWatched)
+      let dd = ukDateFormat.getDate();
+      let mm = ukDateFormat.getMonth() + 1;
+      let yyyy = ukDateFormat.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      ukDateFormat = dd + '/' + mm + '/' + yyyy;
+
+      //console.log('ukDateFormat', ukDateFormat);
+      return ukDateFormat
+    } else {
+      return "No date added"
+    }  };

@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import { AppBar, CssBaseline, Typography, Toolbar, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import DrawerComp from '../drawer/DrawerComp';
+import seenItLogo from '../../images/SeenItLogo.png';
+import mobileSeenItLogo from '../../images/MobileSeenItLogo.png';
+import { textAlign } from '@mui/system';
 
 const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
     const cookies = new Cookies();
@@ -26,17 +29,21 @@ const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
             <AppBar color='primary' height="500px">
                 <Toolbar>
                     
-                    <NavLink to='/'>
-                        <TheatersIcon sx={{ color: "white", display: 'flex', alignItems: 'center'}} /></NavLink>
+                    
                     {isMatch ? (
                         <>
                             {/* Mobile View */}
+                            <Stack sx={{paddingTop:'5px'}}>
+                            <NavLink to='/'><img src={mobileSeenItLogo} height='30px' width='auto' alt='seen it logo'/>
+                        </NavLink></Stack>
                             {currentUser && <Typography sx={{marginLeft: 'auto'}}>Hello  {currentUser.name}</Typography>}
                             <DrawerComp currentUser={currentUser} logout={logout}/>
                         </>
                     ) : <>
                         {/* Desktop View */}
-                        <Typography sx={{ marginLeft: '10px' }}>SEEN IT</Typography>
+                        <Stack sx={{paddingTop:'5px'}}>
+                        <NavLink to='/' ><img src={seenItLogo} height='30px' width='auto' alt='seen it logo'/>
+                        </NavLink></Stack>
                         <Stack direction='row' sx={{marginLeft: 'auto'}}>
                         {!currentUser? <>
                         <NavLink to='/login'>

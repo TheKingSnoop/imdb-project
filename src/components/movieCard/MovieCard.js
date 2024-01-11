@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { addToSeenIt, dynamicRating } from '../../service/movieCardService'
+import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardService'
 import './movieCard.css'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
@@ -14,32 +14,9 @@ const MovieCard = (props) => {
   const cookies = new Cookies();
   const token = cookies.get('jwt')
 
-  const releaseYear = props.release_date.slice(0, 4)
-  const colourRating = dynamicRating(props)
-
-  //Date watched
-
-  const formatDate = () => {
-    if (props.dateWatched) {
-      let ukDateFormat = new Date(props.dateWatched)
-      let dd = ukDateFormat.getDate();
-      let mm = ukDateFormat.getMonth() + 1;
-      let yyyy = ukDateFormat.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-      ukDateFormat = dd + '/' + mm + '/' + yyyy;
-
-      //console.log('ukDateFormat', ukDateFormat);
-      return ukDateFormat
-    }
-  }
-
-
+  const releaseYear = props.release_date.slice(0, 4);
+  const colourRating = dynamicRating(props);
+  const ukDateFormat = formatDate(props);
 
   const handleSubmit = () => {
     const movieToAdd = addToSeenIt(props)
@@ -116,8 +93,8 @@ const MovieCard = (props) => {
               <CardContent>
                 <Typography variant='h6'>My Review</Typography>
                 <Rating value={props.user_rating} precision={0.5} size='large' readOnly />
-                <Typography variant='body2'>{props.user_analysis}</Typography>
-                <Typography variant='body2'>Seen on: {formatDate()}</Typography>
+                <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "50px"}} variant='body2'>{props.user_analysis}</Typography>
+                <Typography variant='body2'>Seen on: {ukDateFormat}</Typography>
               </CardContent>
               <Stack direction="row" spacing={1}>
                 <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
