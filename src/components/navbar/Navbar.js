@@ -34,7 +34,7 @@ const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
                         <>
                             {/* Mobile View */}
                             <Stack sx={{paddingTop:'5px'}}>
-                            <NavLink to='/'><img src={mobileSeenItLogo} height='30px' width='auto' alt='seen it logo'/>
+                            <NavLink to='/'><img src={mobileSeenItLogo} height='40px' width='auto' alt='seen it logo'/>
                         </NavLink></Stack>
                             {currentUser && <Typography sx={{marginLeft: 'auto'}}>Hello  {currentUser.name}</Typography>}
                             <DrawerComp currentUser={currentUser} logout={logout}/>
@@ -42,7 +42,7 @@ const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
                     ) : <>
                         {/* Desktop View */}
                         <Stack sx={{paddingTop:'5px'}}>
-                        <NavLink to='/' ><img src={seenItLogo} height='30px' width='auto' alt='seen it logo'/>
+                        <NavLink to='/' ><img src={seenItLogo} height='40px' width='auto' alt='seen it logo'/>
                         </NavLink></Stack>
                         <Stack direction='row' sx={{marginLeft: 'auto'}}>
                         {!currentUser? <>

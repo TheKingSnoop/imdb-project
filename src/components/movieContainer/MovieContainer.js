@@ -3,6 +3,7 @@ import MovieCard from '../movieCard/MovieCard';
 import Grid from '@mui/material/Grid';
 
 const MovieContainer = ({ movies, currentUser, movieDescription }) => {
+    console.log(movies)
 
     return (
             <Grid container spacing={3} sx={{ width: {md: "900px", xs: '320px'}, minWidth: "200px", display:'flex'}}>

@@ -30,10 +30,10 @@ const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDe
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Button color={isDarkMode? 'secondary': 'primary'} sx={{ marginTop: '20px' }} onClick={getMyMovies}>View all</Button>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+      <Button color={isDarkMode? 'secondary': 'primary'} onClick={getMyMovies}>Reset</Button>
       <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies}  isDarkMode={isDarkMode}/>
-      <Container maxWidth='md' sx={{ py: 6 }}>
+      <Container maxWidth='md'>
         {movies.length ? <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page.</Typography>}
       </Container>
     </Box>

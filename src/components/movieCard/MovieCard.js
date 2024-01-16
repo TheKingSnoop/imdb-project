@@ -58,7 +58,7 @@ const MovieCard = (props) => {
 
   return (
 
-    <Box width='200'>
+    <Box width='200' >
       <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '200px', bgcolor: "primary.light" }}>
         <Tooltip title={props.title}><Box sx={{ position: 'relative' }}>
           <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '320px' }} />
@@ -93,8 +93,9 @@ const MovieCard = (props) => {
               <CardContent>
                 <Typography variant='h6'>My Review</Typography>
                 <Rating value={props.user_rating} precision={0.5} size='large' readOnly />
-                <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "50px"}} variant='body2'>{props.user_analysis}</Typography>
-                <Typography variant='body2'>Seen on: {ukDateFormat}</Typography>
+                <Box sx={{paddingBottom:'10px'}}>
+                <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px"}} variant='body2'>{props.user_analysis}</Typography>
+                </Box><Typography variant='body2'>Seen on: {ukDateFormat}</Typography>
               </CardContent>
               <Stack direction="row" spacing={1}>
                 <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
