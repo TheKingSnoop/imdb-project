@@ -11,7 +11,7 @@ import seenItLogo from '../../images/SeenItLogo.png';
 import mobileSeenItLogo from '../../images/MobileSeenItLogo.png';
 import { textAlign } from '@mui/system';
 
-const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
+const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
     const cookies = new Cookies();
     const navigate = useNavigate();
     const theme = useTheme();
@@ -20,7 +20,7 @@ const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
     const logout = () => {
         cookies.remove('jwt');
         navigate('/');
-    window.location.reload();
+        window.location.reload();
     };
 
     return (
@@ -28,38 +28,38 @@ const Navbar = ({currentUser, isDarkMode, setIsDarkMode}) => {
             <CssBaseline />
             <AppBar color='primary' height="500px">
                 <Toolbar>
-                    
-                    
+
+
                     {isMatch ? (
                         <>
                             {/* Mobile View */}
-                            <Stack sx={{paddingTop:'5px'}}>
-                            <NavLink to='/'><img src={mobileSeenItLogo} height='40px' width='auto' alt='seen it logo'/>
-                        </NavLink></Stack>
-                            {currentUser && <Typography sx={{marginLeft: 'auto'}}>Hello  {currentUser.name}</Typography>}
-                            <DrawerComp currentUser={currentUser} logout={logout}/>
+                            <Stack sx={{ paddingTop: '5px' }}>
+                                <NavLink to='/'><img src={mobileSeenItLogo} height='40px' width='auto' alt='seen it logo' />
+                                </NavLink></Stack>
+                            {currentUser && <Typography sx={{ marginLeft: 'auto' }}>Hello  {currentUser.name}</Typography>}
+                            <DrawerComp currentUser={currentUser} logout={logout} />
                         </>
                     ) : <>
                         {/* Desktop View */}
-                        <Stack sx={{paddingTop:'5px'}}>
-                        <NavLink to='/' ><img src={seenItLogo} height='40px' width='auto' alt='seen it logo'/>
-                        </NavLink></Stack>
-                        <Stack direction='row' sx={{marginLeft: 'auto'}}>
-                        {!currentUser? <>
-                        <NavLink to='/login'>
-                        <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>Login</Button>
-                        </NavLink> <NavLink to='/signup'>
-                        <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Sign Up</Button>
-                        </NavLink> </>:<>
-                        <Typography sx={{display: 'flex', alignItems: 'center'}}>Hello {currentUser.name}</Typography>
-                        <NavLink to='/mymovies'>
-                        <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft:'60px'}}>my movies</Button>
-                        </NavLink>
-                        <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Log out</Button>
-                       
-                       </>}
-                        <Button onClick={() => setIsDarkMode(prev => !prev)} variant='contained' sx={{ backgroundColor: 'primary.dark', marginLeft: '10px', '&:hover' : {backgroundColor: 'primary.light'} }}>{isDarkMode? 'Light Mode' : 'Dark Mode'}</Button>
-                    </Stack>
+                        <Stack sx={{ paddingTop: '5px' }}>
+                            <NavLink to='/' ><img src={seenItLogo} height='40px' width='auto' alt='seen it logo' />
+                            </NavLink></Stack>
+                        <Stack direction='row' sx={{ marginLeft: 'auto' }}>
+                            {!currentUser ? <>
+                                <NavLink to='/login'>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light' }}>Login</Button>
+                                </NavLink> <NavLink to='/signup'>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Sign Up</Button>
+                                </NavLink> </> : <>
+                                <Typography sx={{ display: 'flex', alignItems: 'center' }}>Hello {currentUser.name}</Typography>
+                                <NavLink to='/mymovies'>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '60px' }}>my movies</Button>
+                                </NavLink>
+                                <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Log out</Button>
+
+                            </>}
+                            <Button onClick={() => setIsDarkMode(prev => !prev)} variant='contained' sx={{ backgroundColor: 'primary.dark', marginLeft: '10px', '&:hover': { backgroundColor: 'primary.light' } }}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</Button>
+                        </Stack>
                     </>}
 
                 </Toolbar>

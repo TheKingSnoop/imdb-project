@@ -5,9 +5,7 @@ import marioCover from '../../images/marioCover.jpeg'
 const HeroSection = ({ movies }) => {
     // const bgImage = movies[0] && movies[0].image
     return (
-        <Box sx={{ width: '100vw', height: '50vh', backgroundImage: `url(${marioCover})`, backgroundSize: 'cover', position: 'relative' }}>
-            <Box sx={{ position: 'absolute', top: '0px', left: '0px', width: '100%', height: '100%', bgcolor: 'black', opacity: '0.7' }}>
-            </Box>
+        <Box sx={{ width: '100vw', height: '50vh', backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${marioCover})`, backgroundSize: 'cover', backgroundPosition:'top center', position: 'relative' }}>
             <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', color: 'white' }}>
                 <Typography variant='h3' sx={{ fontFamily: "Russo One", fontSize: { xs: '2rem', md: '4rem' } }}>
                     Seen It

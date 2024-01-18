@@ -46,7 +46,7 @@ const Login = () => {
 
   const margin = { margin: '10px 0px' }
   return (
-    <Grid align='center'>
+    <Grid align='center' sx={{marginTop: '10%'}}>
       <Paper elevation={20} sx={{ padding: '30px 20px', width: { md: '450px', xs: '350px' }, margin: '20px auto' }}>
         <Grid >
           <Avatar sx={{ marginBottom: '20px', backgroundColor: '#d32f2f' }}></Avatar>
