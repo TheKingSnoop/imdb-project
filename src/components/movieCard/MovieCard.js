@@ -1,5 +1,5 @@
-import React from 'react';
-import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip, Snackbar } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardService'
@@ -18,7 +18,11 @@ const MovieCard = (props) => {
   const colourRating = dynamicRating(props);
   const ukDateFormat = formatDate(props);
 
+  const [open, setOpen] = useState(false)
+
   const handleSubmit = () => {
+    
+    console.log("just clicked Seen It")
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async () => {
       const response = await fetch('http://localhost:3001/movie/addMovie', {
@@ -32,7 +36,7 @@ const MovieCard = (props) => {
       const data = await response.json()
       if (data.errors) {
         alert(data.errors[0].msg)
-      }
+      } else {setOpen(true)}
     }
     addToMovieDatabase()
   }
@@ -86,6 +90,15 @@ const MovieCard = (props) => {
                 }
               }}>Seen It?
               </Button>
+              <Snackbar 
+                message='Added to My Movies' 
+                autoHideDuration={2000}
+                open={open}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{
+                  vertical:'bottom',
+                  horizontal:'center'
+                }}/>
             </CardActions>}
           {/* myMovies page and signed in */}
           {props.movies[props.index]._id &&
