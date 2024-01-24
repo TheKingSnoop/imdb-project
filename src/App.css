@@ -1,7 +1,6 @@
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     margin-top: 56px;
     min-height: calc(100vh - 95px);
@@ -12,3 +11,4 @@
     background-color: #141414;
     /* color: white; */
 }
+  

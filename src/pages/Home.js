@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import MovieContainer from '../components/movieContainer/MovieContainer'
 import SearchBar from '../components/searchBar/SearchBar'
 import { Container, Box } from '@mui/material'
+import HeroSection from '../components/heroSection/HeroSection'
 
 const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescription, isDarkMode}) => {
   setMovieDescription(true)
@@ -16,10 +17,11 @@ const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescrip
 }, [])
   return (
    <Box>
+    <HeroSection movies={movies}/>
    <Container maxWidth='md' sx={{ py: 6 }}>
-   <SearchBar setMovies={setMovies} isDarkMode={isDarkMode}/>
-   <MovieContainer movies={movies} currentUser={currentUser} movieDescription={movieDescription}/>
-   </Container>
+    <SearchBar setMovies={setMovies} isDarkMode={isDarkMode}/>
+    <MovieContainer movies={movies} currentUser={currentUser} movieDescription={movieDescription}/>
+    </Container>
    </Box>
   )
 }

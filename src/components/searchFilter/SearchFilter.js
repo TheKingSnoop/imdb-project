@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { TextField, Stack, Button, Box } from '@mui/material'
 import React from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
@@ -28,9 +28,14 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMo
         getFilteredMoviesByTitle()
     }
     return (
+        <Box sx={{display: 'flex', justifyContent:'center', marginBottom:'20px'}}>
         <form onSubmit={handleSubmit}>
-            <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ maxWidth: { md: "900px", xs: '320px' }, minWidth: "300px", input: isDarkMode ? darkModeInputColour: "" }} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='filter'></TextField>
+            <Stack direction='row' spacing={1} sx={{height:'55px'}} >
+            <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ maxWidth: { md: "400px", xs: '200px' }, minWidth: {xs: "200px", md:"300px"}, input: isDarkMode ? darkModeInputColour: "" }} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='filter'></TextField>
+            <Button variant='contained' sx={{ backgroundColor: 'primary.light'}} type="submit">Filter</Button>
+            </Stack>
         </form>
+        </Box>
 
     )
 }

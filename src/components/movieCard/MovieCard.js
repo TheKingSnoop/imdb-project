@@ -1,5 +1,5 @@
-import React from 'react';
-import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip, Snackbar } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardService'
@@ -18,7 +18,11 @@ const MovieCard = (props) => {
   const colourRating = dynamicRating(props);
   const ukDateFormat = formatDate(props);
 
+  const [open, setOpen] = useState(false)
+
   const handleSubmit = () => {
+    
+    console.log("just clicked Seen It")
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async () => {
       const response = await fetch('http://localhost:3001/movie/addMovie', {
@@ -32,7 +36,7 @@ const MovieCard = (props) => {
       const data = await response.json()
       if (data.errors) {
         alert(data.errors[0].msg)
-      }
+      } else {setOpen(true)}
     }
     addToMovieDatabase()
   }
@@ -58,7 +62,7 @@ const MovieCard = (props) => {
 
   return (
 
-    <Box width='200'>
+    <Box width='200' >
       <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '200px', bgcolor: "primary.light" }}>
         <Tooltip title={props.title}><Box sx={{ position: 'relative' }}>
           <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '320px' }} />
@@ -86,6 +90,15 @@ const MovieCard = (props) => {
                 }
               }}>Seen It?
               </Button>
+              <Snackbar 
+                message='Added to My Movies' 
+                autoHideDuration={2000}
+                open={open}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{
+                  vertical:'bottom',
+                  horizontal:'center'
+                }}/>
             </CardActions>}
           {/* myMovies page and signed in */}
           {props.movies[props.index]._id &&
@@ -93,8 +106,9 @@ const MovieCard = (props) => {
               <CardContent>
                 <Typography variant='h6'>My Review</Typography>
                 <Rating value={props.user_rating} precision={0.5} size='large' readOnly />
-                <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "50px"}} variant='body2'>{props.user_analysis}</Typography>
-                <Typography variant='body2'>Seen on: {ukDateFormat}</Typography>
+                <Box sx={{paddingBottom:'10px'}}>
+                <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px"}} variant='body2'>{props.user_analysis}</Typography>
+                </Box><Typography variant='body2'>Seen on: {ukDateFormat}</Typography>
               </CardContent>
               <Stack direction="row" spacing={1}>
                 <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
