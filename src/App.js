@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import MyMovies from './pages/MyMovies';
 import SignUp from './pages/SignUp';
 import NoPage from './pages/NoPage';
+import AllUsers from './pages/AllUsers';
 import Navbar from './components/navbar/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Footer from './components/footer/Footer';
@@ -80,6 +81,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
               <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies}  isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
+              <Route path="/all-users" element={<AllUsers currentUser={currentUser}/>}></Route>
               <Route path="*" element={<NoPage/>}/>
             </Routes>
           </main>
