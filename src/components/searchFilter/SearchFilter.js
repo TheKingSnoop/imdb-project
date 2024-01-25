@@ -2,8 +2,10 @@ import { TextField, Stack, Button, Box } from '@mui/material'
 import React from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
+import FavButton from './FavButton';
 
-const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode }) => {
+const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode, setIsFavourite, isFavourite, favouriteSelector}) => {
+
     const cookies = new Cookies();
 
     const darkModeInputColour = 
@@ -27,12 +29,14 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMo
         }
         getFilteredMoviesByTitle()
     }
+
     return (
         <Box sx={{display: 'flex', justifyContent:'center', marginBottom:'20px'}}>
         <form onSubmit={handleSubmit}>
             <Stack direction='row' spacing={1} sx={{height:'55px'}} >
             <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ maxWidth: { md: "400px", xs: '200px' }, minWidth: {xs: "200px", md:"300px"}, input: isDarkMode ? darkModeInputColour: "" }} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='filter'></TextField>
-            <Button variant='contained' sx={{ backgroundColor: 'primary.light'}} type="submit">Filter</Button>
+            <Button variant='contained' sx={{ backgroundColor: 'primary.light'}} type="submit">Search</Button>
+            <FavButton isDarkMode={isDarkMode} favouriteSelector={favouriteSelector} isFavourite={isFavourite}/>
             </Stack>
         </form>
         </Box>

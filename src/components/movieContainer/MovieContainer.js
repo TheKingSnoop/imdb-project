@@ -2,7 +2,7 @@ import React from 'react'
 import MovieCard from '../movieCard/MovieCard';
 import Grid from '@mui/material/Grid';
 
-const MovieContainer = ({ movies, currentUser, movieDescription }) => {
+const MovieContainer = ({ movies, currentUser, movieDescription}) => {
     console.log(movies)
 
     return (
