@@ -5,16 +5,18 @@ import { useParams } from 'react-router-dom';
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 import MovieContainer from '../components/movieContainer/MovieContainer.js';
+import { Container } from '@mui/system';
 
 const UserPage = ({movies, setMovies, currentUser}) => {
+  const [profileName, setProfileName] = useState("")
     const cookies = new Cookies()
     const params = useParams();
     const readOnly = true;
     const userPageId = params.userId;
-    console.log(userPageId)
     const getMyMovies = async () => {
         const token = cookies.get('jwt')
         const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
+        
         
         const response = await fetch("http://localhost:3001/movie/my-movies", {
           method: "POST",
@@ -27,16 +29,24 @@ const UserPage = ({movies, setMovies, currentUser}) => {
         // setFilterUserInput("")
         // setIsFavourite("all")
       };
+
+      async function getUserById() {
+        const response = await fetch(`http://localhost:3001/auth/all/${userPageId}`)
+        const data = await response.json()
+        setProfileName(data.username)
+    }
       useEffect(() => {
         getMyMovies();
+        getUserById();
       }, [])
-  return (
-    <Box>  <HeroSection/>
-    <Typography></Typography>
+  return (<>
+    <HeroSection/><Box sx={{margin: '20px 0px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>   <Container maxWidth='md'>
+    <Typography variant='h2'>{profileName}'s Movies</Typography>
+    
     <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} readOnly={readOnly}/>
-    </Box>
+    </Container></Box>
   
-  )
+  </>)
 }
 
 export default UserPage
