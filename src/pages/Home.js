@@ -18,7 +18,7 @@ const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescrip
   return (
    <Box>
     <HeroSection movies={movies}/>
-   <Container maxWidth='md' sx={{ py: 6 }}>
+    <Container maxWidth='md' sx={{ py: 6 }}>
     <SearchBar setMovies={setMovies} isDarkMode={isDarkMode}/>
     <MovieContainer movies={movies} currentUser={currentUser} movieDescription={movieDescription}/>
     </Container>
