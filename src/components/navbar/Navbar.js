@@ -9,13 +9,13 @@ import { NavLink } from 'react-router-dom';
 import DrawerComp from '../drawer/DrawerComp';
 import seenItLogo from '../../images/SeenItLogo.png';
 import mobileSeenItLogo from '../../images/MobileSeenItLogo.png';
-import { textAlign } from '@mui/system';
 
 const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
     const cookies = new Cookies();
     const navigate = useNavigate();
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+    // console.log(currentUser)
 
     const logout = () => {
         cookies.remove('jwt');
@@ -28,8 +28,6 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
             <CssBaseline />
             <AppBar color='primary' height="500px">
                 <Toolbar>
-
-
                     {isMatch ? (
                         <>
                             {/* Mobile View */}

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { TextField, Box, Typography, Container, Grid } from '@mui/material'
 import HeroSection from '../components/heroSection/HeroSection';
-
+import Cookies from 'universal-cookie'
+import { jwtDecode } from "jwt-decode";
 import UserCard from '../components/cards/UserCard.js';
 import { maxWidth } from '@mui/system';
 
-const AllUsers = () => {
-    const [users, setUsers] = useState([])
+const Users = () => {
+    const [users, setUsers] = useState([]);
+    const cookies = new Cookies()
     useEffect(() => {
         async function getAllUsers() {
             const response = await fetch("http://localhost:3001/auth/all")
@@ -27,9 +29,10 @@ const AllUsers = () => {
                 {users.map((user, index) => {
                     return <Grid key={index} item md={3} xs={6}><UserCard user={user} /></Grid>
                 })}
-            </Grid></Container>
+            </Grid>
+            </Container>
         </Box>
     )
 }
 
-export default AllUsers
+export default Users

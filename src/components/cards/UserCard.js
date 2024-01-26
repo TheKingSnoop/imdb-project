@@ -1,11 +1,10 @@
 import { Typography, Box, Card} from '@mui/material'
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UserCard = ({user}) => {
     const navigate = useNavigate();
     const handleClick = () => {
-        console.log(user[0].userId)
         navigate(`${user[0].userId}`)
     }
   return (

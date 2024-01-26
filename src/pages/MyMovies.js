@@ -5,6 +5,7 @@ import MovieContainer from '../components/movieContainer/MovieContainer';
 import { Box, Container } from '@mui/system';
 import SearchFilter from '../components/searchFilter/SearchFilter';
 import { Button, Typography } from '@mui/material';
+import HeroSection from '../components/heroSection/HeroSection';
 
 const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDescription, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("");
@@ -46,7 +47,8 @@ let filteredFavMovieList = movies.filter(movies => {
     setIsFavourite("all")
   };
 
-  return (
+  return (<>
+  <HeroSection/>
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
       <Button color={isDarkMode? 'secondary': 'primary'} onClick={getMyMovies}>Reset</Button>
       <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} movies={movies}setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector}/>
@@ -54,7 +56,7 @@ let filteredFavMovieList = movies.filter(movies => {
         {movies.length ? <MovieContainer setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription}/> : <Typography>You haven't added any movies. You can add movies in the home page.</Typography>}
       </Container>
     </Box>
-  )
+ </> )
 }
 
 export default MyMovies

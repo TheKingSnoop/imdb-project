@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import MyMovies from './pages/MyMovies';
 import SignUp from './pages/SignUp';
 import NoPage from './pages/NoPage';
-import AllUsers from './pages/AllUsers';
+import Users from './pages/Users'
 import UserPage from './pages/UserPage';
 import Navbar from './components/navbar/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -81,9 +81,9 @@ function App() {
               <Route path="/home" element={<Home movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
-              <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies}  isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
-              <Route path="/all-users" element={<AllUsers currentUser={currentUser}/>}/>
-              <Route path="/all-users/:userId" element={<UserPage/>}/>
+              <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
+              <Route path="/users" element={<Users/>} />
+              <Route path="/users/:userId" element={<UserPage currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="*" element={<NoPage/>}/>
             </Routes>
           </main>

@@ -67,7 +67,6 @@ const MovieCard = (props) => {
         <Tooltip title={props.title}><Box sx={{ position: 'relative' }}>
           <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '320px' }} />
           {props.isFavourite && <FavoriteIcon sx={{ position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'primary.light' }} />}
-
         </Box></Tooltip>
         <CardContent sx={{ paddingBottom: '0px' }}>
           {/* <Typography variant='h6' gutterBottom sx={{ height: "30px", overflow: "hidden" }}>{props.title}</Typography> */}
@@ -111,10 +110,10 @@ const MovieCard = (props) => {
                 </Box><Typography variant='body2'>Seen on: {ukDateFormat}</Typography>
               </CardContent>
               <Stack direction="row" spacing={1}>
-                <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
+                {!props.readOnly && <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
                   <DialogComponent name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
                   <DialogComponent name={'REVIEW'} form={true} movies={props.movies} index={props.index} />
-                </CardActions>
+                </CardActions>}
               </Stack>
             </Box>}
         </> :

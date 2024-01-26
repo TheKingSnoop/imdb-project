@@ -2,7 +2,7 @@ import React from 'react'
 import MovieCard from '../cards/MovieCard';
 import Grid from '@mui/material/Grid';
 
-const MovieContainer = ({ movies, currentUser, movieDescription}) => {
+const MovieContainer = ({ movies, currentUser, movieDescription, readOnly}) => {
     console.log(movies)
 
     return (
@@ -25,6 +25,7 @@ const MovieContainer = ({ movies, currentUser, movieDescription}) => {
                         isFavourite={movie.userReviewId && movie.userReviewId[0].isFavourite}
                         dateWatched={movie.userReviewId && movie.userReviewId[0].dateWatched}
                         movieDescription= {movieDescription}
+                        readOnly={readOnly}
                         />
                     </Grid>
                 })}
