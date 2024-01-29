@@ -31,7 +31,7 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMo
     }
 
     return (
-        <Box sx={{ padding: '30px' }}>
+        <Box sx={{ padding: '30px 30px 0px 30px', marginBottom:{sm: '20px'} }}>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Grid item md={4} sm={4} xs={7}><TextField fullWidth color={isDarkMode ? 'secondary' : 'primary'} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='Filter By Title'></TextField>

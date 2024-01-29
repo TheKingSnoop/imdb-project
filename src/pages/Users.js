@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import UserCard from '../components/cards/UserCard.js';
 import { maxWidth } from '@mui/system';
 
-const Users = () => {
+const Users = ({isDarkMode}) => {
     const [users, setUsers] = useState([]);
     const cookies = new Cookies()
     useEffect(() => {
@@ -24,7 +24,7 @@ const Users = () => {
         <Box>
             <HeroSection />
             <Container sx={{padding: '30px'}}>
-            <Typography gutterBottom sx={{textAlign: 'center', fontFamily: 'Russo One'}} variant='h4'>All Users</Typography>
+            <Typography gutterBottom sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode? "white" : ""}} variant='h4'>All Users</Typography>
             <Grid container spacing={3}>
                 {users.map((user, index) => {
                     return <Grid key={index} item md={3} sm={4} xs={6}><UserCard user={user} /></Grid>

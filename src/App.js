@@ -82,7 +82,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
               <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
-              <Route path="/users" element={<Users/>} />
+              <Route path="/users" element={<Users isDarkMode={isDarkMode}/>} />
               <Route path="/users/:userId" element={<UserPage currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="*" element={<NoPage/>}/>
             </Routes>

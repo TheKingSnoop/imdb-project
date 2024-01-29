@@ -32,7 +32,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                         <>
                             {/* Mobile View */}
                             <Stack sx={{ paddingTop: '5px' }}>
-                                <NavLink to='/' onClick={() => window.location.reload()}><img src={mobileSeenItLogo} height='40px' width='auto' alt='seen it logo' />
+                                <NavLink to='/'><img src={mobileSeenItLogo} height='40px' width='auto' alt='seen it logo' />
                                 </NavLink>
                             </Stack>
                             {currentUser && <Typography sx={{ fontFamily: 'Russo One', marginLeft: 'auto' }}>Hello  {currentUser.name}</Typography>}

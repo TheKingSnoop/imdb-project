@@ -10,7 +10,7 @@ const UserCard = ({ user }) => {
     navigate(`${user[0].userId}`)
   }
   return (
-    <Card onClick={handleClick} sx={{ padding: '30px', backgroundImage: 'linear-gradient(#9c7c1c, #E3C363)'}}>
+    <Card onClick={handleClick} sx={{ '&:hover': { cursor: 'pointer' }, padding: '30px', backgroundImage: 'linear-gradient(#9c7c1c, #E3C363)'}}>
       <Box sx={{ display: 'flex', flexWrap:'wrap-reverse', justifyContent: 'space-around', alignItems: 'center', marginBottom: '10px'}}>
         <Typography align='center' sx={{ marginTop: '10px', fontFamily: 'Russo One' }}>{user[0].username}</Typography>
         <CardMedia sx={{ borderRadius: '50%', height: '75px', width: '75px' }} component='img' image={marioCover} width='100%' />
