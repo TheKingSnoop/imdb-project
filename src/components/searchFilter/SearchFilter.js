@@ -1,27 +1,27 @@
-import { TextField, Stack, Button, Box } from '@mui/material'
+import { TextField, Stack, Button, Box, Grid } from '@mui/material'
 import React from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 import FavButton from './FavButton';
 
-const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector}) => {
+const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector }) => {
 
     const cookies = new Cookies();
 
-    const darkModeInputColour = 
-    {color: '#eee'}
+    const darkModeInputColour =
+        { color: '#eee' }
 
     const handleInputChange = (e) => {
         setFilterUserInput(e.target.value)
     }
 
-    const handleSubmit =(e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const token = cookies.get('jwt')
-        const user = {name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId}
+        const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
         const user_Id = user.id
-        
-        const getFilteredMoviesByTitle = async() => {
+
+        const getFilteredMoviesByTitle = async () => {
             const response = await fetch(`http://localhost:3001/movie/filterMyMovies/${user_Id}/${filterUserInput}`)
             const data = await response.json()
             console.log(data)
@@ -31,15 +31,21 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMo
     }
 
     return (
-        <Box sx={{maxWidth:'100%', height: { xs:'150px', md:'auto'}, display: 'flex',flexWrap:'wrap', justifyContent:'center', border:'solid blue 2px', padding:'20px 10px'}}>
-        <form onSubmit={handleSubmit}>
-            <Stack direction='row' spacing={1} sx={{height:'auto', display: 'flex', flexWrap:'wrap', justifyContent: {xs:'start', md:'center'}, alignContents: 'center', border:'2px solid green'}} >
-            <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ width: {xs: "200px", md:"150px"}, input: isDarkMode ? darkModeInputColour: "" }} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='Filter By Title'></TextField>
-            <Button variant='contained' sx={{ width:'103px', backgroundColor: 'primary.light', margin:'30px'}} type="submit">Search</Button>
-            <FavButton isDarkMode={isDarkMode} favouriteSelector={favouriteSelector} isFavourite={isFavourite}/>
-            <Button onClick={getMyMovies} variant='contained' sx={{ backgroundColor: 'primary.light', margin:'30px', border:'solid pink 2px'}}>Show All</Button>
-            </Stack>
-        </form>
+        <Box sx={{padding: '30px'}}>
+            <form onSubmit={handleSubmit}>
+                <Grid container spacing={2} sx={{display:'flex', justifyContent:'center'}}>
+                    <Grid item md={4} sm={4} xs={7}><TextField fullWidth color={isDarkMode ? 'secondary' : 'primary'} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='Filter By Title'></TextField>
+                    </Grid>
+                    <Grid item md={2} sm={2} xs={5}><Button sx={{height:'100%'}} fullWidth variant='contained' type="submit">Search</Button>
+                    </Grid>
+                    <Grid item md={4} sm={4} xs={7}><FavButton isDarkMode={isDarkMode} favouriteSelector={favouriteSelector} isFavourite={isFavourite} />
+                    </Grid>
+                    <Grid item md={2} sm={2} xs={5}><Button sx={{height:'100%'}} fullWidth onClick={getMyMovies} variant='contained'>Show All</Button>
+                    </Grid>
+
+
+                </Grid>
+            </form>
         </Box>
 
     )

@@ -8,20 +8,20 @@ const FavButton = ({favouriteSelector, isFavourite, isDarkMode}) => {
     const darkModeInputColour = 
     {color: '#fff'}
   return (
-    <Box width='200px'>
+    
         <TextField label='Filter By'
         select
+        fullWidth
         value= {isFavourite}
         onChange={handleFavouriteValue}
-        fullWidth
         color={isDarkMode? 'secondary': 'primary'}
-        sx={{input: isDarkMode ? darkModeInputColour: "" }}
+        sx={{ input: isDarkMode ? darkModeInputColour: "" }}
         >
             <MenuItem value='all'>All</MenuItem>
             <MenuItem value='true'>Favourites</MenuItem>
             <MenuItem value='false'>Not Favourites</MenuItem>
         </TextField>
-    </Box>
+
   )
 }
 
