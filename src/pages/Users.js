@@ -23,11 +23,11 @@ const Users = () => {
     return (
         <Box>
             <HeroSection />
-            <Container maxWidth='md' sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-            <Typography variant='h2'>All Users:</Typography>
-            <Grid container spacing={3} sx={{width: {md: "900px", xs: '320px'},border: 'solid red 2px', maxWidth: '100%', transform: 'translate(1.5%,10%)'}}>
+            <Container sx={{padding: '30px'}}>
+            <Typography gutterBottom sx={{textAlign: 'center', fontFamily: 'Russo One'}} variant='h4'>All Users</Typography>
+            <Grid container spacing={3}>
                 {users.map((user, index) => {
-                    return <Grid key={index} item md={3} xs={6}><UserCard user={user} /></Grid>
+                    return <Grid key={index} item md={3} sm={4} xs={6}><UserCard user={user} /></Grid>
                 })}
             </Grid>
             </Container>

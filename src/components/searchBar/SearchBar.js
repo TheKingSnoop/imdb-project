@@ -27,8 +27,10 @@ const SearchBar = ({setMovies, isDarkMode}) => {
       <Stack direction='row' spacing={1} sx={{height:'55px'}} >
         <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ maxWidth: {md: "400px", xs: '200px'}, input: isDarkMode ? darkModeInputColour: lightModeInputColour, minWidth: {xs: "200px", md:"300px"}, marginBottom: '30px'}} fullWidth label="Search movie" variant='outlined' focused onChange={(e) => {setUserInput(e.target.value)}}/>
         <Button variant='contained' sx={{ backgroundColor: 'primary.light'}} type="submit">Search</Button>
-      </Stack>
+      
+</Stack>
     </form>
+        <Button variant='contained' sx={{ backgroundColor: 'primary.light'}} type="submit">View All</Button>
     </Box>
   )
 }
