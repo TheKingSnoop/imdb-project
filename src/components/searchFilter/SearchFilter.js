@@ -31,19 +31,17 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMo
     }
 
     return (
-        <Box sx={{padding: '30px'}}>
+        <Box sx={{ padding: '30px' }}>
             <form onSubmit={handleSubmit}>
-                <Grid container spacing={2} sx={{display:'flex', justifyContent:'center'}}>
+                <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Grid item md={4} sm={4} xs={7}><TextField fullWidth color={isDarkMode ? 'secondary' : 'primary'} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='Filter By Title'></TextField>
                     </Grid>
-                    <Grid item md={2} sm={2} xs={5}><Button sx={{height:'100%'}} fullWidth variant='contained' type="submit">Search</Button>
+                    <Grid item md={2} sm={2} xs={5}><Button sx={{ height: '100%' }} fullWidth variant='contained' type="submit">Search</Button>
                     </Grid>
                     <Grid item md={4} sm={4} xs={7}><FavButton isDarkMode={isDarkMode} favouriteSelector={favouriteSelector} isFavourite={isFavourite} />
                     </Grid>
-                    <Grid item md={2} sm={2} xs={5}><Button sx={{height:'100%'}} fullWidth onClick={getMyMovies} variant='contained'>Show All</Button>
+                    <Grid item md={2} sm={2} xs={5}><Button sx={{ height: '100%' }} fullWidth onClick={getMyMovies} variant='contained'>Show All</Button>
                     </Grid>
-
-
                 </Grid>
             </form>
         </Box>
