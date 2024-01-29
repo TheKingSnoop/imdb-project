@@ -10,6 +10,7 @@ const FavButton = ({ favouriteSelector, isFavourite, isDarkMode }) => {
   return (
 
     <TextField label='Filter By'
+      focused
       select
       fullWidth
       value={isFavourite}
