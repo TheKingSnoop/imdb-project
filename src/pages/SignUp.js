@@ -27,7 +27,7 @@ const SignUp = () => {
 
   const handleSubmit = (values, props) => {
     // console.log(props)
-    
+    let data = null
    
       const signUp = async () => {
         const response = await fetch('http://localhost:3001/auth/signup', {
@@ -44,16 +44,19 @@ const SignUp = () => {
           }
         })
         console.log(response)
-        const data = await response.json();
+        data = await response.json();
         console.log(data)
       }
       signUp();
       setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false)
-      alert('Successfully created an acount, redirecting you to the login page.')
-      navigate('/login')
-    },2000)
+      if(data.errors) {
+        alert(data.errors[0].msg)}
+      else {alert('Successfully created an acount, redirecting you to the login page.')
+      navigate('/login')}
+      
+    },1500)
       
   }
   const margin = { margin: '10px 0px' }

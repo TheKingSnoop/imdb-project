@@ -3,7 +3,7 @@ import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText } 
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom'
 
-const DrawerComp = ({ currentUser, logout }) => {
+const DrawerComp = ({ currentUser, logout, isDarkMode, setIsDarkMode}) => {
     const [openDrawer, setOpenDrawer] = useState(false);
     return (
         <React.Fragment>
@@ -28,14 +28,19 @@ const DrawerComp = ({ currentUser, logout }) => {
                                 <ListItemText>MY MOVIES</ListItemText>
                             </ListItemIcon>
                         </NavLink>
+                        <NavLink to='/users'>
+                            <ListItemIcon >
+                                <ListItemText>USERS</ListItemText>
+                            </ListItemIcon>
+                        </NavLink>
                          <NavLink to='/' onClick={logout}>
                             <ListItemIcon >
                                 <ListItemText>LOG OUT</ListItemText>
                             </ListItemIcon>
                         </NavLink>
                         </>}
-                        <ListItemIcon >
-                                <ListItemText>DARK MODE</ListItemText>
+                        <ListItemIcon onClick={() => setIsDarkMode(prev => !prev)}>
+                                <ListItemText>{isDarkMode ? 'LIGHT MODE' : 'DARK MODE'}</ListItemText>
                             </ListItemIcon>
                     </ListItemButton>
 

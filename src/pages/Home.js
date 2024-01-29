@@ -6,20 +6,21 @@ import HeroSection from '../components/heroSection/HeroSection'
 
 const Home = ({movies, setMovies, currentUser, movieDescription, setMovieDescription, isDarkMode}) => {
   setMovieDescription(true)
+
+  async function getTop20Movies() {
+    const response = await fetch("http://localhost:3001/tmdb");
+    const data = await response.json();
+    //console.log('data', data);
+    setMovies(data.payload);
+};
   useEffect(() => {
-    async function getTop20Movies() {
-        const response = await fetch("http://localhost:3001/tmdb");
-        const data = await response.json();
-        //console.log('data', data);
-        setMovies(data.payload);
-    };
     getTop20Movies();
 }, [])
   return (
    <Box>
     <HeroSection movies={movies}/>
-   <Container maxWidth='md' sx={{ py: 6 }}>
-    <SearchBar setMovies={setMovies} isDarkMode={isDarkMode}/>
+    <Container maxWidth='md' sx={{ py: 6, padding:'0px'}}>
+    <SearchBar setMovies={setMovies} isDarkMode={isDarkMode} getTop20Movies={getTop20Movies}/>
     <MovieContainer movies={movies} currentUser={currentUser} movieDescription={movieDescription}/>
     </Container>
    </Box>

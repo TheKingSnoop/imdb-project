@@ -1,15 +1,16 @@
 import React from 'react'
-import MovieCard from '../movieCard/MovieCard';
-import Grid from '@mui/material/Grid';
+import MovieCard from '../cards/MovieCard';
+import {Grid, Box, Container} from '@mui/material';
 
-const MovieContainer = ({ movies, currentUser, movieDescription }) => {
+const MovieContainer = ({ movies, currentUser, movieDescription, readOnly}) => {
     console.log(movies)
 
     return (
-            <Grid container spacing={3} sx={{ width: {md: "900px", xs: '320px'}, minWidth: "200px", display:'flex'}}>
+        <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {md:'0px', xs:'20px', sm:'0px'}}} >
+            <Grid container sx={{  minWidth: "200px", display:'flex'}}>
                 {movies.filter(movie => movie.description && movie.rating && !movie.image.endsWith('null'))
                 .map((movie, index) => {
-                    return <Grid key={index} item md={3} >
+                    return <Grid key={index} item md={3} sm={6} xs={12} >
                         <MovieCard
                         movies={movies}
                         index={index}
@@ -25,10 +26,12 @@ const MovieContainer = ({ movies, currentUser, movieDescription }) => {
                         isFavourite={movie.userReviewId && movie.userReviewId[0].isFavourite}
                         dateWatched={movie.userReviewId && movie.userReviewId[0].dateWatched}
                         movieDescription= {movieDescription}
+                        readOnly={readOnly}
                         />
                     </Grid>
                 })}
             </Grid>
+            </Container>
     )
 }
 

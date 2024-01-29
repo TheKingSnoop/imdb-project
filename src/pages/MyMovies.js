@@ -5,9 +5,26 @@ import MovieContainer from '../components/movieContainer/MovieContainer';
 import { Box, Container } from '@mui/system';
 import SearchFilter from '../components/searchFilter/SearchFilter';
 import { Button, Typography } from '@mui/material';
+import HeroSection from '../components/heroSection/HeroSection';
 
 const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDescription, isDarkMode }) => {
-  const [filterUserInput, setFilterUserInput] = useState("")
+  const [filterUserInput, setFilterUserInput] = useState("");
+  const [isFavourite, setIsFavourite]=useState("all");
+
+  const favouriteSelector = (filterValue) => {
+    setIsFavourite(filterValue)
+    console.log(filterValue)
+};
+
+let filteredFavMovieList = movies.filter(movies => {
+  if(isFavourite === "true") {
+    return movies.userReviewId[0].isFavourite === true
+  } else if(isFavourite === "false") {
+    return movies.userReviewId[0].isFavourite === false
+  } else {
+    return movies;
+}}) 
+
   setMovieDescription(false)
   const cookies = new Cookies()
   useEffect(() => {
@@ -27,17 +44,19 @@ const MyMovies = ({ movies, setMovies, currentUser, movieDescription, setMovieDe
     console.log(data)
     setMovies(data)
     setFilterUserInput("")
+    setIsFavourite("all")
   };
 
-  return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-      <Button color={isDarkMode? 'secondary': 'primary'} onClick={getMyMovies}>Reset</Button>
-      <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies}  isDarkMode={isDarkMode}/>
+  return (<>
+  <HeroSection/>
+  <Container maxWidth='md' sx={{ py: 6, padding:'0px'}}>
+      <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
+      getMyMovies={getMyMovies} movies={movies}setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector}/>
       <Container maxWidth='md'>
-        {movies.length ? <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page.</Typography>}
+        {movies.length ? <MovieContainer setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription}/> : <Typography>You haven't added any movies. You can add movies in the home page.</Typography>}
       </Container>
-    </Box>
-  )
+    </Container>
+ </> )
 }
 
 export default MyMovies
