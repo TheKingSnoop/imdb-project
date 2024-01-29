@@ -35,7 +35,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                                 <NavLink to='/'><img src={mobileSeenItLogo} height='40px' width='auto' alt='seen it logo' />
                                 </NavLink>
                             </Stack>
-                            {currentUser && <Typography sx={{ marginLeft: 'auto' }}>Hello  {currentUser.name}</Typography>}
+                            {currentUser && <Typography sx={{ fontFamily: 'Russo One', marginLeft: 'auto' }}>Hello  {currentUser.name}</Typography>}
                             <DrawerComp currentUser={currentUser} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} logout={logout} />
                         </>
                     ) : <>
@@ -51,7 +51,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                                 <NavLink to='/signup'>
                                     <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Sign Up</Button>
                                 </NavLink> </> : <>
-                                <Typography sx={{ display: 'flex', alignItems: 'center' }}>Hello {currentUser.name}</Typography>
+                                <Typography variant='h5' sx={{ fontFamily: 'Russo One', display: 'flex', alignItems: 'center' }}>Hello {currentUser.name}</Typography>
                                 <NavLink to='/mymovies'>
                                     <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '60px' }}>my movies</Button>
                                 </NavLink>
