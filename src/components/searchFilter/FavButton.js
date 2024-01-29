@@ -8,7 +8,7 @@ const FavButton = ({favouriteSelector, isFavourite, isDarkMode}) => {
     const darkModeInputColour = 
     {color: '#fff'}
   return (
-    <Box width='125px'>
+    <Box width='200px'>
         <TextField label='Filter By'
         select
         value= {isFavourite}

@@ -49,13 +49,13 @@ let filteredFavMovieList = movies.filter(movies => {
 
   return (<>
   <HeroSection/>
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-      <Button color={isDarkMode? 'secondary': 'primary'} onClick={getMyMovies}>Reset</Button>
-      <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} movies={movies}setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector}/>
+  <Container maxWidth='md' sx={{ py: 6, padding:'0px'}}>
+      <SearchFilter filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
+      getMyMovies={getMyMovies} movies={movies}setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector}/>
       <Container maxWidth='md'>
         {movies.length ? <MovieContainer setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription}/> : <Typography>You haven't added any movies. You can add movies in the home page.</Typography>}
       </Container>
-    </Box>
+    </Container>
  </> )
 }
 

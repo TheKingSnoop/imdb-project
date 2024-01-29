@@ -62,10 +62,10 @@ const MovieCard = (props) => {
 
   return (
 
-    <Box width='200' >
-      <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '200px', bgcolor: "primary.light" }}>
+    <Box width='200' sx={{margin:'10px'}}>
+      <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '190px', bgcolor: "primary.light" }}>
         <Tooltip title={props.title}><Box sx={{ position: 'relative' }}>
-          <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '320px' }} />
+          <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
           {props.isFavourite && <FavoriteIcon sx={{ position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'primary.light' }} />}
         </Box></Tooltip>
         <CardContent sx={{ paddingBottom: '0px' }}>

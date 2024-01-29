@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 import FavButton from './FavButton';
 
-const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode, setIsFavourite, isFavourite, favouriteSelector}) => {
+const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector}) => {
 
     const cookies = new Cookies();
 
@@ -31,12 +31,13 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMo
     }
 
     return (
-        <Box sx={{display: 'flex', justifyContent:'center', marginBottom:'20px'}}>
+        <Box sx={{maxWidth:'100%', height: { xs:'150px', md:'auto'}, display: 'flex',flexWrap:'wrap', justifyContent:'center', border:'solid blue 2px', padding:'20px 10px'}}>
         <form onSubmit={handleSubmit}>
-            <Stack direction='row' spacing={1} sx={{height:'55px'}} >
-            <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ maxWidth: { md: "400px", xs: '200px' }, minWidth: {xs: "200px", md:"300px"}, input: isDarkMode ? darkModeInputColour: "" }} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='filter'></TextField>
-            <Button variant='contained' sx={{ backgroundColor: 'primary.light'}} type="submit">Search</Button>
+            <Stack direction='row' spacing={1} sx={{height:'auto', display: 'flex', flexWrap:'wrap', justifyContent: {xs:'start', md:'center'}, alignContents: 'center', border:'2px solid green'}} >
+            <TextField color={isDarkMode? 'secondary': 'primary'} sx={{ width: {xs: "200px", md:"150px"}, input: isDarkMode ? darkModeInputColour: "" }} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='Filter By Title'></TextField>
+            <Button variant='contained' sx={{ width:'103px', backgroundColor: 'primary.light', margin:'30px'}} type="submit">Search</Button>
             <FavButton isDarkMode={isDarkMode} favouriteSelector={favouriteSelector} isFavourite={isFavourite}/>
+            <Button onClick={getMyMovies} variant='contained' sx={{ backgroundColor: 'primary.light', margin:'30px', border:'solid pink 2px'}}>Show All</Button>
             </Stack>
         </form>
         </Box>
