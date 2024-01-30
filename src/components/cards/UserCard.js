@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import marioCover from '../../images/marioCover.jpeg'
 
 const UserCard = ({ user }) => {
+  console.log(user)
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`${user[0].userId}`)

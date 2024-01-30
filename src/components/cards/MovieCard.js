@@ -77,7 +77,7 @@ const MovieCard = (props) => {
               <Typography variant='body2' sx={{ color: colourRating }}>{Math.round(props.rating * 10) / 10}</Typography>
             </div>
           </Stack>
-          <Typography sx={{borderBottom:'2px solid #c62828', paddingBottom:'15px'}} variant='body2'>{releaseYear}</Typography>
+          <Typography variant='body2'>{releaseYear}</Typography>
         </CardContent>
         {props.currentUser ? <>
           {/* signed in and home page */}
@@ -104,7 +104,7 @@ const MovieCard = (props) => {
             <Box>
               <CardContent>
                 
-                <Rating value={props.user_rating} precision={0.5} size='large' readOnly />
+                <Rating sx={{paddingTop: '15px', width:'100%', borderTop:'2px solid #c62828', paddingBottom:'15px'}} value={props.user_rating} precision={0.5} size='large' readOnly />
                 <Box sx={{paddingBottom:'10px'}}>
                 <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px"}} variant='body2'>{props.user_analysis}</Typography>
                 </Box>
