@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom'
-import { formatDateProfile } from '../service/movieCardService'
+import { formatDate } from '../service/movieCardService'
 
 import marioCover from '../images/marioCover.jpeg'
 import shrek from '../images/shrekAvatar.jpeg';
@@ -34,7 +34,7 @@ const MyProfile = () => {
     })
     const cookies = new Cookies();
     const navigate = useNavigate();
-    const ukDateFormat = formatDateProfile(userDetails.date_joined);
+    const ukDateFormat = formatDate(userDetails.date_joined);
 
     const getUserDetailsById = async() => {
         const token = cookies.get('jwt')

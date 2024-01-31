@@ -16,7 +16,7 @@ const MovieCard = (props) => {
 
   const releaseYear = props.release_date.slice(0, 4);
   const colourRating = dynamicRating(props);
-  const ukDateFormat = formatDate(props);
+  const ukDateFormat = formatDate(props.dateWatched);
 
   const [open, setOpen] = useState(false)
 
