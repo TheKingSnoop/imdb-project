@@ -48,17 +48,21 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                             </NavLink>
                         </Stack>
                         {!currentUser ?
-                            "": <Stack sx={{display:'flex', justifyContent: 'center', margin: 'auto'}}>
+                            <Stack sx={{margin: 'auto'}}>
+                            </Stack>   : <Stack sx={{display:'flex', justifyContent: 'center', margin: 'auto'}}>
                             <NavLink to='/myprofile'>
-                            <Button><Typography variant='h5' sx={{ color: 'white', fontFamily: 'Russo One'}}>Hello {currentUser.name}</Typography></Button>
-                            </NavLink></Stack>    
+                            <Button>
+                                <Typography variant='h5' sx={{ color: 'white', fontFamily: 'Russo One'}}>Hello {currentUser.name}</Typography>
+                                </Button>
+                            </NavLink>
+                            </Stack>    
                         } 
                         <Stack direction='row' >
                             
                             {!currentUser ? 
                                 <>
                                 <NavLink to='/login'>
-                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light' }}>Login</Button>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>Login</Button>
                                 </NavLink>
                                 <NavLink to='/signup'>
                                     <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Sign Up</Button>
