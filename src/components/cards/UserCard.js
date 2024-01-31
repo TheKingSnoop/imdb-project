@@ -9,6 +9,7 @@ import mulan from '../../images/mulanAvatar.jpeg';
 import woody from '../../images/woodyAvatar.jpeg';
 import maggie from '../../images/maggieAvatar.jpeg';
 import babyyoda from '../../images/babyyodaAvatar.jpeg';
+import wonderWoman from '../../images/wonderWomanAvatar.png';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const UserCard = ({ user }) => {
@@ -23,13 +24,16 @@ const UserCard = ({ user }) => {
         return shrek
     } else if (user[0].profile_pic == "mulanAvatar") {
         return mulan
-    } else if (user.profile_pic == "woodyAvatar") {
+    } else if (user[0].profile_pic == "woodyAvatar") {
         return woody
     } else if (user[0].profile_pic == "babyYodaAvatar") {
         return babyyoda
     } else if (user[0].profile_pic == "maggieAvatar") {
         return maggie
-    } else return null;
+    } else if (user[0].profile_pic == "wonderWomanAvatar") {
+      return wonderWoman
+  }
+     else return null;
 }
 
   return (

@@ -9,7 +9,8 @@ import shrek from '../images/shrekAvatar.jpeg';
 import mulan from '../images/mulanAvatar.jpeg';
 import woody from '../images/woodyAvatar.jpeg';
 import maggie from '../images/maggieAvatar.jpeg';
-import babyyoda from '../images/babyyodaAvatar.jpeg';
+import babyYoda from '../images/babyyodaAvatar.jpeg';
+import wonderWoman from '../images/wonderWomanAvatar.png';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -25,9 +26,9 @@ const MyProfile = () => {
     const [userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
-        favMovie: null,
-        favQuote: null,
-        favGenre: null
+        favMovie: "",
+        favQuote: "",
+        favGenre: ""
     })
     const cookies = new Cookies();
     const navigate = useNavigate();
@@ -63,6 +64,37 @@ const MyProfile = () => {
         getUserDetailsById();
     }, [])
 
+    const profileImages = [{
+        value: "shrekAvatar",
+        src: shrek,
+        name: "shrek"
+    },
+    {
+        value: "mulanAvatar",
+        src: mulan,
+        name: "mulan"
+    },
+    {
+        value: "woodyAvatar",
+        src: woody,
+        name: "shrek"
+    },
+    {
+        value: "babyYodaAvatar",
+        src: babyYoda,
+        name: "baby yoda"
+    },
+    {
+        value: "maggieAvatar",
+        src: maggie,
+        name: "maggie"
+    },
+    {
+        value: "wonderWomanAvatar",
+        src: wonderWoman,
+        name: "wonder woman"
+    }
+    ]
     const profilePic = () => {
         if (userDetails.profile_pic == "shrekAvatar") {
             return shrek
@@ -71,9 +103,11 @@ const MyProfile = () => {
         } else if (userDetails.profile_pic == "woodyAvatar") {
             return woody
         } else if (userDetails.profile_pic == "babyYodaAvatar") {
-            return babyyoda
+            return babyYoda
         } else if (userDetails.profile_pic == "maggieAvatar") {
             return maggie
+        } else if (userDetails.profile_pic == "wonderWomanAvatar") {
+            return wonderWoman
         } else return null;
     }
 
@@ -107,36 +141,15 @@ const MyProfile = () => {
                                 aria-labelledby="Profile picture options"
                                 name="profilePic"
                             >
-                                <Box sx={{ borderRight: '2px solid grey' }}>
-                                    <FormControlLabel value="shrekAvatar" onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px' }} />} />
-                                    <Box component='img' sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }} alt='shrek' src={shrek}>
-                                    </Box>
+                                {profileImages.map((image, index) => {
+                                    return (
+                                        <Box key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Box component='img' src={image.src} alt={image.name} sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }}></Box>
+                                            <FormControlLabel value={image.value} onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px' }} />} />
+                                        </Box>
+                                    )
+                                })}
 
-                                </Box>
-                                <Box sx={{ borderRight: '2px solid grey' }}>
-                                    <FormControlLabel value="mulanAvatar" onClick={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio />} />
-                                    <Box component='img' sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }} alt='mulan' src={mulan}>
-
-                                    </Box>
-                                </Box>
-                                <Box sx={{ borderRight: '2px solid grey' }}>
-                                    <FormControlLabel value="woodyAvatar" onClick={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio />} />
-                                    <Box component='img' sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }} alt='woody' src={woody}>
-
-                                    </Box>
-                                </Box>
-                                <Box sx={{ borderRight: '2px solid grey' }}>
-                                    <FormControlLabel value="babyYodaAvatar" onClick={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio />} />
-                                    <Box component='img' sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }} alt='babyyoda' src={babyyoda}>
-
-                                    </Box>
-                                </Box>
-                                <Box>
-                                    <FormControlLabel value="maggieAvatar" onClick={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio />} />
-                                    <Box component='img' sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }} alt='maggie' src={maggie}>
-
-                                    </Box>
-                                </Box>
 
                             </RadioGroup>
                         </FormControl>
