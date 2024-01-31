@@ -1,4 +1,4 @@
-import { Avatar, Box, CardMedia, Typography, Card, Grid, TextField, Button } from '@mui/material'
+import { Avatar, Box, CardMedia, Typography, Card, Grid, TextField, Button, Container } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
@@ -22,7 +22,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-const MyProfile = () => {
+const MyProfile = ({isDarkMode}) => {
     const [userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
@@ -125,53 +125,59 @@ const MyProfile = () => {
 
     }
     return (
-        <Box sx={{ marginTop: '20px', minWidth: { sm: '550px', xs: '300px' } }}>
-            <Typography variant='h2' >My Profile</Typography>
-            <Card sx={{ padding: '20px', width: { sm: '700px', xs: '350px' } }}>
+        <Box sx={{  margin: '20px', minWidth: { sm: '550px', xs: '300px' } }}>
+            <Typography variant='h3'sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode && "white"}}  >My Profile</Typography>
+            <Card sx={{ color: isDarkMode && "white", bgcolor: isDarkMode && "primary.light", padding: '20px', width: { sm: '700px', xs: '350px' } }}>
                 <form onSubmit={handleSubmit}><Grid container spacing={2}>
 
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                         {userDetails.profile_pic ? <CardMedia sx={{ borderRadius: '50%', height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' } }} component='img' image={profilePic(userDetails.profile_pic)} width='100%' /> : <Avatar sx={{ height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' }, bgcolor: '#d32f2f' }} />}
                     </Grid>
-                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <Typography textAlign='left' marginLeft='40px'>Change Profile Picture:</Typography>
+                    <Grid item xs={12} sx={{display:'flex', justifyContent:'center'}}>
                         <FormControl>
-                            <FormLabel id="demo-row-radio-buttons-group-label">Change Profile Picture</FormLabel>
+                            
+                           
                             <RadioGroup
                                 row
                                 aria-labelledby="Profile picture options"
                                 name="profilePic"
                             >
-                                {profileImages.map((image, index) => {
-                                    return (
-                                        <Box key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Box component='img' src={image.src} alt={image.name} sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }}></Box>
-                                            <FormControlLabel value={image.value} onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px' }} />} />
-                                        </Box>
-                                    )
-                                })}
+                                <Container sx={{ width:'100%', display:'flex'}}>
+                                    <Grid container  sx={{ display: 'flex', justifyContent:'center', alignItems:'center', paddingBottom:'15px'}}>
+
+                                    {profileImages.map((image, index) => {
+                                        return (
+                                        <Grid item key={index} sm={2} xs={6} sx={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
+                                            <Box  component='img' src={image.src} alt={image.name} sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }}>
+                                            </Box>
+                                            <FormControlLabel value={image.value} onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px', color: isDarkMode && 'white' }} />} />
+                                        </Grid>
+                                        )
+                                    })}</Grid></Container>
 
 
                             </RadioGroup>
                         </FormControl>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>First Name: {userDetails.name}</Typography>
+                        <Typography color='grey' textAlign='left' marginLeft='20px'>First Name: {userDetails.name}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>Last Name: {userDetails.surname}</Typography>
+                        <Typography color='grey' textAlign='left' marginLeft='20px'>Last Name: {userDetails.surname}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>Username: {userDetails.username}</Typography>
+                        <Typography color='grey' textAlign='left' marginLeft='20px'>Username: {userDetails.username}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>Joined Since: {ukDateFormat}</Typography>
+                        <Typography color='grey' textAlign='left' marginLeft='20px'>Joined Since: {ukDateFormat}</Typography>
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <Typography textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography>
+                        <Typography gutterBottom textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography>
                         <TextField fullWidth type={"text"} label='Update Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <Typography textAlign='left'> Favourite Movie Quote: {userDetails.fav_quote}</Typography>
+                        <Typography gutterBottom textAlign='left'> Favourite Movie Quote: {userDetails.fav_quote}</Typography>
                         <TextField fullWidth type={"text"} label='Update Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
@@ -204,8 +210,9 @@ const MyProfile = () => {
                         </FormControl>
                     </Grid>
                 </Grid>
+                <Box fullWidth sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
                     <Button type='submit' variant='contained' color='primary'>Update Profile</Button>
-                </form>
+                </Box></form>
             </Card>
         </Box>
     )
