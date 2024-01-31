@@ -55,6 +55,8 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const cookies = new Cookies()
 
+ 
+
   useEffect(() => {
     const user = getCurrentUser() 
       if(user) {
@@ -83,7 +85,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login/>} />
               <Route path="/mymovies" element={<MyMovies currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
-              <Route path="/myprofile" element={<MyProfile/>} currentUser={currentUser}/>
+              <Route path="/myprofile" element={<MyProfile currentUser={currentUser}/>} />
               <Route path="/users" element={<Users isDarkMode={isDarkMode}/>} />
               <Route path="/users/:userId" element={<UserPage currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="*" element={<NoPage/>}/>

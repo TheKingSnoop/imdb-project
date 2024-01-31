@@ -41,3 +41,24 @@ export function addToSeenIt(props) {
     } else {
       return "No date added"
     }  };
+
+    export function formatDateProfile(date_joined) {
+      if (date_joined) {
+        let ukDateFormat = new Date(date_joined)
+        let dd = ukDateFormat.getDate();
+        let mm = ukDateFormat.getMonth() + 1;
+        let yyyy = ukDateFormat.getFullYear();
+  
+        if (dd < 10) {
+          dd = '0' + dd;
+        }
+        if (mm < 10) {
+          mm = '0' + mm;
+        }
+        ukDateFormat = dd + '/' + mm + '/' + yyyy;
+
+        return ukDateFormat
+      } else {
+        return "No date added"
+      }  
+    };

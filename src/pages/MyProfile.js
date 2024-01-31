@@ -1,5 +1,10 @@
 import { Box, CardMedia, Typography, Card, Grid, TextField, Button } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Cookies from 'universal-cookie'
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from 'react-router-dom'
+import { formatDateProfile } from '../service/movieCardService'
+
 import marioCover from '../images/marioCover.jpeg'
 import shrek from '../images/shrekAvatar.jpeg';
 import mulan from '../images/mulanAvatar.jpeg';
@@ -19,16 +24,50 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
 import { maxWidth } from '@mui/system';
 
-const MyProfile = ({currentUser}) => {
+const MyProfile = () => {
+    const [userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
         favMovie: "",
         favQuote: "",
         favGenre: ""
     })
+    const cookies = new Cookies();
+    const navigate = useNavigate();
+    const ukDateFormat = formatDateProfile(userDetails.date_joined);
 
-    console.log(currentUser);
+    const getUserDetailsById = async() => {
+        const token = cookies.get('jwt')
+        const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
+        const user_Id = user.id
+        const response = await fetch(`http://localhost:3001/auth/user/${user_Id}`)
+        const data = await response.json()
+        setUserDetails(data);
+    }
+
+    const updateProfile = async() => {
+        const response = await fetch(`http://localhost:3001/auth/update-profile/${userDetails.userId}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+              profile_pic: userInput.profilePic,
+              fav_movie: userInput.favMovie,
+              fav_quote: userInput.favQuote,
+              fav_genre: userInput.favGenre
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          const data = await response.json()
+          setUserDetails(data);
+          navigate(0);
+    }
+    useEffect(() => {
+       getUserDetailsById();
+    }, [])
     
+
+
     const handleInputChange = (e) => {
         const { name, value } = e.target
         setUserInput({
@@ -38,7 +77,8 @@ const MyProfile = ({currentUser}) => {
     };
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(userInput)
+        updateProfile()
+        
     }
     return (
         <Box sx={{ marginTop: '20px', minWidth: { sm: '550px', xs: '300px' } }}>
@@ -92,24 +132,27 @@ const MyProfile = ({currentUser}) => {
                         </FormControl>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>First Name: Marcy</Typography>
+                        <Typography textAlign='left' marginLeft='20px'>First Name: {userDetails.name}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>Last Name: Marcy</Typography>
+                        <Typography textAlign='left' marginLeft='20px'>Last Name: {userDetails.surname}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>Username: molly</Typography>
+                        <Typography textAlign='left' marginLeft='20px'>Username: {userDetails.username}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography textAlign='left' marginLeft='20px'>Joined Since: 14/12/2023</Typography>
+                        <Typography textAlign='left' marginLeft='20px'>Joined Since: {ukDateFormat}</Typography>
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <TextField fullWidth type={"text"} label='Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
+                    <Typography textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography>
+                        <TextField fullWidth type={"text"} label='Update Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
+                    <Typography textAlign='left'> Favourite Movie Quote: {userDetails.fav_quote}</Typography>
+                        <TextField fullWidth type={"text"} label='Update Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
+                    <Typography textAlign='left'> Favourite Genre: {userDetails.fav_genre}</Typography>
 
                         <FormControl sx={{ minWidth: 120 }}>
                             <InputLabel>Genre</InputLabel>
