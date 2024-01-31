@@ -14,7 +14,7 @@ const Users = ({isDarkMode}) => {
             const response = await fetch("http://localhost:3001/auth/all")
             const data = await response.json()
             setUsers(data)
-            //console.log(data)
+            console.log(data)
         };
         getAllUsers();
 
