@@ -4,7 +4,7 @@ import TheatersIcon from '@mui/icons-material/Theaters';
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
 
-import { AppBar, CssBaseline, Typography, Toolbar, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
+import { Box, AppBar, CssBaseline, Typography, Toolbar, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import DrawerComp from '../drawer/DrawerComp';
 import seenItLogo from '../../images/SeenItLogo.png';
@@ -35,25 +35,44 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                                 <NavLink to='/'><img src={mobileSeenItLogo} height='40px' width='auto' alt='seen it logo' />
                                 </NavLink>
                             </Stack>
-                            {currentUser && <Typography sx={{ fontFamily: 'Russo One', marginLeft: 'auto' }}>Hello  {currentUser.name}</Typography>}
+                            {currentUser && 
+                            <Box sx={{display:'flex', justifyContent: 'center', width:'100%'}}>
+                            <NavLink to='/myprofile'><Button><Typography sx={{color: 'white', fontFamily: 'Russo One', marginLeft: 'auto' }}>Hello  {currentUser.name}</Typography></Button></NavLink>
+                            </Box>}
                             <DrawerComp currentUser={currentUser} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} logout={logout} />
                         </>
                     ) : <>
                         {/* Desktop View */}
                         <Stack sx={{ paddingTop: '5px' }}>
-                            <NavLink to='/' ><img src={seenItLogo} height='40px' width='auto' alt='seen it logo' />
-                            </NavLink></Stack>
-                        <Stack direction='row' sx={{ marginLeft: 'auto' }}>
-                            {!currentUser ? <>
+                            <NavLink to='/'><img src={seenItLogo} height='40px' width='auto' alt='seen it logo' />
+                            </NavLink>
+                        </Stack>
+                        {!currentUser ?
+                            <Stack sx={{margin: 'auto'}}>
+                            </Stack>   : <Stack sx={{display:'flex', justifyContent: 'center', margin: 'auto'}}>
+                            <NavLink to='/myprofile'>
+                            <Button>
+                                <Typography variant='h5' sx={{ color: 'white', fontFamily: 'Russo One'}}>Hello {currentUser.name}</Typography>
+                                </Button>
+                            </NavLink>
+                            </Stack>    
+                        } 
+                        <Stack direction='row' >
+                            
+                            {!currentUser ? 
+                                <>
                                 <NavLink to='/login'>
-                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light' }}>Login</Button>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>Login</Button>
                                 </NavLink>
                                 <NavLink to='/signup'>
                                     <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Sign Up</Button>
-                                </NavLink> </> : <>
-                                <Typography variant='h5' sx={{ fontFamily: 'Russo One', display: 'flex', alignItems: 'center' }}>Hello {currentUser.name}</Typography>
+                                </NavLink>
+                                </> 
+                                :
+                                 <>
+                                
                                 <NavLink to='/mymovies'>
-                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '60px' }}>my movies</Button>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>my movies</Button>
                                 </NavLink>
                                 <NavLink to='/users'>
                                     <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>users</Button>

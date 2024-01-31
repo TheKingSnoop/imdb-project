@@ -17,7 +17,6 @@ const UserPage = ({movies, setMovies, currentUser}) => {
         const token = cookies.get('jwt')
         const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
         
-        
         const response = await fetch("http://localhost:3001/movie/my-movies", {
           method: "POST",
           headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
@@ -31,8 +30,9 @@ const UserPage = ({movies, setMovies, currentUser}) => {
       };
 
       async function getUserById() {
-        const response = await fetch(`http://localhost:3001/auth/all/${userPageId}`)
+        const response = await fetch(`http://localhost:3001/auth/user/${userPageId}`)
         const data = await response.json()
+        console.log(data)
         setProfileName(data.username)
     }
       useEffect(() => {

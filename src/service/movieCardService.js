@@ -21,9 +21,9 @@ export function addToSeenIt(props) {
     return colourRating
   };
 
-  export function formatDate (props) {
-    if (props.dateWatched) {
-      let ukDateFormat = new Date(props.dateWatched)
+  export function formatDate (date) {
+    if (date) {
+      let ukDateFormat = new Date(date)
       let dd = ukDateFormat.getDate();
       let mm = ukDateFormat.getMonth() + 1;
       let yyyy = ukDateFormat.getFullYear();
