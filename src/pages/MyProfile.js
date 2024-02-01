@@ -16,7 +16,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -38,10 +37,18 @@ const MyProfile = ({isDarkMode}) => {
         const token = cookies.get('jwt')
         const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
         const user_Id = user.id
-        const response = await fetch(`http://localhost:3001/auth/user/${user_Id}`)
-        const data = await response.json()
-        setUserDetails(data);
-    }
+        const response = await fetch(`http://localhost:3001/auth/user/${user_Id}`, {
+            headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
+          });
+        const data = await response.json();
+
+        if(data && data.error && data.error.message === "Unauthorized") {
+            alert('Session expired, please login again.')
+            navigate('/login')
+          } else {
+           setUserDetails(data);
+          }  ;
+    };
 
     const updateProfile = async () => {
         const response = await fetch(`http://localhost:3001/auth/update-profile/${userDetails.userId}`, {
@@ -96,21 +103,20 @@ const MyProfile = ({isDarkMode}) => {
     }
     ]
     const profilePic = () => {
-        if (userDetails.profile_pic == "shrekAvatar") {
+        if (userDetails.profile_pic === "shrekAvatar") {
             return shrek
-        } else if (userDetails.profile_pic == "mulanAvatar") {
+        } else if (userDetails.profile_pic === "mulanAvatar") {
             return mulan
-        } else if (userDetails.profile_pic == "woodyAvatar") {
+        } else if (userDetails.profile_pic === "woodyAvatar") {
             return woody
-        } else if (userDetails.profile_pic == "babyYodaAvatar") {
+        } else if (userDetails.profile_pic === "babyYodaAvatar") {
             return babyYoda
-        } else if (userDetails.profile_pic == "maggieAvatar") {
+        } else if (userDetails.profile_pic === "maggieAvatar") {
             return maggie
-        } else if (userDetails.profile_pic == "wonderWomanAvatar") {
+        } else if (userDetails.profile_pic === "wonderWomanAvatar") {
             return wonderWoman
         } else return null;
     }
-
 
     const handleInputChange = (e) => {
         const { name, value } = e.target

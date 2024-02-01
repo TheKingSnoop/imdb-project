@@ -1,6 +1,6 @@
 import React from 'react'
 import MovieCard from '../cards/MovieCard';
-import {Grid, Box, Container} from '@mui/material';
+import {Grid, Container} from '@mui/material';
 
 const MovieContainer = ({ movies, currentUser, movieDescription, readOnly}) => {
     console.log(movies)

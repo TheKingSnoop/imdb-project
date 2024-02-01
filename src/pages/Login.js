@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie'
 
 const Login = () => {
   //initialise react navigator
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   //initialise cookies
   const cookies = new Cookies();
   const [userInput, setUserInput] = useState({
