@@ -25,7 +25,7 @@ const Users = ({API_HOST, API_PORT, isDarkMode}) => {
             <Typography gutterBottom sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode? "white" : ""}} variant='h4'>All Users</Typography>
             <Grid container spacing={3}>
                 {users.map((user, index) => {
-                    return <Grid key={index} item md={3} sm={4} xs={6}><UserCard user={user} /></Grid>
+                    return <Grid key={index} item md={4} sm={4} xs={6}><UserCard user={user} /></Grid>
                 })}
             </Grid>
             </Container>

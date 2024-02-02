@@ -22,7 +22,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
 const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
-    const [userDetails, setUserDetails] = useState({})
+    const [ userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
         favMovie: "",
@@ -41,12 +41,19 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
             headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
           });
         const data = await response.json();
+        console.log(data)
 
         if(data && data.error && data.error.message === "Unauthorized") {
             alert('Session expired, please login again.')
             navigate('/login')
           } else {
            setUserDetails(data);
+           setUserInput({
+            profilePic: data.profile_pic,
+            favMovie: data.fav_movie,
+            favQuote: data.fav_quote,
+            favGenre: data.fav_genre
+           })
           }  ;
     };
 
@@ -102,18 +109,18 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
         name: "wonder woman"
     }
     ]
-    const profilePic = () => {
-        if (userDetails.profile_pic === "shrekAvatar") {
+    const profilePic = (currentUser) => {
+        if (currentUser === "shrekAvatar") {
             return shrek
-        } else if (userDetails.profile_pic === "mulanAvatar") {
+        } else if (currentUser === "mulanAvatar") {
             return mulan
-        } else if (userDetails.profile_pic === "woodyAvatar") {
+        } else if (currentUser === "woodyAvatar") {
             return woody
-        } else if (userDetails.profile_pic === "babyYodaAvatar") {
+        } else if (currentUser === "babyYodaAvatar") {
             return babyYoda
-        } else if (userDetails.profile_pic === "maggieAvatar") {
+        } else if (currentUser === "maggieAvatar") {
             return maggie
-        } else if (userDetails.profile_pic === "wonderWomanAvatar") {
+        } else if (currentUser === "wonderWomanAvatar") {
             return wonderWoman
         } else return null;
     }
@@ -137,13 +144,13 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
                 <form onSubmit={handleSubmit}><Grid container spacing={2}>
 
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-                        {userDetails.profile_pic ? <CardMedia sx={{ borderRadius: '50%', height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' } }} component='img' image={profilePic(userDetails.profile_pic)} width='100%' /> : <Avatar sx={{ height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' }, bgcolor: '#d32f2f' }} />}
+                        {userDetails.profile_pic ? <CardMedia sx={{ marginBottom:'25px', borderRadius: '50%', height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' } }} component='img' image={profilePic(userInput.profilePic)} width='100%' /> : <Avatar sx={{ height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' }, bgcolor: '#d32f2f' }} />}
                     </Grid>
-                            <Typography textAlign='left' marginLeft='40px'>Change Profile Picture:</Typography>
+                    <Box sx={{ width:'100%', display:'flex', justifyContent:'center'}}>
+                            <Typography>Change Profile Picture:</Typography>
+                    </Box>
                     <Grid item xs={12} sx={{display:'flex', justifyContent:'center'}}>
                         <FormControl>
-                            
-                           
                             <RadioGroup
                                 row
                                 aria-labelledby="Profile picture options"
@@ -161,8 +168,6 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
                                         </Grid>
                                         )
                                     })}</Grid></Container>
-
-
                             </RadioGroup>
                         </FormControl>
                     </Grid>
@@ -179,23 +184,20 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
                         <Typography color='grey' textAlign='left' marginLeft='20px'>Joined Since: {ukDateFormat}</Typography>
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <Typography gutterBottom textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography>
-                        <TextField fullWidth type={"text"} label='Update Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
+                        {/* <Typography gutterBottom textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography> */}
+                        <TextField fullWidth type={"text"} label='Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <Typography gutterBottom textAlign='left'> Favourite Movie Quote: {userDetails.fav_quote}</Typography>
-                        <TextField fullWidth type={"text"} label='Update Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
+                        <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
-                        <Typography textAlign='left'> Favourite Genre: {userDetails.fav_genre}</Typography>
-
                         <FormControl sx={{ minWidth: 120 }}>
-                            <InputLabel>Genre</InputLabel>
+                            <InputLabel>Favourite Genre</InputLabel>
                             <Select
                                 value={userInput.favGenre}
                                 onChange={handleInputChange}
                                 name={'favGenre'}
-                                label='Genre'
+                                label='Favourite Genre'
                             >
                                 <MenuItem value="">
                                     <em>None</em>

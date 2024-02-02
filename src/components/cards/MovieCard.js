@@ -116,7 +116,7 @@ const MovieCard = (props) => {
               <Stack direction="row" spacing={1}>
                 {!props.readOnly && <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
                   <DialogComponent API_HOST={props.API_HOST} API_PORT={props.API_PORT} name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
-                  <DialogComponent name={'REVIEW'} form={true} movies={props.movies} index={props.index} />
+                  <DialogComponent API_HOST={props.API_HOST} API_PORT={props.API_PORT} name={'REVIEW'} form={true} movies={props.movies} index={props.index} />
                 </CardActions>}
               </Stack>
             </Box>}
