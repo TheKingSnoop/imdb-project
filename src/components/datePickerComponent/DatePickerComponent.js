@@ -4,7 +4,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 
 const DatePickerComponent = ({userInput, setUserInput}) => {
-   // console.log(userInput)
+   console.log(userInput, 'daaaate')
     return (
         <Stack spacing={4} sx={{ width: '175px' }}>
             <DatePicker

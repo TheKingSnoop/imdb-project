@@ -61,7 +61,7 @@ const MyMovies = ({ API_HOST, API_PORT, movies, setMovies, currentUser, movieDes
       <SearchFilter API_HOST={API_HOST} API_PORT={API_PORT} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
         getMyMovies={getMyMovies} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector} />
       <Container maxWidth='md'>
-        {movies.length ? <MovieContainer API_HOST={API_HOST} API_PORT={API_PORT} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page.</Typography>}
+        {movies.length ? <MovieContainer API_HOST={API_HOST} API_PORT={API_PORT} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
     </Container>
   </>)

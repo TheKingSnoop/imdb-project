@@ -175,7 +175,7 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
                         <Typography color='grey' textAlign='left' marginLeft='20px'>First Name: {userDetails.name}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography color='grey' textAlign='left' marginLeft='20px'>Last Name: {userDetails.surname}</Typography>
+                        <Typography color='grey' textAlign='left' marginLeft='20px'>Surname: {userDetails.surname}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
                         <Typography color='grey' textAlign='left' marginLeft='20px'>Username: {userDetails.username}</Typography>

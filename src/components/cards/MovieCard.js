@@ -103,7 +103,6 @@ const MovieCard = (props) => {
           {props.movies[props.index]._id &&
             <Box>
               <CardContent>
-                
                 <Rating sx={{paddingTop: '15px', width:'100%', borderTop:'2px solid #c62828', paddingBottom:'15px'}} value={props.user_rating} precision={0.5} size='large' readOnly />
                 <Box sx={{paddingBottom:'10px'}}>
                 <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px"}} variant='body2'>{props.user_analysis}</Typography>

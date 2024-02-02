@@ -9,12 +9,12 @@ import DatePickerComponent from '../datePickerComponent/DatePickerComponent';
 
 const FormComponent = ({ API_HOST, API_PORT, setOpen, movies, index }) => {
   const [userInput, setUserInput] = useState({
-    rating: null,
-    analysis: '',
-    isFavourite: false,
+    rating: movies[index].userReviewId[0].user_rating,
+    analysis: movies[index].userReviewId[0].user_analysis,
+    isFavourite: movies[index].userReviewId[0].isFavourite,
     dateWatched: new Date()
   });
-
+console.log(movies, 'moooovies')
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
