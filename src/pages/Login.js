@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
-const Login = () => {
+const Login = ({ API_HOST, API_PORT }) => {
   //initialise react navigator
   const navigate = useNavigate();
   //initialise cookies
@@ -25,28 +25,33 @@ const Login = () => {
     e.preventDefault()
 
     const login = async () => {
-      const response = await fetch('http://localhost:3001/auth/login', {
+      const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/login`, {
         method: "POST",
         body: JSON.stringify({
           email: userInput.email,
           password: userInput.password
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-      })
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
       const token = await response.json()
 
-      cookies.set('jwt',token, { maxAge: 1000 * 60 * 60 * 2, httpOnly: false});
-      navigate('/')
-      navigate(0);
+      if (token.success === true) {
+        cookies.set('jwt', token, { maxAge: 1000 * 60 * 60 * 2, httpOnly: false });
+        navigate('/')
+        navigate(0);
+      } else {
+        alert(token.message)
+      }
+
     }
     login()
   }
 
   const margin = { margin: '10px 0px' }
   return (
-    <Grid align='center' sx={{marginTop: '10%'}}>
+    <Grid align='center' sx={{ marginTop: '10%' }}>
       <Paper elevation={20} sx={{ padding: '30px 20px', width: { md: '450px', xs: '350px' }, margin: '20px auto' }}>
         <Grid >
           <Avatar sx={{ marginBottom: '20px', backgroundColor: '#d32f2f' }}></Avatar>
@@ -58,7 +63,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <TextField onChange={handleInputChange} name='email' value={userInput.email} sx={margin} type={"text"} fullWidth label='Email' required placeholder='For e.g. Molly@Treatz.com' />
           <TextField onChange={handleInputChange} name='password' value={userInput.password} sx={margin} type={"password"} fullWidth label='Password' required placeholder='Enter password' />
-         <Button sx={margin} type='submit' variant='contained' color='primary'>Log in</Button>
+          <Button sx={margin} type='submit' variant='contained' color='primary'>Log in</Button>
           <Box>
             <Link to='/signup'>Don't have an account? Go to Sign up</Link></Box>
         </form></Paper>

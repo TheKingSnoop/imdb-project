@@ -21,7 +21,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-const MyProfile = ({isDarkMode}) => {
+const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
     const [userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
@@ -37,7 +37,7 @@ const MyProfile = ({isDarkMode}) => {
         const token = cookies.get('jwt')
         const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
         const user_Id = user.id
-        const response = await fetch(`http://localhost:3001/auth/user/${user_Id}`, {
+        const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/user/${user_Id}`, {
             headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
           });
         const data = await response.json();
@@ -51,7 +51,7 @@ const MyProfile = ({isDarkMode}) => {
     };
 
     const updateProfile = async () => {
-        const response = await fetch(`http://localhost:3001/auth/update-profile/${userDetails.userId}`, {
+        const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/update-profile/${userDetails.userId}`, {
             method: 'PATCH',
             body: JSON.stringify({
                 profile_pic: userInput.profilePic,
@@ -216,7 +216,7 @@ const MyProfile = ({isDarkMode}) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <Box fullWidth sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
+                <Box sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
                     <Button type='submit' variant='contained' color='primary'>Update Profile</Button>
                 </Box></form>
             </Card>

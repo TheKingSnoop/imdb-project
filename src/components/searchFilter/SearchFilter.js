@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 import FavButton from './FavButton';
 
-const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector }) => {
+const SearchFilter = ({ API_HOST, API_PORT, filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector }) => {
 
     const cookies = new Cookies();
 
@@ -22,7 +22,7 @@ const SearchFilter = ({ filterUserInput, setFilterUserInput, setMovies, isDarkMo
         const user_Id = user.id
 
         const getFilteredMoviesByTitle = async () => {
-            const response = await fetch(`http://localhost:3001/movie/filterMyMovies/${user_Id}/${filterUserInput}`)
+            const response = await fetch(`http://${API_HOST}:${API_PORT}/movie/filterMyMovies/${user_Id}/${filterUserInput}`)
             const data = await response.json()
             console.log(data)
             setMovies(data)
