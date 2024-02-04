@@ -16,14 +16,13 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-const MyProfile = ({isDarkMode}) => {
-    const [userDetails, setUserDetails] = useState({})
+const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
+    const [ userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
         favMovie: "",
@@ -38,13 +37,28 @@ const MyProfile = ({isDarkMode}) => {
         const token = cookies.get('jwt')
         const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
         const user_Id = user.id
-        const response = await fetch(`http://localhost:3001/auth/user/${user_Id}`)
-        const data = await response.json()
-        setUserDetails(data);
-    }
+        const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/user/${user_Id}`, {
+            headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
+          });
+        const data = await response.json();
+        console.log(data)
+
+        if(data && data.error && data.error.message === "Unauthorized") {
+            alert('Session expired, please login again.')
+            navigate('/login')
+          } else {
+           setUserDetails(data);
+           setUserInput({
+            profilePic: data.profile_pic,
+            favMovie: data.fav_movie,
+            favQuote: data.fav_quote,
+            favGenre: data.fav_genre
+           })
+          }  ;
+    };
 
     const updateProfile = async () => {
-        const response = await fetch(`http://localhost:3001/auth/update-profile/${userDetails.userId}`, {
+        const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/update-profile/${userDetails.userId}`, {
             method: 'PATCH',
             body: JSON.stringify({
                 profile_pic: userInput.profilePic,
@@ -95,22 +109,21 @@ const MyProfile = ({isDarkMode}) => {
         name: "wonder woman"
     }
     ]
-    const profilePic = () => {
-        if (userDetails.profile_pic == "shrekAvatar") {
+    const profilePic = (currentUser) => {
+        if (currentUser === "shrekAvatar") {
             return shrek
-        } else if (userDetails.profile_pic == "mulanAvatar") {
+        } else if (currentUser === "mulanAvatar") {
             return mulan
-        } else if (userDetails.profile_pic == "woodyAvatar") {
+        } else if (currentUser === "woodyAvatar") {
             return woody
-        } else if (userDetails.profile_pic == "babyYodaAvatar") {
+        } else if (currentUser === "babyYodaAvatar") {
             return babyYoda
-        } else if (userDetails.profile_pic == "maggieAvatar") {
+        } else if (currentUser === "maggieAvatar") {
             return maggie
-        } else if (userDetails.profile_pic == "wonderWomanAvatar") {
+        } else if (currentUser === "wonderWomanAvatar") {
             return wonderWoman
         } else return null;
     }
-
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -131,13 +144,13 @@ const MyProfile = ({isDarkMode}) => {
                 <form onSubmit={handleSubmit}><Grid container spacing={2}>
 
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-                        {userDetails.profile_pic ? <CardMedia sx={{ borderRadius: '50%', height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' } }} component='img' image={profilePic(userDetails.profile_pic)} width='100%' /> : <Avatar sx={{ height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' }, bgcolor: '#d32f2f' }} />}
+                        {userDetails.profile_pic ? <CardMedia sx={{ marginBottom:'25px', borderRadius: '50%', height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' } }} component='img' image={profilePic(userInput.profilePic)} width='100%' /> : <Avatar sx={{ height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' }, bgcolor: '#d32f2f' }} />}
                     </Grid>
-                            <Typography textAlign='left' marginLeft='40px'>Change Profile Picture:</Typography>
+                    <Box sx={{ width:'100%', display:'flex', justifyContent:'center'}}>
+                            <Typography>Change Profile Picture:</Typography>
+                    </Box>
                     <Grid item xs={12} sx={{display:'flex', justifyContent:'center'}}>
                         <FormControl>
-                            
-                           
                             <RadioGroup
                                 row
                                 aria-labelledby="Profile picture options"
@@ -155,8 +168,6 @@ const MyProfile = ({isDarkMode}) => {
                                         </Grid>
                                         )
                                     })}</Grid></Container>
-
-
                             </RadioGroup>
                         </FormControl>
                     </Grid>
@@ -164,7 +175,7 @@ const MyProfile = ({isDarkMode}) => {
                         <Typography color='grey' textAlign='left' marginLeft='20px'>First Name: {userDetails.name}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                        <Typography color='grey' textAlign='left' marginLeft='20px'>Last Name: {userDetails.surname}</Typography>
+                        <Typography color='grey' textAlign='left' marginLeft='20px'>Surname: {userDetails.surname}</Typography>
                     </Grid>
                     <Grid item sm={6} xs={12}>
                         <Typography color='grey' textAlign='left' marginLeft='20px'>Username: {userDetails.username}</Typography>
@@ -173,23 +184,20 @@ const MyProfile = ({isDarkMode}) => {
                         <Typography color='grey' textAlign='left' marginLeft='20px'>Joined Since: {ukDateFormat}</Typography>
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <Typography gutterBottom textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography>
-                        <TextField fullWidth type={"text"} label='Update Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
+                        {/* <Typography gutterBottom textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography> */}
+                        <TextField fullWidth type={"text"} label='Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <Typography gutterBottom textAlign='left'> Favourite Movie Quote: {userDetails.fav_quote}</Typography>
-                        <TextField fullWidth type={"text"} label='Update Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
+                        <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
-                        <Typography textAlign='left'> Favourite Genre: {userDetails.fav_genre}</Typography>
-
                         <FormControl sx={{ minWidth: 120 }}>
-                            <InputLabel>Genre</InputLabel>
+                            <InputLabel>Favourite Genre</InputLabel>
                             <Select
                                 value={userInput.favGenre}
                                 onChange={handleInputChange}
                                 name={'favGenre'}
-                                label='Genre'
+                                label='Favourite Genre'
                             >
                                 <MenuItem value="">
                                     <em>None</em>
@@ -210,7 +218,7 @@ const MyProfile = ({isDarkMode}) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <Box fullWidth sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
+                <Box sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
                     <Button type='submit' variant='contained' color='primary'>Update Profile</Button>
                 </Box></form>
             </Card>

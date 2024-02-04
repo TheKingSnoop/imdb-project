@@ -37,7 +37,7 @@ const UserCard = ({ user }) => {
 }
 
   return (
-    <Card onClick={handleClick} sx={{ '&:hover': { cursor: 'pointer' }, padding: '30px', backgroundImage: 'linear-gradient(#9c7c1c, #E3C363)'}}>
+    <Card onClick={handleClick} sx={{ height:'100%','&:hover': { cursor: 'pointer' }, padding: '30px', backgroundImage: 'linear-gradient(#9c7c1c, #E3C363)'}}>
       <Box sx={{ display: 'flex', flexWrap:'wrap-reverse', justifyContent: 'space-around', alignItems: 'center', marginBottom: '10px'}}>
         <Typography align='center' sx={{ marginTop: '10px', fontFamily: 'Russo One' }}>{user[0].username}</Typography>
         {user[0].profile_pic?<CardMedia sx={{ borderRadius: '50%', height: '75px', width: '75px' }} component='img' image={profilePic(user[0].profile_pic)} width='100%'/>:<Avatar sx={{bgcolor: '#d32f2f', height: '75px', width: '75px'}}/>}

@@ -1,7 +1,7 @@
 import { TextField, Box, Button, Stack, Grid } from '@mui/material'
 import React, { useState } from 'react'
 
-const SearchBar = ({ setMovies, isDarkMode, getTop20Movies }) => {
+const SearchBar = ({ API_HOST, API_PORT, setMovies, isDarkMode, getTop20Movies }) => {
   const [userInput, setUserInput] = useState("");
 
   const darkModeInputColour =
@@ -14,7 +14,7 @@ const SearchBar = ({ setMovies, isDarkMode, getTop20Movies }) => {
     e.preventDefault();
 
     const getMovie = async () => {
-      const response = await fetch(`http://localhost:3001/tmdb/${userInput}`)
+      const response = await fetch(`http://${API_HOST}:${API_PORT}/tmdb/${userInput}`)
       const data = await response.json();
       console.log('searchbox', data)
       setMovies(data.payload)

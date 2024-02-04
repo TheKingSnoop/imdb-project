@@ -7,14 +7,14 @@ import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
 import DatePickerComponent from '../datePickerComponent/DatePickerComponent';
 
-const FormComponent = ({ setOpen, movies, index }) => {
+const FormComponent = ({ API_HOST, API_PORT, setOpen, movies, index }) => {
   const [userInput, setUserInput] = useState({
-    rating: null,
-    analysis: '',
-    isFavourite: false,
+    rating: movies[index].userReviewId[0].user_rating,
+    analysis: movies[index].userReviewId[0].user_analysis,
+    isFavourite: movies[index].userReviewId[0].isFavourite,
     dateWatched: new Date()
   });
-
+console.log(movies, 'moooovies')
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -31,7 +31,7 @@ const FormComponent = ({ setOpen, movies, index }) => {
     //console.log('review_Id', review_Id)
     console.log(userInput)
     const addReviewToDatabase = async () => {
-      const response = await fetch(`http://localhost:3001/review/updateMyReview/${review_Id}`, {
+      const response = await fetch(`http://${API_HOST}:${API_PORT}/review/updateMyReview/${review_Id}`, {
         method: 'PATCH',
         body: JSON.stringify({
           user_rating: userInput.rating,

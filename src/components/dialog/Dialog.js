@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import FormComponent from '../form/FormComponent';
 
 
-const DialogComponent = ({name, dialogText, handleSubmit, dialogTitle, form, movies, index}) => {
+const DialogComponent = ({API_HOST, API_PORT, name, dialogText, handleSubmit, dialogTitle, form, movies, index}) => {
     const [open, setOpen] = useState(false)
     return (
         <>
@@ -18,7 +18,7 @@ const DialogComponent = ({name, dialogText, handleSubmit, dialogTitle, form, mov
                         {dialogText}
                     </DialogContentText>
                 </DialogContent>
-                {form && <FormComponent setOpen={setOpen} movies={movies} index={index}/>}
+                {form && <FormComponent API_HOST={API_HOST} API_PORT={API_PORT} setOpen={setOpen} movies={movies} index={index}/>}
                 <DialogActions>
                     {!form && <><Button onClick={() => setOpen(false)}>
                         CANCEL

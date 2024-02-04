@@ -25,7 +25,7 @@ const MovieCard = (props) => {
     console.log("just clicked Seen It")
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async () => {
-      const response = await fetch('http://localhost:3001/movie/addMovie', {
+      const response = await fetch(`http://${props.API_HOST}:${props.API_PORT}/movie/addMovie`, {
         method: 'POST',
         body: JSON.stringify(movieToAdd),
         headers: {
@@ -49,7 +49,7 @@ const MovieCard = (props) => {
     console.log('review_Id', review_Id)
 
     const deleteMovieFromDatabase = async () => {
-      const response = await fetch(`http://localhost:3001/movie/my-movies/delete/${movie_Id}/${review_Id}`, {
+      const response = await fetch(`http://${props.API_HOST}:${props.API_PORT}/movie/my-movies/delete/${movie_Id}/${review_Id}`, {
         method: 'DELETE',
         headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" }
       })
@@ -103,7 +103,6 @@ const MovieCard = (props) => {
           {props.movies[props.index]._id &&
             <Box>
               <CardContent>
-                
                 <Rating sx={{paddingTop: '15px', width:'100%', borderTop:'2px solid #c62828', paddingBottom:'15px'}} value={props.user_rating} precision={0.5} size='large' readOnly />
                 <Box sx={{paddingBottom:'10px'}}>
                 <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px"}} variant='body2'>{props.user_analysis}</Typography>
@@ -115,8 +114,8 @@ const MovieCard = (props) => {
               </CardContent>
               <Stack direction="row" spacing={1}>
                 {!props.readOnly && <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
-                  <DialogComponent name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
-                  <DialogComponent name={'REVIEW'} form={true} movies={props.movies} index={props.index} />
+                  <DialogComponent API_HOST={props.API_HOST} API_PORT={props.API_PORT} name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
+                  <DialogComponent API_HOST={props.API_HOST} API_PORT={props.API_PORT} name={'REVIEW'} form={true} movies={props.movies} index={props.index} />
                 </CardActions>}
               </Stack>
             </Box>}

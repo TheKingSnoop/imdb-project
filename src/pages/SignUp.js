@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-const SignUp = () => {
+const SignUp = ({API_HOST, API_PORT}) => {
   const initialValues = {
     name: '',
     surname: '',
@@ -30,7 +30,7 @@ const SignUp = () => {
     let data = null
    
       const signUp = async () => {
-        const response = await fetch('http://localhost:3001/auth/signup', {
+        const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/signup`, {
           method: "POST",
           body: JSON.stringify({
             email: values.email,
