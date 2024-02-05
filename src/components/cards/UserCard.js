@@ -1,36 +1,32 @@
-import { Typography, Box, Card, Stack, CardMedia, Avatar } from '@mui/material'
-import { bgcolor } from '@mui/system';
+import { Typography, Box, Card, CardMedia, Avatar } from '@mui/material'
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../service/movieCardService'
-import marioCover from '../../images/marioCover.jpeg'
 import shrek from '../../images/shrekAvatar.jpeg';
 import mulan from '../../images/mulanAvatar.jpeg';
 import woody from '../../images/woodyAvatar.jpeg';
 import maggie from '../../images/maggieAvatar.jpeg';
 import babyyoda from '../../images/babyyodaAvatar.jpeg';
 import wonderWoman from '../../images/wonderWomanAvatar.png';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const UserCard = ({ user }) => {
   const ukDateFormat = formatDate(user[0].date_joined);
-  console.log(user[0])
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`${user[0].userId}`)
   }
   const profilePic = () => {
-    if (user[0].profile_pic == "shrekAvatar") {
+    if (user[0].profile_pic === "shrekAvatar") {
         return shrek
-    } else if (user[0].profile_pic == "mulanAvatar") {
+    } else if (user[0].profile_pic === "mulanAvatar") {
         return mulan
-    } else if (user[0].profile_pic == "woodyAvatar") {
+    } else if (user[0].profile_pic === "woodyAvatar") {
         return woody
-    } else if (user[0].profile_pic == "babyYodaAvatar") {
+    } else if (user[0].profile_pic === "babyYodaAvatar") {
         return babyyoda
-    } else if (user[0].profile_pic == "maggieAvatar") {
+    } else if (user[0].profile_pic === "maggieAvatar") {
         return maggie
-    } else if (user[0].profile_pic == "wonderWomanAvatar") {
+    } else if (user[0].profile_pic === "wonderWomanAvatar") {
       return wonderWoman
   }
      else return null;

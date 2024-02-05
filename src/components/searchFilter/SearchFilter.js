@@ -1,4 +1,4 @@
-import { TextField, Stack, Button, Box, Grid } from '@mui/material'
+import { TextField, Button, Box, Grid } from '@mui/material'
 import React from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
@@ -24,7 +24,6 @@ const SearchFilter = ({ API_HOST, API_PORT, filterUserInput, setFilterUserInput,
         const getFilteredMoviesByTitle = async () => {
             const response = await fetch(`http://${API_HOST}:${API_PORT}/movie/filterMyMovies/${user_Id}/${filterUserInput}`)
             const data = await response.json()
-            console.log(data)
             setMovies(data)
         }
         getFilteredMoviesByTitle()
