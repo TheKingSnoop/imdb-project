@@ -41,7 +41,6 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
             headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
           });
         const data = await response.json();
-        console.log(data)
 
         if(data && data.error && data.error.message === "Unauthorized") {
             alert('Session expired, please login again.')
@@ -76,7 +75,7 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
     }
     useEffect(() => {
         getUserDetailsById();
-    }, [])
+    })
 
     const profileImages = [{
         value: "shrekAvatar",
