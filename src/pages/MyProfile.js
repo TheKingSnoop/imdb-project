@@ -73,7 +73,7 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
         const data = await response.json()
         setUserDetails(data);
         setOpen(true)
-        //navigate(0);
+        navigate(0);
     }
     useEffect(() => {
         getUserDetailsById();
@@ -140,7 +140,7 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
     }
     return (
         <Box sx={{  margin: '20px', minWidth: { sm: '550px', xs: '300px' } }}>
-            <Typography variant='h3'sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode && "white"}}  >My Profile</Typography>
+            <Typography variant='h4'sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode && "white"}}  >My Profile</Typography>
             <Card sx={{ color: isDarkMode && "white", bgcolor: isDarkMode && "primary.light", padding: '20px', width: { sm: '700px', xs: '350px' } }}>
                 <form onSubmit={handleSubmit}><Grid container spacing={2}>
 

@@ -12,7 +12,8 @@ const Users = ({API_HOST, API_PORT, isDarkMode}) => {
             setUsers(data)
         };
         getAllUsers();
-    })
+    },[])
+
     return (
         <Box>
             <HeroSection />

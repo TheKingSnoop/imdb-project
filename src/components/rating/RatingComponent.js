@@ -10,16 +10,16 @@ const RatingComponent = ({ userInput, setUserInput }) => {
     });
   }
   return (
-    <>
-      <Box sx={{ width: "auto" }}>
+   
+    
         <Rating
           value={userInput.rating}
           precision={0.5}
           size='large'
           onChange={handleChange}
         />
-      </Box>
-    </>
+   
+   
   )
 }
 
