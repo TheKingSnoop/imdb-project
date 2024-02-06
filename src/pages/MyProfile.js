@@ -1,4 +1,4 @@
-import { Avatar, Box, CardMedia, Typography, Card, Grid, TextField, Button, Container } from '@mui/material'
+import { Avatar, Box, CardMedia, Typography, Card, Grid, TextField, Button, Container, Snackbar } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
@@ -22,7 +22,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
 const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
-    const [ userDetails, setUserDetails] = useState({})
+    const [open, setOpen] = useState(false)
+    const [userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
         favMovie: "",
@@ -71,11 +72,12 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
         })
         const data = await response.json()
         setUserDetails(data);
-        navigate(0);
+        setOpen(true)
+        //navigate(0);
     }
     useEffect(() => {
         getUserDetailsById();
-    })
+    },[]) 
 
     const profileImages = [{
         value: "shrekAvatar",
@@ -219,7 +221,16 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
                 </Grid>
                 <Box sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
                     <Button type='submit' variant='contained' color='primary'>Update Profile</Button>
-                </Box></form>
+                <Snackbar 
+                message='Profile Updated' 
+                autoHideDuration={2000}
+                open={open}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{
+                  vertical:'bottom',
+                  horizontal:'center'
+                }}/></Box></form>
+                
             </Card>
         </Box>
     )

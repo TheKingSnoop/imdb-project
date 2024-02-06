@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography, TextField, Button, Box, Stack } from '@mui/material'
+import { Typography, TextField, Button, Box, Stack } from '@mui/material'
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -55,11 +55,11 @@ console.log(movies, 'moooovies')
 
   return (
     <Box align='center' sx={{ padding: '0 20px', width: { md: '450px', xs: '300px' } }}>
-      <Grid sx={{marginBottom:'50px', maxWidth:'100%'}}>
+      <Box sx={{marginBottom:'30px', maxWidth:'100%'}}>
         <RateReviewIcon color='primary' sx={{ marginBottom: '20px', fontSize: '50px' }} />
         <Typography variant='h5' sx={{ fontWeight: "bold" }}>Review</Typography>
         <Typography variant='caption'>Please fill in this form to add a review.</Typography>
-      </Grid>
+      </Box>
       <form onSubmit={handleSubmit}>
         <Stack direction='row' spacing={2} sx={{ display: 'flex', alignItems: 'center' }}>
         <Typography variant='body2'>Rate this movie</Typography>
