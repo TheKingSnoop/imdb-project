@@ -192,7 +192,7 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
                         <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
-                        <FormControl sx={{ minWidth: 120 }}>
+                        <FormControl sx={{ minWidth: 180 }}>
                             <InputLabel>Favourite Genre</InputLabel>
                             <Select
                                 value={userInput.favGenre}
