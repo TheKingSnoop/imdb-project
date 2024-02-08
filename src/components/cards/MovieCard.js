@@ -21,7 +21,7 @@ const MovieCard = (props) => {
   const [open, setOpen] = useState(false)
 
   const handleSubmit = () => {
-    
+
     console.log("just clicked Seen It")
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async () => {
@@ -36,7 +36,7 @@ const MovieCard = (props) => {
       const data = await response.json()
       if (data.errors) {
         alert(data.errors[0].msg)
-      } else {setOpen(true)}
+      } else { setOpen(true) }
     }
     addToMovieDatabase()
   }
@@ -62,8 +62,8 @@ const MovieCard = (props) => {
 
   return (
 
-    <Box width='200' sx={{margin:'10px'}}>
-      <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '190px', bgcolor: "primary.light" , color:'white'}}>
+    <Box width='200' sx={{ margin: '10px' }}>
+      <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '190px', bgcolor: "primary.light", color: 'white' }}>
         <Tooltip title={props.title}><Box sx={{ position: 'relative' }}>
           <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
           {props.isFavourite && <FavoriteIcon sx={{ position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'primary.light' }} />}
@@ -83,33 +83,35 @@ const MovieCard = (props) => {
           {/* signed in and home page */}
           {!props.movies[props.index]._id &&
             <CardActions>
-              <Button onClick={handleSubmit} size='medium' color='secondary' sx={{
-                bgcolor: "primary.main", '&:hover': {
-                  backgroundColor: 'primary.dark'
-                }
-              }}>Seen It?
-              </Button>
-              <Snackbar 
-                message='Added to My Movies' 
+              <Tooltip title='Add to my movies seen'>
+                <Button onClick={handleSubmit} size='medium' color='secondary' sx={{
+                  bgcolor: "primary.main", '&:hover': {
+                    backgroundColor: 'primary.dark'
+                  }
+                }}>Seen It?
+                </Button>
+              </Tooltip>
+              <Snackbar
+                message='✔️ Added to My Movies'
                 autoHideDuration={2000}
                 open={open}
                 onClose={() => setOpen(false)}
                 anchorOrigin={{
-                  vertical:'bottom',
-                  horizontal:'center'
-                }}/>
+                  vertical: 'bottom',
+                  horizontal: 'center'
+                }} />
             </CardActions>}
           {/* myMovies page and signed in */}
           {props.movies[props.index]._id &&
             <Box>
               <CardContent>
-                <Rating sx={{paddingTop: '15px', width:'100%', borderTop:'2px solid #c62828', paddingBottom:'15px'}} value={props.user_rating} precision={0.5} size='large' readOnly />
-                <Box sx={{paddingBottom:'10px'}}>
-                <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px"}} variant='body2'>{props.user_analysis}</Typography>
+                <Rating sx={{ paddingTop: '15px', width: '100%', borderTop: '2px solid #c62828', paddingBottom: '15px' }} value={props.user_rating} precision={0.5} size='large' readOnly />
+                <Box sx={{ paddingBottom: '10px' }}>
+                  <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px" }} variant='body2'>{props.user_analysis}</Typography>
                 </Box>
                 <Stack direction='row' spacing={1}>
-                <Typography variant='body2'>Seen on:</Typography>
-                <Typography variant='body2'>{ukDateFormat}</Typography>
+                  <Typography variant='body2'>Seen on:</Typography>
+                  <Typography variant='body2'>{ukDateFormat}</Typography>
                 </Stack>
               </CardContent>
               <Stack direction="row" spacing={1}>
