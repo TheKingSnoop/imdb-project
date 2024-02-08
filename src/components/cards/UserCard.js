@@ -2,11 +2,11 @@ import { Typography, Box, Card, CardMedia, Avatar, Stack } from '@mui/material'
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../service/movieCardService'
-import shrek from '../../images/shrekAvatar.jpeg';
-import mulan from '../../images/mulanAvatar.jpeg';
-import woody from '../../images/woodyAvatar.jpeg';
-import maggie from '../../images/maggieAvatar.jpeg';
-import babyyoda from '../../images/babyyodaAvatar.jpeg';
+import shrek from '../../images/shrekAvatar.png';
+import mulan from '../../images/mulanAvatar.png';
+import woody from '../../images/woodyAvatar.png';
+import maggie from '../../images/maggieAvatar.png';
+import babyyoda from '../../images/babyyodaAvatar.png';
 import wonderWoman from '../../images/wonderWomanAvatar.png';
 
 const UserCard = ({ user }) => {

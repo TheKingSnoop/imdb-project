@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import MovieContainer from '../components/movieContainer/MovieContainer.js';
 import { useNavigate } from 'react-router-dom';
 
-const UserPage = ({ API_HOST, movies, setMovies, currentUser }) => {
+const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
 
   const [profileName, setProfileName] = useState("")
 
