@@ -7,7 +7,7 @@ import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
 import DatePickerComponent from '../datePickerComponent/DatePickerComponent';
 
-const FormComponent = ({ API_HOST, API_PORT, setOpen, movies, index }) => {
+const FormComponent = ({ API_HOST, setOpen, movies, index }) => {
   const [userInput, setUserInput] = useState({
     rating: movies[index].userReviewId[0].user_rating,
     analysis: movies[index].userReviewId[0].user_analysis,
@@ -31,7 +31,7 @@ console.log(movies, 'moooovies')
     //console.log('review_Id', review_Id)
     console.log(userInput)
     const addReviewToDatabase = async () => {
-      const response = await fetch(`http://${API_HOST}:${API_PORT}/review/updateMyReview/${review_Id}`, {
+      const response = await fetch(`http://${API_HOST}/review/updateMyReview/${review_Id}`, {
         method: 'PATCH',
         body: JSON.stringify({
           user_rating: userInput.rating,

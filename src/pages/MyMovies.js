@@ -7,7 +7,7 @@ import { Typography, Container } from '@mui/material';
 import HeroSection from '../components/heroSection/HeroSection';
 import { useNavigate } from 'react-router-dom';
 
-const MyMovies = ({ API_HOST, API_PORT, movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
+const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("");
   const [isFavourite, setIsFavourite] = useState("all");
 
@@ -38,7 +38,7 @@ const MyMovies = ({ API_HOST, API_PORT, movies, setMovies, currentUser, movieDes
     const token = cookies.get('jwt')
     const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
     const user_Id = user.id
-    const response = await fetch(`http://${API_HOST}:${API_PORT}/movie/my-movies`, {
+    const response = await fetch(`http://${API_HOST}/movie/my-movies`, {
       method: "POST",
       headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
       body: JSON.stringify({ user_Id: user_Id })
@@ -58,10 +58,10 @@ const MyMovies = ({ API_HOST, API_PORT, movies, setMovies, currentUser, movieDes
   return (<>
     <HeroSection />
     <Container maxWidth='md' sx={{ py: 6, padding: '0px' }}>
-      <SearchFilter API_HOST={API_HOST} API_PORT={API_PORT} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
+      <SearchFilter API_HOST={API_HOST} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
         getMyMovies={getMyMovies} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector} />
       <Container maxWidth='md'>
-        {movies.length ? <MovieContainer API_HOST={API_HOST} API_PORT={API_PORT} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
+        {movies.length ? <MovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
     </Container>
   </>)

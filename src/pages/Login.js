@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
-const Login = ({ API_HOST, API_PORT }) => {
+const Login = ({ API_HOST }) => {
   //initialise react navigator
   const navigate = useNavigate();
   //initialise cookies
@@ -25,7 +25,7 @@ const Login = ({ API_HOST, API_PORT }) => {
     e.preventDefault()
 
     const login = async () => {
-      const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/login`, {
+      const response = await fetch(`http://${API_HOST}/auth/login`, {
         method: "POST",
         body: JSON.stringify({
           email: userInput.email,
