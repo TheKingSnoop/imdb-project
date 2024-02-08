@@ -1,4 +1,4 @@
-import { Avatar, Box, CardMedia, Typography, Card, Grid, TextField, Button, Container } from '@mui/material'
+import { Avatar, Box, CardMedia, Typography, Card, Grid, TextField, Button, Container, Snackbar } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
@@ -21,7 +21,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
+
 const MyProfile = ({API_HOST, isDarkMode}) => {
+  const [open, setOpen] = useState(false)
     const [ userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
@@ -71,11 +73,12 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
         })
         const data = await response.json()
         setUserDetails(data);
+        setOpen(true)
         navigate(0);
     }
     useEffect(() => {
         getUserDetailsById();
-    })
+    },[]) 
 
     const profileImages = [{
         value: "shrekAvatar",
@@ -138,7 +141,7 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
     }
     return (
         <Box sx={{  margin: '20px', minWidth: { sm: '550px', xs: '300px' } }}>
-            <Typography variant='h3'sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode && "white"}}  >My Profile</Typography>
+            <Typography variant='h4'sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode && "white"}}  >My Profile</Typography>
             <Card sx={{ color: isDarkMode && "white", bgcolor: isDarkMode && "primary.light", padding: '20px', width: { sm: '700px', xs: '350px' } }}>
                 <form onSubmit={handleSubmit}><Grid container spacing={2}>
 
@@ -190,7 +193,7 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
                         <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
-                        <FormControl sx={{ minWidth: 120 }}>
+                        <FormControl sx={{ minWidth: 180 }}>
                             <InputLabel>Favourite Genre</InputLabel>
                             <Select
                                 value={userInput.favGenre}
@@ -219,7 +222,16 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
                 </Grid>
                 <Box sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
                     <Button type='submit' variant='contained' color='primary'>Update Profile</Button>
-                </Box></form>
+                <Snackbar 
+                message='Profile Updated' 
+                autoHideDuration={2000}
+                open={open}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{
+                  vertical:'bottom',
+                  horizontal:'center'
+                }}/></Box></form>
+                
             </Card>
         </Box>
     )

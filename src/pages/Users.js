@@ -12,7 +12,8 @@ const Users = ({API_HOST, isDarkMode}) => {
             setUsers(data)
         };
         getAllUsers();
-    })
+    },[])
+
     return (
         <Box>
             <HeroSection />
@@ -20,7 +21,7 @@ const Users = ({API_HOST, isDarkMode}) => {
             <Typography gutterBottom sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode? "white" : ""}} variant='h4'>All Users</Typography>
             <Grid container spacing={3}>
                 {users.map((user, index) => {
-                    return <Grid key={index} item md={4} sm={4} xs={12}><UserCard user={user} /></Grid>
+                    return <Grid key={index} item md={4} sm={6} xs={12}><UserCard user={user} /></Grid>
                 })}
             </Grid>
             </Container>

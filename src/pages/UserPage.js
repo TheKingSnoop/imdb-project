@@ -7,6 +7,7 @@ import MovieContainer from '../components/movieContainer/MovieContainer.js';
 import { useNavigate } from 'react-router-dom';
 
 const UserPage = ({ API_HOST, movies, setMovies, currentUser }) => {
+
   const [profileName, setProfileName] = useState("")
 
   const cookies = new Cookies();
@@ -47,15 +48,15 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser }) => {
   }, []);
 
   return (
-  <>
-    <HeroSection />
-    <Box sx={{ margin: '20px 0px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Container maxWidth='md'>
-        <Typography variant='h2'>{profileName}'s Movies</Typography>
+    <>
+      <HeroSection />
+      <Box sx={{ margin: '20px 0px' }}>
+        <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'>{profileName}'s movies</Typography>
+        <Container maxWidth='md'>
         <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} readOnly={readOnly} />
-      </Container>
-    </Box>
-  </>
+        </Container>
+      </Box>
+    </>
   )
 }
 

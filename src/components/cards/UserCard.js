@@ -1,4 +1,4 @@
-import { Typography, Box, Card, CardMedia, Avatar } from '@mui/material'
+import { Typography, Box, Card, CardMedia, Avatar, Stack } from '@mui/material'
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../service/movieCardService'
@@ -17,32 +17,43 @@ const UserCard = ({ user }) => {
   }
   const profilePic = () => {
     if (user[0].profile_pic === "shrekAvatar") {
-        return shrek
+      return shrek
     } else if (user[0].profile_pic === "mulanAvatar") {
-        return mulan
+      return mulan
     } else if (user[0].profile_pic === "woodyAvatar") {
-        return woody
+      return woody
     } else if (user[0].profile_pic === "babyYodaAvatar") {
-        return babyyoda
+      return babyyoda
     } else if (user[0].profile_pic === "maggieAvatar") {
-        return maggie
+      return maggie
     } else if (user[0].profile_pic === "wonderWomanAvatar") {
       return wonderWoman
+    }
+    else return null;
   }
-     else return null;
-}
 
   return (
-    <Card onClick={handleClick} sx={{ height:'100%','&:hover': { cursor: 'pointer' }, padding: '30px', backgroundImage: 'linear-gradient(#9c7c1c, #E3C363)'}}>
-      <Box sx={{ display: 'flex', flexWrap:'wrap-reverse', justifyContent: 'space-around', alignItems: 'center', marginBottom: '10px'}}>
-        <Typography align='center' sx={{ marginTop: '10px', fontFamily: 'Russo One' }}>{user[0].username}</Typography>
-        {user[0].profile_pic?<CardMedia sx={{ borderRadius: '50%', height: '75px', width: '75px' }} component='img' image={profilePic(user[0].profile_pic)} width='100%'/>:<Avatar sx={{bgcolor: '#d32f2f', height: '75px', width: '75px'}}/>}
+    <Card onClick={handleClick} sx={{ height: '100%', backgroundImage: 'linear-gradient(to bottom right, #c5dffc, #6AAFF8)', '&:hover': { cursor: 'pointer' }, }}>
+      <Box sx={{ padding: '5px 25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', backgroundImage: 'linear-gradient(to bottom right, #3d93f5, #167df3)' }}>
+        <Typography align='center' sx={{fontFamily: 'Russo One' }}>{user[0].username}</Typography>
+        {user[0].profile_pic ? <CardMedia sx={{ borderRadius: '50%', height: '40px', width: '40px' }} component='img' image={profilePic(user[0].profile_pic)} width='100%' /> : <Avatar sx={{ bgcolor: '#d32f2f', height: '40px', width: '40px' }} />}
       </Box>
-      <Typography sx={{borderTop:'2px solid grey', paddingTop:'5px'}}variant='body2'gutterBottom> Fav movie: {user[0].fav_movie}</Typography>
-      <Typography variant='body2' gutterBottom> Fav movie quote: {user[0].fav_quote}</Typography>
-      <Typography variant='body2'> Date Joined: {ukDateFormat}</Typography>
+      <Box sx={{padding: '0px 25px 10px 25px'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography color='dimGray' variant='body2' gutterBottom>Date Joined:</Typography>
+          <Typography variant='body2' gutterBottom> {ukDateFormat}</Typography>
+        </Box>
+        <Typography color='dimGray' variant='body2'>Favourite Movie:</Typography>
+        <Typography variant='body2' gutterBottom>{user[0].fav_movie}</Typography>
+        <Typography color='dimGray' variant='body2'>Favourite Movie Quote:</Typography>
+        <Typography variant='body2' gutterBottom>{user[0].fav_quote === '""' ? "" :user[0].fav_quote}</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography color='dimGray' variant='body2' gutterBottom>Favourite Movie Genre:</Typography>
+          <Typography variant='body2' gutterBottom> {user[0].fav_genre}</Typography>
+        </Box>
+      </Box>
     </Card>
-    )
+  )
 }
 
 export default UserCard
