@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, Box, Stack, Image } from '@mui/material';
-import marioCover from '../../images/marioCover.jpeg'
+import marioCover from '../../images/marioCover.png'
 
 const HeroSection = ({ movies }) => {
     
