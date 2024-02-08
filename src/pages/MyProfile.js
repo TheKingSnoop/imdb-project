@@ -21,9 +21,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
-    const [open, setOpen] = useState(false)
-    const [userDetails, setUserDetails] = useState({})
+
+const MyProfile = ({API_HOST, isDarkMode}) => {
+  const [open, setOpen] = useState(false)
+    const [ userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
         favMovie: "",
@@ -38,7 +39,7 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
         const token = cookies.get('jwt')
         const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
         const user_Id = user.id
-        const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/user/${user_Id}`, {
+        const response = await fetch(`http://${API_HOST}/auth/user/${user_Id}`, {
             headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
           });
         const data = await response.json();
@@ -58,7 +59,7 @@ const MyProfile = ({API_HOST, API_PORT, isDarkMode}) => {
     };
 
     const updateProfile = async () => {
-        const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/update-profile/${userDetails.userId}`, {
+        const response = await fetch(`http://${API_HOST}/auth/update-profile/${userDetails.userId}`, {
             method: 'PATCH',
             body: JSON.stringify({
                 profile_pic: userInput.profilePic,

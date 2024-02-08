@@ -3,11 +3,11 @@ import { Box, Typography, Container, Grid } from '@mui/material'
 import HeroSection from '../components/heroSection/HeroSection';
 import UserCard from '../components/cards/UserCard.js';
 
-const Users = ({API_HOST, API_PORT, isDarkMode}) => {
+const Users = ({API_HOST, isDarkMode}) => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
         async function getAllUsers() {
-            const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/all`)
+            const response = await fetch(`http://${API_HOST}/auth/all`)
             const data = await response.json()
             setUsers(data)
         };

@@ -56,7 +56,7 @@ function App() {
   const cookies = new Cookies()
 
 const API_HOST = process.env.REACT_APP_API_HOST;
-const API_PORT = process.env.REACT_APP_API_PORT;
+//const API_PORT = process.env.REACT_APP_API_PORT;
 
   useEffect(() => {
     const user = getCurrentUser() 
@@ -81,14 +81,14 @@ const API_PORT = process.env.REACT_APP_API_PORT;
           <Navbar currentUser= {currentUser} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
         <main className= {`main ${isDarkMode? "main_darkMode" : "" }`}>
             <Routes>
-              <Route index element={<Home API_HOST={API_HOST} API_PORT={API_PORT} movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription} />} />
-              <Route path="/home" element={<Home API_HOST={API_HOST} API_PORT={API_PORT} movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription}/>} />
-              <Route path="/signup" element={<SignUp API_HOST={API_HOST} API_PORT={API_PORT}/>} />
-              <Route path="/login" element={<Login API_HOST={API_HOST} API_PORT={API_PORT}/>} />
-              <Route path="/mymovies" element={<MyMovies API_HOST={API_HOST} API_PORT={API_PORT} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription}/>} />
-              <Route path="/myprofile" element={<MyProfile API_HOST={API_HOST} API_PORT={API_PORT} isDarkMode={isDarkMode} currentUser={currentUser}/>} />
-              <Route path="/users" element={<Users API_HOST={API_HOST} API_PORT={API_PORT} isDarkMode={isDarkMode}/>} />
-              <Route path="/users/:userId" element={<UserPage API_HOST={API_HOST} API_PORT={API_PORT} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
+              <Route index element={<Home API_HOST={API_HOST} movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription} />} />
+              <Route path="/home" element={<Home API_HOST={API_HOST} movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription}/>} />
+              <Route path="/signup" element={<SignUp API_HOST={API_HOST}/>} />
+              <Route path="/login" element={<Login API_HOST={API_HOST}/>} />
+              <Route path="/mymovies" element={<MyMovies API_HOST={API_HOST} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription}/>} />
+              <Route path="/myprofile" element={<MyProfile API_HOST={API_HOST} isDarkMode={isDarkMode} currentUser={currentUser}/>} />
+              <Route path="/users" element={<Users API_HOST={API_HOST} isDarkMode={isDarkMode}/>} />
+              <Route path="/users/:userId" element={<UserPage API_HOST={API_HOST} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription} setMovieDescription={setMovieDescription}/>} />
               <Route path="*" element={<NoPage/>}/>
             </Routes>
           </main>

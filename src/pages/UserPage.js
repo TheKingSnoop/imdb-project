@@ -6,7 +6,8 @@ import Cookies from 'universal-cookie';
 import MovieContainer from '../components/movieContainer/MovieContainer.js';
 import { useNavigate } from 'react-router-dom';
 
-const UserPage = ({ API_HOST, API_PORT, movies, setMovies, currentUser, isDarkMode }) => {
+const UserPage = ({ API_HOST, movies, setMovies, currentUser }) => {
+
   const [profileName, setProfileName] = useState("")
 
   const cookies = new Cookies();
@@ -18,7 +19,7 @@ const UserPage = ({ API_HOST, API_PORT, movies, setMovies, currentUser, isDarkMo
 
   const getMyMovies = async () => {
 
-    const response = await fetch(`http://${API_HOST}:${API_PORT}/movie/my-movies`, {
+    const response = await fetch(`http://${API_HOST}/movie/my-movies`, {
       method: "POST",
       headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
       body: JSON.stringify({ user_Id: userPageId })
@@ -28,7 +29,7 @@ const UserPage = ({ API_HOST, API_PORT, movies, setMovies, currentUser, isDarkMo
   };
 
   async function getUserById() {
-    const response = await fetch(`http://${API_HOST}:${API_PORT}/auth/user/${userPageId}`, {
+    const response = await fetch(`http://${API_HOST}/auth/user/${userPageId}`, {
       headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
     })
     const data = await response.json()
