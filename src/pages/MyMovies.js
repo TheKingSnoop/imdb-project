@@ -7,7 +7,7 @@ import { Typography, Container, Stack, Box } from '@mui/material';
 import HeroSection from '../components/heroSection/HeroSection';
 import { useNavigate } from 'react-router-dom';
 
-const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
+const MyMovies = ({ API_HOST,movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("");
   const [isFavourite, setIsFavourite] = useState("all");
 
@@ -17,13 +17,13 @@ const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, 
     setIsFavourite(filterValue)
   };
 
-  let filteredFavMovieList = movies.filter(movies => {
+  let filteredFavMovieList = movies.filter(movie => {
     if (isFavourite === "true") {
-      return movies.userReviewId[0].isFavourite === true
+      return movie.userReviewId[0].isFavourite === true
     } else if (isFavourite === "false") {
-      return movies.userReviewId[0].isFavourite === false
+      return movie.userReviewId[0].isFavourite === false
     } else {
-      return movies;
+      return movie;
     }
   })
 

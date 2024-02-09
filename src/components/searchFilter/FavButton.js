@@ -8,7 +8,6 @@ const FavButton = ({ favouriteSelector, isFavourite, isDarkMode }) => {
   const darkModeInputColour =
     { color: '#fff' }
   return (
-
     <TextField label='Filter By'
       focused
       select
