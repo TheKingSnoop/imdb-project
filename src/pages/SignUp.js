@@ -43,9 +43,7 @@ const SignUp = ({API_HOST}) => {
             "Content-Type": "application/json"
           }
         })
-        console.log(response)
         data = await response.json();
-        console.log(data)
       }
       signUp();
       setTimeout(() => {

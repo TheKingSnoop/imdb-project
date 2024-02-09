@@ -16,7 +16,6 @@ const SearchBar = ({ API_HOST, setMovies, isDarkMode, getTop20Movies }) => {
     const getMovie = async () => {
       const response = await fetch(`http://${API_HOST}/tmdb/${userInput}`)
       const data = await response.json();
-      console.log('searchbox', data)
       setMovies(data.payload)
     }
     getMovie()
@@ -25,7 +24,6 @@ const SearchBar = ({ API_HOST, setMovies, isDarkMode, getTop20Movies }) => {
     <Box sx={{ padding: '30px 30px 0px 30px', marginBottom:{sm: '20px'}}}>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
-
           <Grid item md={6} sm={8} xs={7}>
             <TextField color={isDarkMode ? 'secondary' : 'primary'} fullWidth sx={{ input: isDarkMode ? darkModeInputColour : lightModeInputColour, }} label="Search movie" variant='outlined' focused onChange={(e) => { setUserInput(e.target.value) }} />
           </Grid>

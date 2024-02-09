@@ -35,9 +35,7 @@ export function addToSeenIt(props) {
         mm = '0' + mm;
       }
       ukDateFormat = dd + '/' + mm + '/' + yyyy;
-
-      //console.log('ukDateFormat', ukDateFormat);
       return ukDateFormat
     } else {
-      return "No date added"
+      return "No date"
     }  };

@@ -7,7 +7,7 @@ const DialogComponent = ({API_HOST, name, dialogText, handleSubmit, dialogTitle,
     const [open, setOpen] = useState(false)
     return (
         <>
-            <Button onClick={() => setOpen(true)} sx={{bgcolor:"primary.dark", color:"white", width: '100px', '&:hover': {
+            <Button onClick={() => setOpen(true)} sx={{bgcolor:"primary.dark", color:"white", padding:'5px', width: {sm:'100px', xs:'70px'}, fontSize:{xs:'9px',sm:'12px'}, '&:hover': {
       backgroundColor: 'primary.main'}}} size='medium'>{name}</Button>
             <Dialog aria-labelledby='dialog-title' aria-describedby='dialog-description' open={open} onClose={() => setOpen(false)}>
                 <DialogTitle id='dialog-title'>

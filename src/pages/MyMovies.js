@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
-import MovieContainer from '../components/movieContainer/MovieContainer';
+import MyMoviesMovieContainer from '../components/movieContainer/MyMoviesMovieContainer';
 import SearchFilter from '../components/searchFilter/SearchFilter';
-import { Typography, Container } from '@mui/material';
+import { Typography, Container, Stack, Box } from '@mui/material';
 import HeroSection from '../components/heroSection/HeroSection';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +15,6 @@ const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, 
 
   const favouriteSelector = (filterValue) => {
     setIsFavourite(filterValue)
-    console.log(filterValue)
   };
 
   let filteredFavMovieList = movies.filter(movies => {
@@ -28,11 +27,7 @@ const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, 
     }
   })
 
-  movieDescription=false;
   const cookies = new Cookies()
-  useEffect(() => {
-    getMyMovies();
-  }, [])
 
   const getMyMovies = async () => {
     const token = cookies.get('jwt')
@@ -55,13 +50,26 @@ const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, 
     }
   };
 
+useEffect(() => {
+    getMyMovies();
+  }, [])
   return (<>
     <HeroSection />
     <Container maxWidth='md' sx={{ py: 6, padding: '0px' }}>
       <SearchFilter API_HOST={API_HOST} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
         getMyMovies={getMyMovies} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector} />
-      <Container maxWidth='md'>
-        {movies.length ? <MovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
+        <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
+          <Stack sx={{display:'flex', alignItems:'center'}}>
+          <Typography color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>
+          <Typography color='dimgrey' variant='body2'>Movies</Typography>
+          </Stack>
+          <Stack sx={{display:'flex', alignItems:'center'}}>
+          {movies[0] && movies[0].userReviewId && <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.filter(movie => movie.userReviewId[0].isFavourite === true).length}</Typography>}
+          <Typography color='dimGrey' variant='body2'>Favourited</Typography>
+          </Stack>
+        </Box>
+      <Container maxWidth='md' sx={{ padding: '0px' }}>
+        {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
     </Container>
   </>)

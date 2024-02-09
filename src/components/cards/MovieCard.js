@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import DialogComponent from '../dialog/Dialog';
 
 const MovieCard = (props) => {
-  //console.log("loooook",props.movieDescription)
   const navigate = useNavigate();
   const cookies = new Cookies();
   const token = cookies.get('jwt')
@@ -21,8 +20,6 @@ const MovieCard = (props) => {
   const [open, setOpen] = useState(false)
 
   const handleSubmit = () => {
-
-    console.log("just clicked Seen It")
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async () => {
       const response = await fetch(`http://${props.API_HOST}/movie/addMovie`, {
@@ -41,35 +38,17 @@ const MovieCard = (props) => {
     addToMovieDatabase()
   }
 
-  const handleDelete = () => {
-    console.log(props.movies)
-    const movie_Id = props.movies[props.index]._id
-    const review_Id = props.movies[props.index].userReviewId[0]._id
-    console.log('movie_Id', movie_Id)
-    console.log('review_Id', review_Id)
-
-    const deleteMovieFromDatabase = async () => {
-      const response = await fetch(`http://${props.API_HOST}/movie/my-movies/delete/${movie_Id}/${review_Id}`, {
-        method: 'DELETE',
-        headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" }
-      })
-      const data = await response.json()
-      console.log('has the movie been deleted?', data)
-      navigate(0);
-    }
-    deleteMovieFromDatabase()
-  }
-
   return (
 
     <Box width='200' sx={{ margin: '10px' }}>
       <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '190px', bgcolor: "primary.light", color: 'white' }}>
-        <Tooltip title={props.title}><Box sx={{ position: 'relative' }}>
-          <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
-          {props.isFavourite && <FavoriteIcon sx={{ position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'primary.light' }} />}
-        </Box></Tooltip>
+        <Tooltip title={props.title}>
+          <Box sx={{ position: 'relative' }}>
+           <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
+            {props.isFavourite && <FavoriteIcon sx={{ position: 'absolute', top: '5px', right: '5px', fontSize: '40px', color: 'primary.light' }} />}
+          </Box>
+        </Tooltip>
         <CardContent sx={{ paddingBottom: '0px' }}>
-          {/* <Typography variant='h6' gutterBottom sx={{ height: "30px", overflow: "hidden" }}>{props.title}</Typography> */}
           {props.movieDescription ? <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> : null}
           <Stack direction="row" spacing={1}>
             <div className='rating'>
@@ -102,25 +81,6 @@ const MovieCard = (props) => {
                 }} />
             </CardActions>}
           {/* myMovies page and signed in */}
-          {props.movies[props.index]._id &&
-            <Box>
-              <CardContent>
-                <Rating sx={{ paddingTop: '15px', width: '100%', borderTop: '2px solid #c62828', paddingBottom: '15px' }} value={props.user_rating} precision={0.5} size='large' readOnly />
-                <Box sx={{ paddingBottom: '10px' }}>
-                  <Typography sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "80px" }} variant='body2'>{props.user_analysis}</Typography>
-                </Box>
-                <Stack direction='row' spacing={1}>
-                  <Typography variant='body2'>Seen on:</Typography>
-                  <Typography variant='body2'>{ukDateFormat}</Typography>
-                </Stack>
-              </CardContent>
-              <Stack direction="row" spacing={1}>
-                {!props.readOnly && <CardActions sx={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
-                  <DialogComponent API_HOST={props.API_HOST} name={'REMOVE'} dialogText={`Are you sure you want to remove '${props.movies[props.index].title}' from your list of Seen It movies?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
-                  <DialogComponent API_HOST={props.API_HOST} name={'REVIEW'} form={true} movies={props.movies} index={props.index} />
-                </CardActions>}
-              </Stack>
-            </Box>}
         </> :
           // not signed in
           ""}

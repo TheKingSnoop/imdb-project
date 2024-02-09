@@ -1,9 +1,9 @@
-import { Typography, Box, Container } from '@mui/material';
+import { Typography, Box, Container, Stack } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import HeroSection from '../components/heroSection/HeroSection'
 import { useParams } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import MovieContainer from '../components/movieContainer/MovieContainer.js';
+import MyMoviesMovieContainer from '../components/movieContainer/MyMoviesMovieContainer.js';
 import { useNavigate } from 'react-router-dom';
 
 const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
@@ -51,9 +51,19 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     <>
       <HeroSection />
       <Box sx={{ margin: '20px 0px' }}>
-        <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'>{profileName}'s movies</Typography>
+        <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'": profileName + "'s"} movies</Typography>
         <Container maxWidth='md'>
-        <MovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} readOnly={readOnly} />
+        <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
+          <Stack sx={{display:'flex', alignItems:'center'}}>
+          <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>
+          <Typography color='dimgrey' variant='body2'>Movies</Typography>
+          </Stack>
+          <Stack sx={{display:'flex', alignItems:'center'}}>
+          {movies[0] && movies[0].userReviewId && <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.filter(movie => movie.userReviewId[0].isFavourite === true).length}</Typography>}
+          <Typography color='dimGrey' variant='body2'>Favourited</Typography>
+          </Stack>
+        </Box>
+        <MyMoviesMovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} isDarkMode={isDarkMode} />
         </Container>
       </Box>
     </>
