@@ -7,8 +7,7 @@ const MovieContainer = ({ API_HOST, movies, currentUser, movieDescription, readO
     return (
         <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {xs:'20px', sm:'0px 0px 30px 0px'}}} >
             <Grid container sx={{  minWidth: "200px", display:'flex'}}>
-                {movies.filter(movie => movie.description && movie.rating && !movie.image.endsWith('null'))
-                .map((movie, index) => {
+                {movies.map((movie, index) => {
                     return <Grid key={index} item md={3} sm={6} xs={12} >
                         <MovieCard
                         API_HOST={API_HOST}
