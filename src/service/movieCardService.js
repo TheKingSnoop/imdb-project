@@ -39,3 +39,9 @@ export function addToSeenIt(props) {
     } else {
       return "No date"
     }  };
+
+    export async function getFilteredMoviesByTitle(API_HOST, userId, filterUserInput) {
+      const response = await fetch(`http://${API_HOST}/movie/filterMyMovies/${userId}/${filterUserInput}`)
+            const data = await response.json()
+            return data
+    }

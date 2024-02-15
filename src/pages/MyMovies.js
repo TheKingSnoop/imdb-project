@@ -10,6 +10,11 @@ import { useNavigate } from 'react-router-dom';
 const MyMovies = ({ API_HOST,movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("");
   const [isFavourite, setIsFavourite] = useState("all");
+  
+  const cookies = new Cookies()
+  const token = cookies.get('jwt')
+        const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
+        const user_Id = user.id
 
   const navigate = useNavigate();
 
@@ -27,7 +32,7 @@ const MyMovies = ({ API_HOST,movies, setMovies, currentUser, movieDescription, i
     }
   })
 
-  const cookies = new Cookies()
+  
 
   const getMyMovies = async () => {
     const token = cookies.get('jwt')
@@ -57,7 +62,7 @@ useEffect(() => {
     <HeroSection />
     <Container maxWidth='1240px' sx={{ py: 6, padding: '0px' }}>
       <SearchFilter API_HOST={API_HOST} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
-        getMyMovies={getMyMovies} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector} />
+        getMyMovies={getMyMovies} setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector} user_Id={user_Id}/>
         <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
           <Stack onClick={()=> setIsFavourite("all")}  sx={{display:'flex', alignItems:'center', '&:hover': { cursor: 'pointer' }}}>
           <Typography color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>

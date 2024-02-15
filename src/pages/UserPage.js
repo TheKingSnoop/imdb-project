@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import MyMoviesMovieContainer from '../components/movieContainer/MyMoviesMovieContainer.js';
 import { useNavigate } from 'react-router-dom';
+import SearchFilter from '../components/searchFilter/SearchFilter';
 
 const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
-
+  const [filterUserInput, setFilterUserInput] = useState("");
+  const [isFavourite, setIsFavourite] = useState("all");
   const [profileName, setProfileName] = useState("")
 
   const cookies = new Cookies();
@@ -16,6 +18,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   const token = cookies.get('jwt')
   const readOnly = true;
   const userPageId = params.userId;
+  console.log("pls loook", userPageId)
 
   const getMyMovies = async () => {
     if(!token) {
@@ -66,6 +69,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
       <Box maxWidth='1240px' sx={{ margin: '20px 0px'}}>
         <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'": profileName + "'s"} movies</Typography>
         <Container>
+          <SearchFilter API_HOST={API_HOST} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId}/>
         <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
           <Stack sx={{display:'flex', alignItems:'center'}}>
           <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>

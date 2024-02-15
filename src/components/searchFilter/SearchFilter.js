@@ -3,11 +3,9 @@ import React from 'react'
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode";
 import FavButton from './FavButton';
+import { getFilteredMoviesByTitle } from '../../service/movieCardService';
 
-const SearchFilter = ({ API_HOST, filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector }) => {
-
-    const cookies = new Cookies();
-
+const SearchFilter = ({ API_HOST, filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector, user_Id }) => {
     const darkModeInputColour =
         { color: '#eee' }
 
@@ -15,18 +13,13 @@ const SearchFilter = ({ API_HOST, filterUserInput, setFilterUserInput, setMovies
         setFilterUserInput(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = cookies.get('jwt')
-        const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }
-        const user_Id = user.id
 
-        const getFilteredMoviesByTitle = async () => {
-            const response = await fetch(`http://${API_HOST}/movie/filterMyMovies/${user_Id}/${filterUserInput}`)
-            const data = await response.json()
-            setMovies(data)
-        }
-        getFilteredMoviesByTitle()
+     const data = await getFilteredMoviesByTitle(API_HOST, user_Id, filterUserInput)
+     
+     setMovies(data)
+       
     }
 
     return (
