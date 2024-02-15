@@ -41,7 +41,7 @@ const MovieCard = (props) => {
   return (
 
     <Box width='200' sx={{ margin: '10px' }}>
-      <Card sx={{ minHeight: "500px", maxHeight: 'auto', minWidth: '190px', bgcolor: "primary.light", color: 'white' }}>
+      <Card sx={{ minHeight: "400px", maxHeight: 'auto', minWidth: '120px', bgcolor: "primary.light", color: 'white' }}>
         <Tooltip title={props.title}>
           <Box sx={{ position: 'relative' }}>
            <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />

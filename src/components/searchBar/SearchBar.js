@@ -21,7 +21,7 @@ const SearchBar = ({ API_HOST, setMovies, isDarkMode, getTop20Movies }) => {
     getMovie()
   }
   return (
-    <Box sx={{ padding: '30px 30px 0px 30px', marginBottom:{sm: '20px'}}}>
+    <Box sx={{ margin:"auto", maxWidth: "1240px", padding: '30px 30px 0px 30px', marginBottom:{sm: '20px'}}}>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Grid item md={6} sm={8} xs={7}>

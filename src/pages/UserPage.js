@@ -18,17 +18,30 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   const userPageId = params.userId;
 
   const getMyMovies = async () => {
-
-    const response = await fetch(`http://${API_HOST}/movie/my-movies`, {
+    if(!token) {
+      alert('not signed in')
+      navigate('/users') 
+      return
+    }
+      const response = await fetch(`http://${API_HOST}/movie/my-movies`, {
       method: "POST",
       headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
       body: JSON.stringify({ user_Id: userPageId })
     });
     const data = await response.json()
-    setMovies(data)
+    if (data && data.error && data.error.message === "Unauthorized") {
+      alert('Session expired, please login again.')
+      navigate('/login')
+    } else {
+      setMovies(data)
+    }
+    
   };
 
   async function getUserById() {
+    if(!token) {
+      return
+    }
     const response = await fetch(`http://${API_HOST}/auth/user/${userPageId}`, {
       headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
     })
@@ -50,9 +63,9 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   return (
     <>
       <HeroSection />
-      <Box sx={{ margin: '20px 0px' }}>
+      <Box maxWidth='1240px' sx={{ margin: '20px 0px'}}>
         <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'": profileName + "'s"} movies</Typography>
-        <Container maxWidth='md'>
+        <Container>
         <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
           <Stack sx={{display:'flex', alignItems:'center'}}>
           <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>

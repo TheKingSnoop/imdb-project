@@ -55,20 +55,20 @@ useEffect(() => {
   }, [])
   return (<>
     <HeroSection />
-    <Container maxWidth='md' sx={{ py: 6, padding: '0px' }}>
+    <Container maxWidth='1240px' sx={{ py: 6, padding: '0px' }}>
       <SearchFilter API_HOST={API_HOST} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
         getMyMovies={getMyMovies} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector} />
         <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
-          <Stack sx={{display:'flex', alignItems:'center'}}>
+          <Stack onClick={()=> setIsFavourite("all")}  sx={{display:'flex', alignItems:'center', '&:hover': { cursor: 'pointer' }}}>
           <Typography color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>
           <Typography color='dimgrey' variant='body2'>Movies</Typography>
           </Stack>
-          <Stack sx={{display:'flex', alignItems:'center'}}>
+          <Stack onClick={()=> setIsFavourite("true")} sx={{display:'flex', alignItems:'center', '&:hover': { cursor: 'pointer' }}}>
           {movies[0] && movies[0].userReviewId && <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.filter(movie => movie.userReviewId[0].isFavourite === true).length}</Typography>}
           <Typography color='dimGrey' variant='body2'>Favourited</Typography>
           </Stack>
         </Box>
-      <Container maxWidth='md' sx={{ padding: '0px' }}>
+      <Container sx={{ padding: '0px' }}>
         {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
     </Container>

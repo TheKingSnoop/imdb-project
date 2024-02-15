@@ -11,6 +11,11 @@ const DrawerComp = ({ currentUser, logout, isDarkMode, setIsDarkMode}) => {
                 <List>
                     <ListItemButton onClick={() => setOpenDrawer(false)} sx={{display: 'flex', flexDirection:'column', alignItems: 'flex-start'}}>
                         {!currentUser? <>
+                            <NavLink to='/users'>
+                            <ListItemIcon >
+                                <ListItemText>USERS</ListItemText>
+                            </ListItemIcon>
+                        </NavLink>
                         <NavLink to='/login'>
                             <ListItemIcon >
                                 <ListItemText>LOGIN</ListItemText>

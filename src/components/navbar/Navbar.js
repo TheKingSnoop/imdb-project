@@ -26,8 +26,9 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
     return (
         <React.Fragment>
             <CssBaseline />
-            <AppBar color='primary' height="500px">
-                <Toolbar>
+            <AppBar color='primary' height="500px" sx={{ margin: "auto"}} >
+                <Box sx={{display: "flex", justifyContent: "center", textAlign: "center"}}>
+                <Toolbar sx={{width:"1240px"}}>
                     {isMatch ? (
                         <>
                             {/* Mobile View */}
@@ -61,8 +62,11 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                             
                             {!currentUser ? 
                                 <>
+                                <NavLink to='/users'>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>users</Button>
+                                </NavLink>
                                 <NavLink to='/login'>
-                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>Login</Button>
+                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px'}}>Login</Button>
                                 </NavLink>
                                 <NavLink to='/signup'>
                                     <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Sign Up</Button>
@@ -82,8 +86,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                             <Button onClick={() => setIsDarkMode(prev => !prev)} variant='contained' sx={{ backgroundColor: 'primary.dark', marginLeft: '10px', '&:hover': { backgroundColor: 'primary.light' } }}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</Button>
                         </Stack>
                     </>}
-
-                </Toolbar>
+                </Toolbar></Box>
             </AppBar>
         </React.Fragment>
     )
