@@ -17,7 +17,7 @@ export default function StandaloneToggleButton({userInput, setUserInput}) {
           });
         }}
         >
-      {userInput.isFavourite?<FavoriteIcon color='primary' />:<FavoriteIcon/>}
+      {userInput.isFavourite?<FavoriteIcon  sx={{color:"#ef5350"}} />:<FavoriteIcon/>}
     </ToggleButton></Box>
   );
 }

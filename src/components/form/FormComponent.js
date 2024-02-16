@@ -58,24 +58,13 @@ const FormComponent = ({ API_HOST, setOpen, movies, index, isDarkMode }) => {
       </Box>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} padding='10px'>
-          
           <Grid item xs={4} sm={7} align='left' sx={{display:'flex', alignItems:'center'}}><Typography variant='body2'>Rate this movie</Typography></Grid>
           <Grid item xs={8} sm={5} sx={{display:'flex', alignItems:'center'}}><RatingComponent userInput={userInput} setUserInput={setUserInput} /></Grid>
-  
           <Grid item xs={9} sm={4} sx={{display:'flex', alignItems:'center'}}><Typography variant='body2'>Add to Favourites?</Typography></Grid>
           <Grid item xs={3} sm={2} sx={{display:'flex', alignItems:'center'}}><IsFavouriteButton userInput={userInput} setUserInput={setUserInput}/></Grid>
           <Grid item xs={12} sm={6} align='right'><DatePickerComponent userInput={userInput} setUserInput={setUserInput}/></Grid>
           <Grid item xs={12}><TextField onChange={handleInputChange} name='analysis' multiline rows={2} value={userInput.analysis} sx={margin} type={"text"} fullWidth label='Analysis' placeholder='For e.g. The ending of this movie was spectacular' /></Grid>
         </Grid>
-        {/* old: */}
-        
-          
- 
-              
-            
-           
-        
-          
           <Button sx={margin} type='submit' variant='contained' color='primary'>Add Review</Button>
       </form>
     </Box>

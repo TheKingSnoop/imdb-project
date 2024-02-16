@@ -2,10 +2,10 @@ import React from 'react'
 import MyMoviesCard from '../cards/MyMoviesCard';
 import {Grid, Container} from '@mui/material';
 
-const MyMoviesMovieContainer = ({ API_HOST, movies, currentUser, isDarkMode}) => {
+const MyMoviesMovieContainer = ({ readOnly, API_HOST, movies, currentUser, isDarkMode}) => {
 
     return (
-        <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {xs:'20px', sm:'0px 0px 30px 0px'}}} >
+        <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {xs:'0px 20px 20px 20px', sm:'0px 0px 30px 0px'}}} >
             <Grid container spacing={2} sx={{  minWidth: "200px", display:'flex'}}>
                 {movies.map((movie, index) => {
                     return <Grid key={index} item >
@@ -16,6 +16,7 @@ const MyMoviesMovieContainer = ({ API_HOST, movies, currentUser, isDarkMode}) =>
                         currentUser={currentUser}
                         movie={movie}
                         isDarkMode={isDarkMode}
+                        readOnly={readOnly}
                         />
                     </Grid>
                 })}
