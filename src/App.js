@@ -52,7 +52,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [movieDescription, setMovieDescription] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(true)
   const cookies = new Cookies()
 
 const API_HOST = process.env.REACT_APP_API_HOST;
@@ -83,8 +83,8 @@ const API_HOST = process.env.REACT_APP_API_HOST;
             <Routes>
               <Route index element={<Home API_HOST={API_HOST} movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription} />} />
               <Route path="/home" element={<Home API_HOST={API_HOST} movies={movies} setMovies={setMovies} currentUser={currentUser}  isDarkMode={isDarkMode} movieDescription={movieDescription}/>} />
-              <Route path="/signup" element={<SignUp API_HOST={API_HOST}/>} />
-              <Route path="/login" element={<Login API_HOST={API_HOST}/>} />
+              <Route path="/signup" element={<SignUp API_HOST={API_HOST} isDarkMode={isDarkMode}/>} />
+              <Route path="/login" element={<Login API_HOST={API_HOST} isDarkMode={isDarkMode}/>} />
               <Route path="/mymovies" element={<MyMovies API_HOST={API_HOST} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} movieDescription={movieDescription}/>} />
               <Route path="/myprofile" element={<MyProfile API_HOST={API_HOST} isDarkMode={isDarkMode} currentUser={currentUser}/>} />
               <Route path="/users" element={<Users API_HOST={API_HOST} isDarkMode={isDarkMode}/>} />

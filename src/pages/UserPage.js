@@ -1,4 +1,4 @@
-import { Typography, Box, Container, Stack } from '@mui/material';
+import { Typography, Box, Stack } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import HeroSection from '../components/heroSection/HeroSection'
 import { useParams } from 'react-router-dom';
@@ -33,12 +33,12 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   })
 
   const getMyMovies = async () => {
-    if(!token) {
-      alert('not signed in')
-      navigate('/users') 
+    if (!token) {
+      alert("You must be signed in to view a user's page")
+      navigate('/users')
       return
     }
-      const response = await fetch(`http://${API_HOST}/movie/my-movies`, {
+    const response = await fetch(`http://${API_HOST}/movie/my-movies`, {
       method: "POST",
       headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
       body: JSON.stringify({ user_Id: userPageId })
@@ -55,7 +55,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   };
 
   async function getUserById() {
-    if(!token) {
+    if (!token) {
       return
     }
     const response = await fetch(`http://${API_HOST}/auth/user/${userPageId}`, {
@@ -79,22 +79,22 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   return (
     <>
       <HeroSection />
-      <Box maxWidth='1240px' sx={{ margin: '20px 0px'}}>
-        <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'": profileName + "'s"} movies</Typography>
-        <Container>
-          <SearchFilter API_HOST={API_HOST} favouriteSelector={favouriteSelector} getMyMovies={getMyMovies} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId} setIsFavourite={setIsFavourite} isFavourite={isFavourite}/>
-        <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
-          <Stack onClick={()=> setIsFavourite("all")} sx={{display:'flex', alignItems:'center', '&:hover': { cursor: 'pointer' }}}>
-          <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>
-          <Typography color='dimgrey' variant='body2'>Movies</Typography>
-          </Stack>
-          <Stack onClick={()=> setIsFavourite("true")} sx={{display:'flex', alignItems:'center', '&:hover': { cursor: 'pointer' }}}>
-          {movies[0] && movies[0].userReviewId && <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.filter(movie => movie.userReviewId[0].isFavourite === true).length}</Typography>}
-          <Typography color='dimGrey' variant='body2'>Favourited</Typography>
-          </Stack>
+      <Box maxWidth='1240px' sx={{ margin: '20px 0px' }}>
+        <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'" : profileName + "'s"} movies</Typography>
+        <Box>
+          <SearchFilter API_HOST={API_HOST} favouriteSelector={favouriteSelector} getMyMovies={getMyMovies} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId} setIsFavourite={setIsFavourite} isFavourite={isFavourite} isDarkMode={isDarkMode} />
+          <Box marginY='15px' sx={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Stack onClick={() => setIsFavourite("all")} sx={{ display: 'flex', alignItems: 'center', '&:hover': { cursor: 'pointer' } }}>
+              <Typography color={isDarkMode && 'white'} sx={{ fontFamily: 'Russo One' }}>{movies.length}</Typography>
+              <Typography color='dimgrey' variant='body2'>Movies</Typography>
+            </Stack>
+            <Stack onClick={() => setIsFavourite("true")} sx={{ display: 'flex', alignItems: 'center', '&:hover': { cursor: 'pointer' } }}>
+              {movies[0] && movies[0].userReviewId && <Typography color={isDarkMode && 'white'} sx={{ fontFamily: 'Russo One' }}>{movies.filter(movie => movie.userReviewId[0].isFavourite === true).length}</Typography>}
+              <Typography color='dimGrey' variant='body2'>Favourited</Typography>
+            </Stack>
+          </Box>
+          <MyMoviesMovieContainer setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
         </Box>
-        <MyMoviesMovieContainer setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
-        </Container>
       </Box>
     </>
   )

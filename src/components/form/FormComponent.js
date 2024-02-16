@@ -7,7 +7,7 @@ import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
 import DatePickerComponent from '../datePickerComponent/DatePickerComponent';
 
-const FormComponent = ({ API_HOST, setOpen, movies, index }) => {
+const FormComponent = ({ API_HOST, setOpen, movies, index, isDarkMode }) => {
   const [userInput, setUserInput] = useState({
     rating: movies[index].userReviewId[0].user_rating,
     analysis: movies[index].userReviewId[0].user_analysis,
@@ -50,7 +50,7 @@ const FormComponent = ({ API_HOST, setOpen, movies, index }) => {
   const margin = { margin: '10px 0px' }
 
   return (
-    <Box align='center' sx={{ padding: '0 20px', width: { sm: '450px', xs: '300px' } }}>
+    <Box align='center' sx={{ padding: '0 20px', width: { sm: '450px', xs: '300px' }}}>
       <Box sx={{marginBottom:'30px', maxWidth:'100%'}}>
         <RateReviewIcon color='primary' sx={{ marginBottom: '20px', fontSize: '50px' }} />
         <Typography variant='h5' sx={{ fontWeight: "bold" }}>Review</Typography>

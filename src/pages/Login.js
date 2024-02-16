@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
-const Login = ({ API_HOST }) => {
+const Login = ({ API_HOST, isDarkMode }) => {
   //initialise react navigator
   const navigate = useNavigate();
   //initialise cookies
@@ -52,7 +52,7 @@ const Login = ({ API_HOST }) => {
   const margin = { margin: '10px 0px' }
   return (
     <Grid align='center' sx={{ marginTop: '10%' }}>
-      <Paper elevation={20} sx={{ padding: '30px 20px', width: { md: '450px', xs: '350px' }, margin: '20px auto' }}>
+      <Paper elevation={20} sx={{ padding: '30px 20px', width: { md: '450px', xs: '350px' }, margin: '20px auto', bgcolor: isDarkMode ? '#d6d6d6': 'white' }}>
         <Grid >
           <Avatar sx={{ marginBottom: '20px', backgroundColor: '#d32f2f' }}></Avatar>
           <Typography variant='h5' sx={{ fontWeight: "bold" }} gutterBottom>Login</Typography>

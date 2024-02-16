@@ -40,16 +40,15 @@ const UserCard = ({ user }) => {
       </Box>
       <Box sx={{padding: '0px 25px 10px 25px'}}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography color='dimGray' variant='body2' gutterBottom>Date Joined:</Typography>
-          <Typography variant='body2' gutterBottom> {ukDateFormat}</Typography>
+          <Typography color='dimGray' variant='body2' gutterBottom sx={{fontFamily:'Acme'}}>Date Joined:</Typography>
+          <Typography variant='body2' gutterBottom sx={{fontFamily:'Acme'}}> {ukDateFormat}</Typography>
         </Box>
-        <Typography color='dimGray' variant='body2'>Favourite Movie:</Typography>
-        <Typography variant='body2' gutterBottom>{user[0].fav_movie}</Typography>
-        <Typography color='dimGray' variant='body2'>Favourite Movie Quote:</Typography>
-        <Typography variant='body2' gutterBottom>{user[0].fav_quote === '""' ? "" :user[0].fav_quote}</Typography>
+        <Typography variant='body2' gutterBottom sx={{fontFamily:'Acme'}}>{user[0].fav_movie}</Typography>
+        <Typography color='dimGray' variant='body2' sx={{fontFamily:'Acme'}}>Favourite Movie Quote:</Typography>
+        <Typography variant='body2' gutterBottom sx={{fontFamily:'Acme'}}>{user[0].fav_quote === '""' ? "" :user[0].fav_quote}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography color='dimGray' variant='body2' gutterBottom>Favourite Movie Genre:</Typography>
-          <Typography variant='body2' gutterBottom> {user[0].fav_genre}</Typography>
+          <Typography color='dimGray' variant='body2' gutterBottom sx={{fontFamily:'Acme'}}>Favourite Movie Genre:</Typography>
+          <Typography variant='body2' gutterBottom sx={{fontFamily:'Acme'}}> {user[0].fav_genre}</Typography>
         </Box>
       </Box>
     </Card>

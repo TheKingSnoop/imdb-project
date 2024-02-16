@@ -4,12 +4,6 @@ import React, { useState } from 'react'
 const SearchBar = ({ API_HOST, setMovies, isDarkMode, getTop20Movies }) => {
   const [userInput, setUserInput] = useState("");
 
-  const darkModeInputColour =
-    { color: '#fff' }
-
-  const lightModeInputColour =
-    { color: '#0a0a0a' }
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -25,7 +19,7 @@ const SearchBar = ({ API_HOST, setMovies, isDarkMode, getTop20Movies }) => {
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Grid item md={6} sm={8} xs={7}>
-            <TextField color={isDarkMode ? 'secondary' : 'primary'} fullWidth sx={{ input: isDarkMode ? darkModeInputColour : lightModeInputColour, }} label="Search movie" variant='outlined' focused onChange={(e) => { setUserInput(e.target.value) }} />
+            <TextField color={isDarkMode ? 'secondary' : 'primary'} fullWidth sx={{"& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}}, input: isDarkMode ? 'white' : '#0a0a0a' }} label="Search movie" variant='outlined' focused onChange={(e) => { setUserInput(e.target.value) }} />
           </Grid>
           <Grid item md={3} sm={2} xs={5}><Button variant='contained' fullWidth sx={{ height: '100%', backgroundColor: 'primary.light' }} type="submit">Search</Button>
           </Grid>
