@@ -35,9 +35,13 @@ export function addToSeenIt(props) {
         mm = '0' + mm;
       }
       ukDateFormat = dd + '/' + mm + '/' + yyyy;
-
-      //console.log('ukDateFormat', ukDateFormat);
       return ukDateFormat
     } else {
-      return "No date added"
+      return "No date"
     }  };
+
+    export async function getFilteredMoviesByTitle(API_HOST, userId, filterUserInput) {
+      const response = await fetch(`http://${API_HOST}/movie/filterMyMovies/${userId}/${filterUserInput}`)
+            const data = await response.json()
+            return data
+    }

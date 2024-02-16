@@ -5,10 +5,7 @@ const FavButton = ({ favouriteSelector, isFavourite, isDarkMode }) => {
   const handleFavouriteValue = (e) => {
     favouriteSelector(e.target.value)
   }
-  const darkModeInputColour =
-    { color: '#fff' }
   return (
-
     <TextField label='Filter By'
       focused
       select
@@ -16,7 +13,7 @@ const FavButton = ({ favouriteSelector, isFavourite, isDarkMode }) => {
       value={isFavourite}
       onChange={handleFavouriteValue}
       color={isDarkMode ? 'secondary' : 'primary'}
-      sx={{ input: isDarkMode ? darkModeInputColour : "" }}>
+      sx={{ input: isDarkMode ? 'white' : "", "& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'} }}>
       <MenuItem value='all'>All</MenuItem>
       <MenuItem value='true'>Favourites</MenuItem>
       <MenuItem value='false'>Not Favourites</MenuItem>
