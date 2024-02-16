@@ -8,7 +8,7 @@ const MyMoviesMovieContainer = ({ API_HOST, movies, currentUser, isDarkMode}) =>
         <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {xs:'20px', sm:'0px 0px 30px 0px'}}} >
             <Grid container spacing={2} sx={{  minWidth: "200px", display:'flex'}}>
                 {movies.map((movie, index) => {
-                    return <Grid key={index} item md={4} sm={6} xs={12} >
+                    return <Grid key={index} item >
                         <MyMoviesCard
                         API_HOST={API_HOST}
                         movies={movies}
