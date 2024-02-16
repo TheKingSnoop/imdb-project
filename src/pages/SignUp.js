@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-const SignUp = ({API_HOST}) => {
+const SignUp = ({API_HOST, isDarkMode}) => {
   const initialValues = {
     name: '',
     surname: '',
@@ -43,9 +43,7 @@ const SignUp = ({API_HOST}) => {
             "Content-Type": "application/json"
           }
         })
-        console.log(response)
         data = await response.json();
-        console.log(data)
       }
       signUp();
       setTimeout(() => {
@@ -62,7 +60,7 @@ const SignUp = ({API_HOST}) => {
   const margin = { margin: '10px 0px' }
   return (
     <Grid align='center'>
-      <Paper elevation={20} sx={{ padding: '30px 20px', width: { md: '450px', xs: '350px' }, margin: '20px auto' }}>
+      <Paper elevation={20} sx={{ padding: '30px 20px', width: { md: '450px', xs: '350px' }, margin: '20px auto', bgcolor: isDarkMode ? '#d6d6d6': 'white' }}>
         <Grid >
           <Avatar sx={{ marginBottom: '20px', backgroundColor: '#d32f2f' }}></Avatar>
           <Typography variant='h5' sx={{ fontWeight: "bold" }} gutterBottom>Sign Up</Typography>

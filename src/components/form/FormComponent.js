@@ -7,14 +7,13 @@ import RatingComponent from '../rating/RatingComponent'
 import IsFavouriteButton from '../toggleButton/IsFavouriteButton'
 import DatePickerComponent from '../datePickerComponent/DatePickerComponent';
 
-const FormComponent = ({ API_HOST, setOpen, movies, index }) => {
+const FormComponent = ({ API_HOST, setOpen, movies, index, isDarkMode }) => {
   const [userInput, setUserInput] = useState({
     rating: movies[index].userReviewId[0].user_rating,
     analysis: movies[index].userReviewId[0].user_analysis,
     isFavourite: movies[index].userReviewId[0].isFavourite,
     dateWatched: new Date()
   });
-console.log(movies, 'moooovies')
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -28,8 +27,6 @@ console.log(movies, 'moooovies')
   const handleSubmit = (e) => {
     e.preventDefault()
     const review_Id = movies[index].userReviewId[0]._id
-    //console.log('review_Id', review_Id)
-    console.log(userInput)
     const addReviewToDatabase = async () => {
       const response = await fetch(`http://${API_HOST}/review/updateMyReview/${review_Id}`, {
         method: 'PATCH',
@@ -44,7 +41,6 @@ console.log(movies, 'moooovies')
         }
       })
       const data = await response.json()
-      console.log(data)
       setOpen(false)
       navigate(0);
     }
@@ -54,7 +50,7 @@ console.log(movies, 'moooovies')
   const margin = { margin: '10px 0px' }
 
   return (
-    <Box align='center' sx={{ padding: '0 20px', width: { sm: '450px', xs: '300px' } }}>
+    <Box align='center' sx={{ padding: '0 20px', width: { sm: '450px', xs: '300px' }}}>
       <Box sx={{marginBottom:'30px', maxWidth:'100%'}}>
         <RateReviewIcon color='primary' sx={{ marginBottom: '20px', fontSize: '50px' }} />
         <Typography variant='h5' sx={{ fontWeight: "bold" }}>Review</Typography>

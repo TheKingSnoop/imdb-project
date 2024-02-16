@@ -19,7 +19,7 @@ const Home = ({API_HOST, movies, setMovies, currentUser, movieDescription, isDar
   return (
    <Box>
     <HeroSection movies={movies}/>
-    <Container maxWidth='md' sx={{ py: 6, padding:'0px'}}>
+    <Container maxWidth='1249px' sx={{ py: 6, padding:'0px'}}>
     <SearchBar API_HOST={API_HOST} setMovies={setMovies} isDarkMode={isDarkMode} getTop20Movies={getTop20Movies}/>
     <MovieContainer API_HOST={API_HOST} movies={movies} currentUser={currentUser} movieDescription={movieDescription}/>
     </Container>

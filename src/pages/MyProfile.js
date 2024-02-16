@@ -166,7 +166,7 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
                                         <Grid item key={index} sm={2} xs={6} sx={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
                                             <Box  component='img' src={image.src} alt={image.name} sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }}>
                                             </Box>
-                                            <FormControlLabel value={image.value} onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px', color: isDarkMode && 'white' }} />} />
+                                            <FormControlLabel value={image.value} onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px', color: isDarkMode && 'grey' }} />} />
                                         </Grid>
                                         )
                                     })}</Grid></Container>
@@ -187,13 +187,13 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
                         {/* <Typography gutterBottom textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography> */}
-                        <TextField fullWidth type={"text"} label='Favourite Movie' placeholder='Bones and All' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} />
+                        <TextField fullWidth type={"text"} label='Favourite Movie' placeholder='Titanic' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} focused color={isDarkMode ? 'secondary' : 'primary'} sx={{"& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'}}}/>
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} />
+                        <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} focused color={isDarkMode ? 'secondary' : 'primary'} sx={{"& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'}}}/>
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
-                        <FormControl sx={{ minWidth: 180 }}>
+                        <FormControl focused color={isDarkMode ? 'secondary' : 'primary'}  sx={{ minWidth: 180, "& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'} }}>
                             <InputLabel>Favourite Genre</InputLabel>
                             <Select
                                 value={userInput.favGenre}

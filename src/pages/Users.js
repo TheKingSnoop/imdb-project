@@ -19,7 +19,7 @@ const Users = ({API_HOST, isDarkMode}) => {
             <HeroSection />
             <Container sx={{padding: '30px'}}>
             <Typography gutterBottom sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode? "white" : ""}} variant='h4'>All Users</Typography>
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
                 {users.map((user, index) => {
                     return <Grid key={index} item md={4} sm={6} xs={12}><UserCard user={user} /></Grid>
                 })}
