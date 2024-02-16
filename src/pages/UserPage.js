@@ -16,9 +16,21 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   const navigate = useNavigate();
   const params = useParams();
   const token = cookies.get('jwt')
-  const readOnly = true;
   const userPageId = params.userId;
-  console.log("pls loook", userPageId)
+
+  const favouriteSelector = (filterValue) => {
+    setIsFavourite(filterValue)
+  };
+
+  let filteredFavMovieList = movies.filter(movie => {
+    if (isFavourite === "true") {
+      return movie.userReviewId[0].isFavourite === true
+    } else if (isFavourite === "false") {
+      return movie.userReviewId[0].isFavourite === false
+    } else {
+      return movie;
+    }
+  })
 
   const getMyMovies = async () => {
     if(!token) {
@@ -37,8 +49,9 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
       navigate('/login')
     } else {
       setMovies(data)
+      setFilterUserInput("")
+      setIsFavourite("all")
     }
-    
   };
 
   async function getUserById() {
@@ -69,18 +82,18 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
       <Box maxWidth='1240px' sx={{ margin: '20px 0px'}}>
         <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'": profileName + "'s"} movies</Typography>
         <Container>
-          <SearchFilter API_HOST={API_HOST} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId}/>
+          <SearchFilter API_HOST={API_HOST} favouriteSelector={favouriteSelector} getMyMovies={getMyMovies} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId} setIsFavourite={setIsFavourite} isFavourite={isFavourite}/>
         <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
-          <Stack sx={{display:'flex', alignItems:'center'}}>
+          <Stack onClick={()=> setIsFavourite("all")} sx={{display:'flex', alignItems:'center', '&:hover': { cursor: 'pointer' }}}>
           <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.length}</Typography>
           <Typography color='dimgrey' variant='body2'>Movies</Typography>
           </Stack>
-          <Stack sx={{display:'flex', alignItems:'center'}}>
+          <Stack onClick={()=> setIsFavourite("true")} sx={{display:'flex', alignItems:'center', '&:hover': { cursor: 'pointer' }}}>
           {movies[0] && movies[0].userReviewId && <Typography  color={isDarkMode && 'white'} sx={{fontFamily:'Russo One'}}>{movies.filter(movie => movie.userReviewId[0].isFavourite === true).length}</Typography>}
           <Typography color='dimGrey' variant='body2'>Favourited</Typography>
           </Stack>
         </Box>
-        <MyMoviesMovieContainer setMovies={setMovies} movies={movies} currentUser={currentUser} isDarkMode={isDarkMode} />
+        <MyMoviesMovieContainer setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
         </Container>
       </Box>
     </>

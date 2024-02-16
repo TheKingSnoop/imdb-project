@@ -1,11 +1,9 @@
 import { TextField, Button, Box, Grid } from '@mui/material'
 import React from 'react'
-import Cookies from 'universal-cookie'
-import { jwtDecode } from "jwt-decode";
 import FavButton from './FavButton';
 import { getFilteredMoviesByTitle } from '../../service/movieCardService';
 
-const SearchFilter = ({ API_HOST, filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, setIsFavourite, isFavourite, favouriteSelector, user_Id }) => {
+const SearchFilter = ({ API_HOST, filterUserInput, setFilterUserInput, setMovies, isDarkMode, getMyMovies, isFavourite, favouriteSelector, user_Id }) => {
     const darkModeInputColour =
         { color: '#eee' }
 

@@ -7,7 +7,7 @@ import { Typography, Container, Stack, Box } from '@mui/material';
 import HeroSection from '../components/heroSection/HeroSection';
 import { useNavigate } from 'react-router-dom';
 
-const MyMovies = ({ API_HOST,movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
+const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("");
   const [isFavourite, setIsFavourite] = useState("all");
   
@@ -31,8 +31,6 @@ const MyMovies = ({ API_HOST,movies, setMovies, currentUser, movieDescription, i
       return movie;
     }
   })
-
-  
 
   const getMyMovies = async () => {
     const token = cookies.get('jwt')
@@ -58,6 +56,7 @@ const MyMovies = ({ API_HOST,movies, setMovies, currentUser, movieDescription, i
 useEffect(() => {
     getMyMovies();
   }, [])
+  
   return (<>
     <HeroSection />
     <Container maxWidth='1240px' sx={{ py: 6, padding: '0px' }}>
@@ -74,7 +73,7 @@ useEffect(() => {
           </Stack>
         </Box>
       <Container sx={{ padding: '0px' }}>
-        {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} filterUserInput={filterUserInput} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
+        {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
     </Container>
   </>)
