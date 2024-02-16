@@ -59,7 +59,7 @@ useEffect(() => {
   
   return (<>
     <HeroSection />
-    <Container maxWidth='1240px' sx={{ py: 6, padding: '0px' }}>
+    <Box maxWidth='1240px' sx={{ py: 6, padding: '0px' }}>
       <SearchFilter API_HOST={API_HOST} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput}
         getMyMovies={getMyMovies} setMovies={setMovies} isDarkMode={isDarkMode} setIsFavourite={setIsFavourite} isFavourite={isFavourite} favouriteSelector={favouriteSelector} user_Id={user_Id}/>
         <Box marginY='15px' sx={{display:'flex', justifyContent:'space-around'}}>
@@ -75,7 +75,7 @@ useEffect(() => {
       <Container sx={{ padding: '0px' }}>
         {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
-    </Container>
+    </Box>
   </>)
 }
 
