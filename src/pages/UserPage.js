@@ -16,6 +16,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   const navigate = useNavigate();
   const params = useParams();
   const token = cookies.get('jwt')
+  const readOnly = true;
   const userPageId = params.userId;
 
   const favouriteSelector = (filterValue) => {
@@ -93,7 +94,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
               <Typography color='dimGrey' variant='body2'>Favourited</Typography>
             </Stack>
           </Box>
-          <MyMoviesMovieContainer setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
+          <MyMoviesMovieContainer readOnly={readOnly} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
         </Box>
       </Box>
     </>
