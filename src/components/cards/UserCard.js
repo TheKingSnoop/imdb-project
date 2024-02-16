@@ -34,9 +34,9 @@ const UserCard = ({ user }) => {
 
   return (
     <Card onClick={handleClick} sx={{ height: '100%', backgroundImage: 'linear-gradient(to bottom right, #c5dffc, #6AAFF8)', '&:hover': { cursor: 'pointer' }, }}>
-      <Box sx={{ padding: '5px 25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', backgroundImage: 'linear-gradient(to bottom right, #3d93f5, #167df3)' }}>
-        <Typography align='center' sx={{fontFamily: 'Russo One' }}>{user[0].username}</Typography>
-        {user[0].profile_pic ? <CardMedia sx={{ borderRadius: '50%', height: '40px', width: '40px' }} component='img' image={profilePic(user[0].profile_pic)} width='100%' /> : <Avatar sx={{ bgcolor: '#d32f2f', height: '40px', width: '40px' }} />}
+      <Box sx={{ padding: '5px 25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position:'relative', marginBottom: '10px', backgroundImage: 'linear-gradient(to bottom right, #3d93f5, #167df3)' }}>
+        <Typography align='center' sx={{fontFamily: 'Russo One', zIndex:'1' }}>{user[0].username}</Typography>
+        {user[0].profile_pic ? <CardMedia sx={{position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-20%)', border:'2px solid #3d93f5', borderRadius: '50%', height: '70px', width: '70px' }} component='img' image={profilePic(user[0].profile_pic)} width='100%' /> : <Avatar sx={{position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-20%)', border:'2px solid #3d93f5', borderRadius: '50%', height: '70px', width: '70px', bgcolor: '#d32f2f'}} />}
       </Box>
       <Box sx={{padding: '0px 25px 10px 25px'}}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
