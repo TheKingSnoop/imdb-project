@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip, Snackbar } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardService'
 import './movieCard.css'
 import Cookies from 'universal-cookie'
@@ -36,12 +37,17 @@ const MovieCard = (props) => {
     addToMovieDatabase()
   }
 
+  const snackBarHandleClick = () => {
+    navigate('/myMovies')
+    setTimeout(() => { window.scrollTo(0, document.body.scrollHeight); }, 500)
+  }
+
   return (
 
     <Box width='200' sx={{ margin: '10px' }}>
       <Card sx={{ minHeight: "400px", maxHeight: 'auto', minWidth: '120px', bgcolor: "primary.light", color: 'white' }}>
-        <Tooltip title={props.title}>       
-           <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
+        <Tooltip title={props.title}>
+          <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
         </Tooltip>
         <CardContent sx={{ paddingBottom: '0px' }}>
           {props.movieDescription ? <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> : null}
@@ -66,14 +72,19 @@ const MovieCard = (props) => {
                 </Button>
               </Tooltip>
               <Snackbar
-                message='✔️ Added to My Movies'
-                autoHideDuration={2000}
+                autoHideDuration={3000}
                 open={open}
                 onClose={() => setOpen(false)}
                 anchorOrigin={{
                   vertical: 'bottom',
                   horizontal: 'center'
-                }} />
+                }} >
+                <Box bgcolor="dimGrey" paddingX='10px' height='40px' sx={{display:'flex', alignItems:'center', borderRadius:'5px' ,'&:hover': { cursor: 'pointer' }}}>
+                <DoneOutlineIcon sx={{ color:'limeGreen', marginRight:'7px'}}/>
+                  <h5 color='White' onClick={snackBarHandleClick}>Added to My Movies. Click here to review now.</h5>
+                </Box>
+
+              </Snackbar>
             </CardActions>}
           {/* myMovies page and signed in */}
         </> :

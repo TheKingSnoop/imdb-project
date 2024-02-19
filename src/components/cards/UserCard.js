@@ -43,6 +43,7 @@ const UserCard = ({ user }) => {
           <Typography color='dimGray' variant='body2' gutterBottom sx={{fontFamily:'Acme'}}>Date Joined:</Typography>
           <Typography variant='body2' gutterBottom sx={{fontFamily:'Acme'}}> {ukDateFormat}</Typography>
         </Box>
+        <Typography color='dimGray' variant='body2' sx={{fontFamily:'Acme'}}>Favourite Movie:</Typography>
         <Typography variant='body2' gutterBottom sx={{fontFamily:'Acme'}}>{user[0].fav_movie}</Typography>
         <Typography color='dimGray' variant='body2' sx={{fontFamily:'Acme'}}>Favourite Movie Quote:</Typography>
         <Typography variant='body2' gutterBottom sx={{fontFamily:'Acme'}}>{user[0].fav_quote === '""' ? "" :user[0].fav_quote}</Typography>
