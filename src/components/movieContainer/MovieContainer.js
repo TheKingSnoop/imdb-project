@@ -2,7 +2,7 @@ import React from 'react'
 import MovieCard from '../cards/MovieCard';
 import {Grid, Container, Typography} from '@mui/material';
 
-const MovieContainer = ({ API_HOST, movies, currentUser, movieDescription, readOnly, landingPageText, isDarkMode}) => {
+const MovieContainer = ({ API_HOST, movies, currentUser, readOnly, landingPageText, isDarkMode}) => {
 
     return (
         <Container sx={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'center', padding: {xs:'20px', sm:'0px 0px 30px 0px'}}} >
@@ -21,11 +21,6 @@ const MovieContainer = ({ API_HOST, movies, currentUser, movieDescription, readO
                         release_date={movie.release_date}
                         image={movie.image}
                         id={movie.tmdb_id}
-                        user_rating={movie.userReviewId && movie.userReviewId[0].user_rating}
-                        user_analysis={movie.userReviewId && movie.userReviewId[0].user_analysis}
-                        isFavourite={movie.userReviewId && movie.userReviewId[0].isFavourite}
-                        dateWatched={movie.userReviewId && movie.userReviewId[0].dateWatched}
-                        movieDescription= {movieDescription}
                         readOnly={readOnly}
                         />
                     </Grid>

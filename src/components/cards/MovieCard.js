@@ -18,10 +18,10 @@ const MovieCard = (props) => {
 
   const [open, setOpen] = useState(false)
 
-  const handleSubmit = () => {
+  const handleSubmit = (endpoint) => {
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async () => {
-      const response = await fetch(`http://${props.API_HOST}/movie/addMovie`, {
+      const response = await fetch(`http://${props.API_HOST}/${endpoint}`, {
         method: 'POST',
         body: JSON.stringify(movieToAdd),
         headers: {
@@ -37,6 +37,13 @@ const MovieCard = (props) => {
     addToMovieDatabase()
   }
 
+  const handleWatchListButton = async () => {
+    const movieToAdd = addToSeenIt(props)
+    const addToMovieToDatabase = async () => {
+
+    }
+  }
+
   const snackBarHandleClick = () => {
     navigate('/myMovies')
     setTimeout(() => { window.scrollTo(0, document.body.scrollHeight); }, 500)
@@ -50,7 +57,7 @@ const MovieCard = (props) => {
           <CardMedia component='img' width='100%' image={props.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
         </Tooltip>
         <CardContent sx={{ paddingBottom: '0px' }}>
-          {props.movieDescription ? <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> : null}
+          <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> 
           <Stack direction="row" spacing={1}>
             <div className='rating'>
               <StarOutlineIcon sx={{ color: colourRating }} />
@@ -64,13 +71,23 @@ const MovieCard = (props) => {
           {!props.movies[props.index]._id &&
             <CardActions>
               <Tooltip title='Add to my movies seen'>
-                <Button onClick={handleSubmit} size='medium' color='secondary' sx={{
+                <Button onClick={()=> handleSubmit("movie/addMovie")} size='medium' color='secondary' sx={{
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
                 }}>Seen It?
                 </Button>
               </Tooltip>
+
+              <Tooltip title='Add to your watch list'>
+                <Button onClick={()=> handleSubmit("watchlist/addMovie")} size='medium' color='secondary' sx={{
+                  bgcolor: "primary.main", '&:hover': {
+                    backgroundColor: 'primary.dark'
+                  }
+                }}>watch list?
+                </Button>
+              </Tooltip>
+
               <Snackbar
                 autoHideDuration={3000}
                 open={open}
@@ -79,8 +96,8 @@ const MovieCard = (props) => {
                   vertical: 'bottom',
                   horizontal: 'center'
                 }} >
-                <Box bgcolor="dimGrey" paddingX='10px' height='40px' sx={{display:'flex', alignItems:'center', borderRadius:'5px' ,'&:hover': { cursor: 'pointer' }}}>
-                <DoneOutlineIcon sx={{ color:'limeGreen', marginRight:'7px'}}/>
+                <Box bgcolor="dimGrey" paddingX='10px' height='40px' sx={{ display: 'flex', alignItems: 'center', borderRadius: '5px', '&:hover': { cursor: 'pointer' } }}>
+                  <DoneOutlineIcon sx={{ color: 'limeGreen', marginRight: '7px' }} />
                   <h5 color='White' onClick={snackBarHandleClick}>Added to My Movies. Click here to review now.</h5>
                 </Box>
 
