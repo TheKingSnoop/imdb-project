@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Stack, Rating, Tooltip, Snackbar } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardService'
-import './movieCard.css'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
+import SnackBarComponent from '../snackBar/SnackBarComponent';
 
 const MovieCard = (props) => {
-  const navigate = useNavigate();
   const cookies = new Cookies();
   const token = cookies.get('jwt')
 
   const releaseYear = props.release_date.slice(0, 4);
   const colourRating = dynamicRating(props);
-  const ukDateFormat = formatDate(props.dateWatched);
+  // const ukDateFormat = formatDate(props.dateWatched);
 
-  const [open, setOpen] = useState(false)
+  const [openSeenItSnackBar, setOpenSeenItSnackBar] = useState(false)
+  const [openWatchListSnackBar, setOpenWatchListSnackBar] = useState(false)
 
-  const handleSubmit = (endpoint) => {
+  const handleSubmit = (endpoint, setFunction) => {
     const movieToAdd = addToSeenIt(props)
     const addToMovieDatabase = async () => {
       const response = await fetch(`http://${props.API_HOST}/${endpoint}`, {
@@ -32,21 +31,9 @@ const MovieCard = (props) => {
       const data = await response.json()
       if (data.errors) {
         alert(data.errors[0].msg)
-      } else { setOpen(true) }
+      } else { setFunction(true) }
     }
     addToMovieDatabase()
-  }
-
-  const handleWatchListButton = async () => {
-    const movieToAdd = addToSeenIt(props)
-    const addToMovieToDatabase = async () => {
-
-    }
-  }
-
-  const snackBarHandleClick = () => {
-    navigate('/myMovies')
-    setTimeout(() => { window.scrollTo(0, document.body.scrollHeight); }, 500)
   }
 
   return (
@@ -59,10 +46,10 @@ const MovieCard = (props) => {
         <CardContent sx={{ paddingBottom: '0px' }}>
           <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{props.description}</Typography> 
           <Stack direction="row" spacing={1}>
-            <div className='rating'>
+            <Box sx={{display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-start', gap: '10px',  padding: '10px 0'}}>
               <StarOutlineIcon sx={{ color: colourRating }} />
               <Typography variant='body2' sx={{ color: colourRating }}>{Math.round(props.rating * 10) / 10}</Typography>
-            </div>
+            </Box>
           </Stack>
           <Typography variant='body2'>{releaseYear}</Typography>
         </CardContent>
@@ -71,7 +58,7 @@ const MovieCard = (props) => {
           {!props.movies[props.index]._id &&
             <CardActions>
               <Tooltip title='Add to my movies seen'>
-                <Button onClick={()=> handleSubmit("movie/addMovie")} size='medium' color='secondary' sx={{
+                <Button onClick={()=> handleSubmit("movie/addMovie", setOpenSeenItSnackBar)} size='medium' color='secondary' sx={{
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
@@ -80,28 +67,15 @@ const MovieCard = (props) => {
               </Tooltip>
 
               <Tooltip title='Add to your watch list'>
-                <Button onClick={()=> handleSubmit("watchlist/addMovie")} size='medium' color='secondary' sx={{
+                <Button onClick={()=> handleSubmit("watchlist/addMovie", setOpenWatchListSnackBar)} size='medium' color='secondary' sx={{
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
                 }}>watch list?
                 </Button>
               </Tooltip>
-
-              <Snackbar
-                autoHideDuration={3000}
-                open={open}
-                onClose={() => setOpen(false)}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center'
-                }} >
-                <Box bgcolor="dimGrey" paddingX='10px' height='40px' sx={{ display: 'flex', alignItems: 'center', borderRadius: '5px', '&:hover': { cursor: 'pointer' } }}>
-                  <DoneOutlineIcon sx={{ color: 'limeGreen', marginRight: '7px' }} />
-                  <h5 color='White' onClick={snackBarHandleClick}>Added to My Movies. Click here to review now.</h5>
-                </Box>
-
-              </Snackbar>
+              <SnackBarComponent setOpen={setOpenWatchListSnackBar} open={openWatchListSnackBar}  message={'Added to My Watch List. Click here to view watch list.'} path={"/mywatchlist"}/>
+              <SnackBarComponent setOpen={setOpenSeenItSnackBar} open={openSeenItSnackBar} message={'Added to My Movies. Click here to review now.'} path={"/myMovies"}/>
             </CardActions>}
           {/* myMovies page and signed in */}
         </> :

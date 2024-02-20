@@ -19,7 +19,7 @@ const SearchFilter = ({ API_HOST, filterUserInput, setFilterUserInput, setMovies
     }
 
     return (
-        <Box sx={{ maxWidth: "1240px", margin: "auto", padding: '30px 30px 0px 30px', marginBottom:{sm: '20px'} }}>
+        <Box sx={{ maxWidth: "1240px", margin: "auto", padding: '0px 30px', marginBottom:{sm: '20px'} }}>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Grid item md={4} sm={4} xs={7}><TextField fullWidth color={isDarkMode? 'secondary':'primary'} size='medium' sx={{"& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'}}} onChange={handleInputChange} name='title' value={filterUserInput} focused type='text' label='Search By Title' placeholder='Star Wars'></TextField>

@@ -1,9 +1,10 @@
-import { Typography, Box, Stack } from '@mui/material';
+import { Typography, Box, Stack, Container } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import HeroSection from '../components/heroSection/HeroSection'
 import { useParams } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import MyMoviesMovieContainer from '../components/movieContainer/MyMoviesMovieContainer.js';
+import CarouselComponent from '../components/carousel/CarouselComponent.js';
 import { useNavigate } from 'react-router-dom';
 import SearchFilter from '../components/searchFilter/SearchFilter';
 
@@ -81,7 +82,8 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     <>
       <HeroSection />
       <Box maxWidth='1240px' sx={{ margin: '20px 0px' }}>
-        <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'" : profileName + "'s"} movies</Typography>
+        <Typography gutterBottom textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'" : profileName + "'s"} movies</Typography>
+        {/* <CarouselComponent/> */}
         <Box>
           <SearchFilter API_HOST={API_HOST} favouriteSelector={favouriteSelector} getMyMovies={getMyMovies} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId} setIsFavourite={setIsFavourite} isFavourite={isFavourite} isDarkMode={isDarkMode} />
           <Box marginY='15px' sx={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -94,7 +96,9 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
               <Typography color='dimGrey' variant='body2'>Favourited</Typography>
             </Stack>
           </Box>
-          <MyMoviesMovieContainer readOnly={readOnly} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
+          <Container sx={{ padding: '0px' }}>
+            <MyMoviesMovieContainer readOnly={readOnly} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
+          </Container>
         </Box>
       </Box>
     </>

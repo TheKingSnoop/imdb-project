@@ -1,12 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
-import TheatersIcon from '@mui/icons-material/Theaters';
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
 
 import { Box, AppBar, CssBaseline, Typography, Toolbar, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import DrawerComp from '../drawer/DrawerComp';
+import MenuListComponent from '../menuList/MenuListComponent';
 import seenItLogo from '../../images/SeenItLogo.png';
 import mobileSeenItLogo from '../../images/MobileSeenItLogo.png';
 
@@ -22,7 +21,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
         navigate('/');
         window.location.reload();
     };
-
+    const menuListItems = [{itemName: "Seen", navLink: '/mymovies'}, {itemName: "Watch List", navLink: '/mywatchlist'}]
     return (
         <React.Fragment>
             <CssBaseline />
@@ -74,10 +73,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                                 </> 
                                 :
                                  <>
-                                
-                                <NavLink to='/mymovies'>
-                                    <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}>my movies</Button>
-                                </NavLink>
+                                <MenuListComponent menuListItems={menuListItems} menuListName={"MY MOVIES"}/>
                                 <NavLink to='/users'>
                                     <Button variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>users</Button>
                                 </NavLink>

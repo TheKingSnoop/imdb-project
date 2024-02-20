@@ -86,7 +86,7 @@ const API_HOST = process.env.REACT_APP_API_HOST;
               <Route path="/signup" element={<SignUp API_HOST={API_HOST} isDarkMode={isDarkMode}/>} />
               <Route path="/login" element={<Login API_HOST={API_HOST} isDarkMode={isDarkMode}/>} />
               <Route path="/mymovies" element={<MyMovies API_HOST={API_HOST} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode}/>} />
-              <Route path="/mymovies/watchlist" element={<WatchList API_HOST={API_HOST} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} />} />
+              <Route path="/mywatchlist" element={<WatchList API_HOST={API_HOST} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} />} />
               <Route path="/myprofile" element={<MyProfile API_HOST={API_HOST} isDarkMode={isDarkMode} currentUser={currentUser}/>} />
               <Route path="/users" element={<Users API_HOST={API_HOST} isDarkMode={isDarkMode}/>} />
               <Route path="/users/:userId" element={<UserPage API_HOST={API_HOST} currentUser={currentUser} movies={movies} setMovies={setMovies} isDarkMode={isDarkMode} />} />
