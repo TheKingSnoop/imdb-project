@@ -5,6 +5,11 @@ import FormComponent from '../form/FormComponent';
 
 const DialogComponent = ({API_HOST, name, dialogText, handleSubmit, dialogTitle, form, movies, index, isDarkMode}) => {
     const [open, setOpen] = useState(false)
+
+    const handleClick = () => {
+        setOpen(false)
+        handleSubmit()
+    }
     return (
         <>
             <Button onClick={() => setOpen(true)} sx={{bgcolor:"primary.dark", color:"white", padding:'5px', width: {sm:'100px', xs:'70px'}, fontSize:{xs:'9px',sm:'12px'}, '&:hover': {
@@ -23,7 +28,7 @@ const DialogComponent = ({API_HOST, name, dialogText, handleSubmit, dialogTitle,
                     {!form && <><Button onClick={() => setOpen(false)}>
                         CANCEL
                     </Button>
-                    <Button autoFocus onClick={() => handleSubmit() && setOpen(false)}>
+                    <Button autoFocus onClick={handleClick}>
                         {name}
                     </Button>
                     </>}
