@@ -29,7 +29,7 @@ const MyMoviesCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly, ge
     return (
         <Card>
             <Grid container bgcolor='primary.light'>
-                <Grid item xs={3} md={2} width='100%'>
+                <Grid item xs={3} md={2} width='100%' sx={{position:'relative'}}>
                        <CardMedia component='img' image={movie.image} sx={{ objectFit: 'stretch', maxWidth:'100%' }} />
                     {movie.userReviewId && movie.userReviewId[0].isFavourite && <FavoriteIcon sx={{ position: 'absolute', top: '2px', right: '0', fontSize: '30px', color: '#ef5350'}} />} 
               
