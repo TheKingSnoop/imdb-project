@@ -27,7 +27,7 @@ const MyWatchListCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly,
             })
             const data = await response.json()
             console.log(data.message)
-            getWatchList()  
+                getWatchList()  
             } catch (error) {
                 console.log(error)
             }
@@ -89,7 +89,7 @@ const MyWatchListCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly,
                         {!readOnly ?
                             <Stack spacing={1} direction='row' sx={{}}>
                                 <DialogComponent isDarkMode={isDarkMode} API_HOST={API_HOST} name={'REMOVE'} dialogText={`Are you sure you want to remove '${movies[index].title}' from your watchlist?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
-                                <Button  variant='contained' onClick={handleSubmit} sx={{ backgroundColor: 'primary', marginLeft: '10px'}}>Seen It</Button>
+                                <Button variant='contained' onClick={handleSubmit} sx={{ backgroundColor: 'primary', marginLeft: '10px'}}>Seen It</Button>
                             </Stack> :
                             <Box sx={{ height: { xs: "0px", sm: "50px" } }}></Box>}
                     </Box>

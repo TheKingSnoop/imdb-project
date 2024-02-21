@@ -7,19 +7,19 @@ const CarouselComponent = ({ watchlistMovies, isDarkMode }) => {
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 1024 },
-            items: 7
+            breakpoint: { max: 4000, min: 2001 },
+            items: 8
         },
         desktop: {
-            breakpoint: { max: 1024, min: 800 },
-            items: 6
+            breakpoint: { max: 2000, min: 1025 },
+            items: 7
         },
         tablet: {
-            breakpoint: { max: 800, min: 464 },
-            items: 4
+            breakpoint: { max: 1024, min: 668 },
+            items: 6
         },
         mobile: {
-            breakpoint: { max: 464, min: 0 },
+            breakpoint: { max: 667, min: 0 },
             items: 3
         }
     };
