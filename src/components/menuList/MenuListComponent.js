@@ -7,11 +7,11 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
-import { NavLink, Link} from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Typography } from '@mui/material';
 
-export default function MenuListComposition({menuListItems, menuListName}) {
+export default function MenuListComposition({ menuListItems, menuListName }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -49,7 +49,7 @@ export default function MenuListComposition({menuListItems, menuListName}) {
   return (
     <Stack direction="row" spacing={2}>
       <div>
-        <Button variant='contained' sx={{ backgroundColor: 'primary.light'}}
+        <Button variant='contained' sx={{ backgroundColor: 'primary.light' }}
           ref={anchorRef}
           id="composition-button"
           aria-controls={open ? 'composition-menu' : undefined}
@@ -76,7 +76,7 @@ export default function MenuListComposition({menuListItems, menuListName}) {
                   placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
-              <Paper sx={{borderRadius: '0px 0px 5px 5px', bgcolor:"primary.light"}}>
+              <Paper sx={{ borderRadius: '0px 0px 5px 5px', bgcolor: "primary.light" }}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
@@ -84,14 +84,16 @@ export default function MenuListComposition({menuListItems, menuListName}) {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    {menuListItems.map((item, index)=>{
+                    {menuListItems.map((item, index) => {
                       return (
-                        <MenuItem key={index} onClick={handleClose} sx={{color:"red", textDecoration:'none'}}>
-                          <NavLink to={item.navLink} style={{textDecoration:"none"}}><Typography sx={{color:"white"}}>{item.itemName}</Typography></NavLink>
-                        </MenuItem>
+                        <NavLink key={index} to={item.navLink} style={{ textDecoration: "none" }}>
+                          <MenuItem onClick={handleClose} sx={{ color: "red", textDecoration: 'none' }}><Typography sx={{ color: "white" }}>
+                            {item.itemName}</Typography>
+                          </MenuItem>
+                        </NavLink>
                       )
                     })}
-                    
+
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

@@ -83,7 +83,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
       <HeroSection />
       <Box maxWidth='1240px' sx={{ margin: '20px 0px' }}>
         <Typography gutterBottom textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'" : profileName + "'s"} movies</Typography>
-        {/* <CarouselComponent/> */}
+        <CarouselComponent/>
         <Box>
           <SearchFilter API_HOST={API_HOST} favouriteSelector={favouriteSelector} getMyMovies={getMyMovies} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId} setIsFavourite={setIsFavourite} isFavourite={isFavourite} isDarkMode={isDarkMode} />
           <Box marginY='15px' sx={{ display: 'flex', justifyContent: 'space-around' }}>

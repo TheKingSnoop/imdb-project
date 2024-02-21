@@ -6,7 +6,7 @@ import DialogComponent from '../dialog/Dialog';
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
 
-const MyMoviesCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly }) => {
+const MyMoviesCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly, getMyMovies }) => {
     const navigate = useNavigate();
     const cookies = new Cookies();
     const token = cookies.get('jwt')
@@ -21,7 +21,7 @@ const MyMoviesCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly }) 
                 headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" }
             })
             const data = await response.json()
-            navigate(0);
+            getMyMovies()
         }
         deleteMovieFromDatabase()
     }

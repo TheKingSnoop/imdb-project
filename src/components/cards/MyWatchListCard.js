@@ -8,9 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import SnackBarComponent from '../snackBar/SnackBarComponent';
 
-const MyWatchListCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly, currentUser }) => {
+const MyWatchListCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly, currentUser, getWatchList }) => {
     const [openSeenItSnackBar, setOpenSeenItSnackBar] = useState(false)
-    console.log(currentUser, 'loook')
 
     const navigate = useNavigate();
     const cookies = new Cookies();
@@ -21,12 +20,19 @@ const MyWatchListCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly,
         const movie_Id = movies[index]._id
 
         const deleteMovieFromDatabase = async () => {
-            const response = await fetch(`http://${API_HOST}/watchlist/delete/${movie_Id}`, {
+            try {
+              const response = await fetch(`http://${API_HOST}/watchlist/delete/${movie_Id}`, {
                 method: 'DELETE',
                 headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" }
             })
             const data = await response.json()
-            navigate(0);
+            console.log(data.message)
+            getWatchList()  
+            } catch (error) {
+                console.log(error)
+            }
+
+            
     }
     deleteMovieFromDatabase()
     }

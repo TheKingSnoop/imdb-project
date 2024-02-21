@@ -2,7 +2,7 @@ import React from 'react'
 import MyMoviesCard from '../cards/MyMoviesCard';
 import {Grid, Container} from '@mui/material';
 
-const MyMoviesMovieContainer = ({ readOnly, API_HOST, movies, currentUser, isDarkMode}) => {
+const MyMoviesMovieContainer = ({ readOnly, API_HOST, movies, currentUser, isDarkMode, getMyMovies}) => {
 
     return (
         <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {xs:'0px 20px 20px 20px', sm:'0px 0px 30px 0px'}}} >
@@ -17,6 +17,7 @@ const MyMoviesMovieContainer = ({ readOnly, API_HOST, movies, currentUser, isDar
                         movie={movie}
                         isDarkMode={isDarkMode}
                         readOnly={readOnly}
+                        getMyMovies={getMyMovies}
                         />
                     </Grid>
                 })}

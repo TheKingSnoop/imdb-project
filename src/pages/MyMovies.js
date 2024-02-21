@@ -74,7 +74,7 @@ useEffect(() => {
           </Stack>
         </Box>
       <Container sx={{ padding: '0px' }}>
-        {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} movieDescription={movieDescription} /> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
+        {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} movieDescription={movieDescription} getMyMovies={getMyMovies}/> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
     </Box>
   </>)
