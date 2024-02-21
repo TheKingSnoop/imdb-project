@@ -13,7 +13,7 @@ export function addToSeenIt(props) {
 
   export function dynamicRating(props) {
     let colourRating = "black"
-    if(props.rating <= 6){
+    if(props.rating < 6){
       colourRating = "brown"
     } else {
       colourRating = "gold"

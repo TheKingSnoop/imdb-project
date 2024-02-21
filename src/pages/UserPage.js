@@ -1,9 +1,10 @@
-import { Typography, Box, Stack } from '@mui/material';
+import { Typography, Box, Stack, Container } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import HeroSection from '../components/heroSection/HeroSection'
 import { useParams } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import MyMoviesMovieContainer from '../components/movieContainer/MyMoviesMovieContainer.js';
+import CarouselComponent from '../components/carousel/CarouselComponent.js';
 import { useNavigate } from 'react-router-dom';
 import SearchFilter from '../components/searchFilter/SearchFilter';
 
@@ -11,6 +12,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("");
   const [isFavourite, setIsFavourite] = useState("all");
   const [profileName, setProfileName] = useState("")
+  const [watchlistMovies, setWatchlistMovies] = useState([]);
 
   const cookies = new Cookies();
   const navigate = useNavigate();
@@ -72,17 +74,35 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     }
   };
 
+  const getWatchList = async () => {
+    if (!token) {
+      return
+    }
+    try{
+    const response = await fetch(`http://${API_HOST}/watchlist/getWatchList/${userPageId}`)
+    const data = await response.json()
+    console.log(data, "look")
+    setWatchlistMovies(data)
+    } catch(error){
+      console.log(error)
+    }
+}
+
   useEffect(() => {
     getMyMovies();
     getUserById();
+    getWatchList()
   }, []);
 
   return (
     <>
       <HeroSection />
-      <Box maxWidth='1240px' sx={{ margin: '20px 0px' }}>
-        <Typography textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white" }} variant='h4'> {profileName.endsWith('s') ? profileName + "'" : profileName + "'s"} movies</Typography>
+      <Box maxWidth='1240px'  sx={{ margin: '20px 0px' }}>
+        <Typography gutterBottom textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'26px', sm:'30px'} }} variant='h4'> {profileName.endsWith('s') ? profileName + "'" : profileName + "'s"} Movies</Typography>
+        <Typography variant='h5' marginLeft='24px' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'20px', sm:'24px'} }}>Watch list</Typography>
+        <CarouselComponent watchlistMovies={watchlistMovies} isDarkMode={isDarkMode}/>
         <Box>
+        <Typography variant='h5' marginLeft='24px' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'20px', sm:'24px'} }}>Seen</Typography>
           <SearchFilter API_HOST={API_HOST} favouriteSelector={favouriteSelector} getMyMovies={getMyMovies} filterUserInput={filterUserInput} setFilterUserInput={setFilterUserInput} setMovies={setMovies} user_Id={userPageId} setIsFavourite={setIsFavourite} isFavourite={isFavourite} isDarkMode={isDarkMode} />
           <Box marginY='15px' sx={{ display: 'flex', justifyContent: 'space-around' }}>
             <Stack onClick={() => setIsFavourite("all")} sx={{ display: 'flex', alignItems: 'center', '&:hover': { cursor: 'pointer' } }}>
@@ -94,7 +114,9 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
               <Typography color='dimGrey' variant='body2'>Favourited</Typography>
             </Stack>
           </Box>
-          <MyMoviesMovieContainer readOnly={readOnly} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
+          <Container sx={{ padding: '0px' }}>
+            <MyMoviesMovieContainer readOnly={readOnly} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} isDarkMode={isDarkMode} />
+          </Container>
         </Box>
       </Box>
     </>

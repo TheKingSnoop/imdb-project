@@ -54,7 +54,7 @@ const FormComponent = ({ API_HOST, setOpen, movies, index, isDarkMode }) => {
       <Box sx={{marginBottom:'30px', maxWidth:'100%'}}>
         <RateReviewIcon color='primary' sx={{ marginBottom: '20px', fontSize: '50px' }} />
         <Typography variant='h5' sx={{ fontWeight: "bold" }}>Review</Typography>
-        <Typography variant='caption'>Add your review below.</Typography>
+        <Typography variant='caption'>Add your review for <span style={{fontWeight:'bold'}}>'{movies[index].title}' </span>below.</Typography>
       </Box>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} padding='10px'>

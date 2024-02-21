@@ -1,15 +1,13 @@
 import React from 'react'
-import MyMoviesCard from '../cards/MyMoviesCard';
 import {Grid, Container} from '@mui/material';
-
-const MyMoviesMovieContainer = ({ readOnly, API_HOST, movies, currentUser, isDarkMode, getMyMovies}) => {
-
-    return (
-        <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {xs:'0px 20px 20px 20px', sm:'0px 0px 30px 0px'}}} >
+import MyWatchListCard from '../cards/MyWatchListCard';
+const WatchListContainer = ({API_HOST, currentUser, isDarkMode, movies, readOnly, getWatchList}) => {
+  return (
+    <Container sx={{width:'100%', display:'flex', justifyContent:'center', padding: {xs:'0px 20px 20px 20px', sm:'0px 0px 30px 0px'}}} >
             <Grid container spacing={2} sx={{  minWidth: "200px", display:'flex'}}>
                 {movies.map((movie, index) => {
                     return <Grid key={index} item >
-                        <MyMoviesCard
+                        <MyWatchListCard
                         API_HOST={API_HOST}
                         movies={movies}
                         index={index}
@@ -17,13 +15,13 @@ const MyMoviesMovieContainer = ({ readOnly, API_HOST, movies, currentUser, isDar
                         movie={movie}
                         isDarkMode={isDarkMode}
                         readOnly={readOnly}
-                        getMyMovies={getMyMovies}
+                        getWatchList={getWatchList}
                         />
                     </Grid>
                 })}
             </Grid>
             </Container>
-    )
+  )
 }
 
-export default MyMoviesMovieContainer
+export default WatchListContainer

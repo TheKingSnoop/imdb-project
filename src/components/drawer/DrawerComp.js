@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 const DrawerComp = ({ currentUser, logout, isDarkMode, setIsDarkMode}) => {
     const [openDrawer, setOpenDrawer] = useState(false);
+    const menuListItems = [{itemName: "Seen", navLink: '/mymovies'}, {itemName: "Watch List", navLink: '/mywatchlist'}]
     return (
         <React.Fragment>
             <Drawer open={openDrawer} anchor='right' onClose={() => setOpenDrawer(false)}>
@@ -38,6 +39,12 @@ const DrawerComp = ({ currentUser, logout, isDarkMode, setIsDarkMode}) => {
                                 <ListItemText>MY MOVIES</ListItemText>
                             </ListItemIcon>
                         </NavLink>
+                        <NavLink to='/mywatchlist'>
+                            <ListItemIcon >
+                                <ListItemText>MY WATCHLIST</ListItemText>
+                            </ListItemIcon>
+                        </NavLink>
+                        
                         <NavLink to='/users'>
                             <ListItemIcon >
                                 <ListItemText>USERS</ListItemText>
