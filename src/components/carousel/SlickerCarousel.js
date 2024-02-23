@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { CardMedia, Typography, Card, Container, Box } from '@mui/material';
 import './SlickerCarousel.css'
+import MovieDialog from '../dialog/MovieDialog';
 
 const SlickerCarousel = ({ movies }) => {
     const settings = {
@@ -46,9 +47,14 @@ const SlickerCarousel = ({ movies }) => {
             <Slider {...settings}>
                 {movies.map((movie, index) => {
                     return (
-                        <Card key={index} sx={{maxWidth:'130px'}} >
-                            <CardMedia component='img' width='100%' image={movie.image} />
+                    <>
+                        
+                        <Card key={index} sx={{maxWidth:'130px'}}  >
+                            <CardMedia component='img' width='100%' image={movie.image}/>
+                            <MovieDialog movie={movie} name={movie.title}/>
                         </Card>
+
+                    </>
                     )
                 })}
             </Slider>
