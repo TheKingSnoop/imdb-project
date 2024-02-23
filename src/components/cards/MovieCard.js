@@ -62,7 +62,7 @@ const MovieCard = (props) => {
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
-                }}>Seen It?
+                }}>+ Seen It
                 </Button>
               </Tooltip>
 
@@ -71,7 +71,7 @@ const MovieCard = (props) => {
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
-                }}>watch list?
+                }}>+ watch list
                 </Button>
               </Tooltip>
               <SnackBarComponent setOpen={setOpenWatchListSnackBar} open={openWatchListSnackBar}  message={'Added to My Watch List. Click here to view watch list.'} path={"/mywatchlist"}/>

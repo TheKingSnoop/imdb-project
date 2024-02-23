@@ -85,13 +85,15 @@ const MyWatchListCard = ({ API_HOST, movies, index, movie, isDarkMode, readOnly,
                                 <StarOutlineIcon sx={{ color: colourRating, fontSize:{xs: '15px', sm:'30px'} }} />
                                 <Typography variant='body2' sx={{ color: colourRating, fontSize:{xs: '11px', sm:'16px'} }}>{Math.round(movie.rating * 10) / 10}</Typography>
                             </Box>
-                        </Stack>
-                        {!readOnly ?
+                            {!readOnly ?
                             <Stack spacing={1} direction='row' sx={{}}>
                                 <DialogComponent isDarkMode={isDarkMode} API_HOST={API_HOST} name={'REMOVE'} dialogText={`Are you sure you want to remove '${movies[index].title}' from your watchlist?`} handleSubmit={handleDelete} dialogTitle={'Remove Movie'} />
-                                <Button variant='contained' onClick={handleSubmit} sx={{ backgroundColor: 'primary', marginLeft: '10px'}}>Seen It</Button>
+                                <Button variant="contained" onClick={handleSubmit} sx={{bgcolor:"primary", color:"white", padding:'5px', width: {sm:'100px', xs:'70px'}, fontSize:{xs:'9px',sm:'12px'}, '&:hover': {
+      backgroundColor: 'primary.main'}}} size='medium'>+ Seen It</Button>
                             </Stack> :
                             <Box sx={{ height: { xs: "0px", sm: "50px" } }}></Box>}
+                        </Stack>
+                        
                     </Box>
                 </Grid>
             </Grid>
