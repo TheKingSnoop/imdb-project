@@ -6,7 +6,7 @@ import { CardMedia, Typography, Card, Container, Box } from '@mui/material';
 import './SlickerCarousel.css'
 import MovieDialog from '../dialog/MovieDialog';
 
-const SlickerCarousel = ({ movies, isDarkMode }) => {
+const SlickerCarousel = ({ movies, isDarkMode, currentUser, title}) => {
     const settings = {
         dots: false,
         infinite: false,
@@ -42,12 +42,14 @@ const SlickerCarousel = ({ movies, isDarkMode }) => {
         ]
     };
     return (
-        <Container sx={{ display: 'flex', justifyContent: 'center', width: '90%' }}>
+        
+        <Container sx={{ display: 'flex', flexDirection:'column', justifyContent: 'center', width: '90%'}}>
+            <Typography sx={{color:isDarkMode? 'white' : 'black', fontFamily:'Russo One'}}>{title}</Typography>
             <Box sx={{ maxWidth: '100%', height: 'auto', padding: { md: '30px' } }}>
                 <Slider {...settings}>
                     {movies.map((movie, index) => {
                         return (
-                            <MovieDialog movie={movie} key={index} isDarkMode={isDarkMode}/>
+                            <MovieDialog movie={movie} key={index} isDarkMode={isDarkMode} currentUser={currentUser}/>
                         )
                     })}
                 </Slider>

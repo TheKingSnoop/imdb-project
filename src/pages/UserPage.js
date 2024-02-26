@@ -81,7 +81,6 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     try{
     const response = await fetch(`http://${API_HOST}/watchlist/getWatchList/${userPageId}`)
     const data = await response.json()
-    console.log(data, "look")
     setWatchlistMovies(data)
     } catch(error){
       console.log(error)

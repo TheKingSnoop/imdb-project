@@ -5,7 +5,7 @@ import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardS
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 
-const MovieDialog = ({ API_HOST, dialogText, dialogTitle, movies, index, isDarkMode, movie }) => {
+const MovieDialog = ({ API_HOST, dialogText, dialogTitle, movies, index, isDarkMode, movie, currentUser }) => {
     const [open, setOpen] = useState(false)
     const colourRating = dynamicRating(movie);
 
@@ -44,8 +44,7 @@ const MovieDialog = ({ API_HOST, dialogText, dialogTitle, movies, index, isDarkM
               <Typography variant='body2' sx={{ color: colourRating }}>{Math.round(movie.rating * 10) / 10}</Typography>
             </Box>
                 </DialogContent>
-                {/* {form && <FormComponent API_HOST={API_HOST} setOpen={setOpen} movies={movies} index={index} isDarkMode={isDarkMode}/>} */}
-                <DialogActions sx={{bgcolor:'primary.light'}}>
+                {currentUser && <DialogActions sx={{bgcolor:'primary.light'}}>
                 <Grid container spacing={1}>
                     <Grid item sm={4} xs={12}>
                         <Button variant='contained' autoFocus onClick={handleClick} sx={{ width: '100%' }}>
@@ -63,7 +62,9 @@ const MovieDialog = ({ API_HOST, dialogText, dialogTitle, movies, index, isDarkM
                         </Button>
                     </Grid>
                 </Grid>
-                </DialogActions>
+                </DialogActions>}
+                
+                
             </Dialog>
         </>
     )
