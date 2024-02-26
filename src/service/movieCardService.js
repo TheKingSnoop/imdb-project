@@ -11,9 +11,9 @@ export function addToSeenIt(props) {
     return addMovie
   }
 
-  export function dynamicRating(props) {
+  export function dynamicRating(movie) {
     let colourRating = "black"
-    if(props.rating < 6){
+    if(movie.rating < 6){
       colourRating = "brown"
     } else {
       colourRating = "gold"

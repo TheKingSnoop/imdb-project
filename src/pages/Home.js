@@ -23,7 +23,7 @@ const Home = ({API_HOST, movies, setMovies, currentUser, movieDescription, isDar
     <HeroSection movies={movies}/>
     <Container maxWidth='1249px' sx={{ py: 6, padding:'0px'}}>
     <SearchBar API_HOST={API_HOST} setMovies={setMovies} isDarkMode={isDarkMode} getTop20Movies={getTop20Movies} setLandingPageText={setLandingPageText}/>
-    <SlickerCarousel movies={movies}/>
+    <SlickerCarousel movies={movies} isDarkMode={isDarkMode}/>
     <MovieContainer API_HOST={API_HOST} movies={movies} currentUser={currentUser} movieDescription={movieDescription} landingPageText={landingPageText} isDarkMode={isDarkMode}/>
     </Container>
    </>

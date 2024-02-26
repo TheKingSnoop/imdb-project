@@ -6,19 +6,19 @@ import { CardMedia, Typography, Card, Container, Box } from '@mui/material';
 import './SlickerCarousel.css'
 import MovieDialog from '../dialog/MovieDialog';
 
-const SlickerCarousel = ({ movies }) => {
+const SlickerCarousel = ({ movies, isDarkMode }) => {
     const settings = {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: 7,
+        slidesToShow: 7.5,
         slidesToScroll: 2,
         initialSlide: 0,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 5,
+                    slidesToShow: 5.5,
                     slidesToScroll: 3,
                     infinite: true,
                     dots: false
@@ -27,7 +27,7 @@ const SlickerCarousel = ({ movies }) => {
             {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 3.5,
                     slidesToScroll: 1,
                     initialSlide: 2
                 }
@@ -42,23 +42,16 @@ const SlickerCarousel = ({ movies }) => {
         ]
     };
     return (
-        <Container sx={{display:'flex', justifyContent:'center', width:'90%'}}>
-        <Box sx={{ maxWidth: '100%', height: 'auto', padding: {md: '30px'}}}>
-            <Slider {...settings}>
-                {movies.map((movie, index) => {
-                    return (
-                    <>
-                        
-                        <Card key={index} sx={{maxWidth:'130px'}}  >
-                            <CardMedia component='img' width='100%' image={movie.image}/>
-                            <MovieDialog movie={movie} name={movie.title}/>
-                        </Card>
-
-                    </>
-                    )
-                })}
-            </Slider>
-        </Box>
+        <Container sx={{ display: 'flex', justifyContent: 'center', width: '90%' }}>
+            <Box sx={{ maxWidth: '100%', height: 'auto', padding: { md: '30px' } }}>
+                <Slider {...settings}>
+                    {movies.map((movie, index) => {
+                        return (
+                            <MovieDialog movie={movie} key={index} isDarkMode={isDarkMode}/>
+                        )
+                    })}
+                </Slider>
+            </Box>
         </Container>
     )
 }
