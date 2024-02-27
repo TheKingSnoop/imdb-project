@@ -12,6 +12,12 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MovieIcon from '@mui/icons-material/Movie';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
+import ariel from '../../images/arielAvatar.png';
+import indianaJones from '../../images/indianaJonesAvatar.png';
+import terminator from '../../images/terminatorAvatar.png';
+import hermione from '../../images/hermioneAvatar.png';
+import spiderman from '../../images/spidermanAvatar.png';
+import mrsIncredible from '../../images/mrsIncredibleAvatar.png';
 
 const UserCard = ({ user, isDarkMode }) => {
   const ukDateFormat = formatDate(user[0].date_joined);
@@ -32,6 +38,18 @@ const UserCard = ({ user, isDarkMode }) => {
       return maggie
     } else if (user[0].profile_pic === "wonderWomanAvatar") {
       return wonderWoman
+    } else if (user[0].profile_pic === "arielAvatar") {
+      return ariel
+    }else if (user[0].profile_pic === "indianaJonesAvatar") {
+      return indianaJones
+    }else if (user[0].profile_pic === "terminatorAvatar") {
+      return terminator
+    }else if (user[0].profile_pic === "hermioneAvatar") {
+      return hermione
+    }else if (user[0].profile_pic === "spidermanAvatar") {
+      return spiderman
+    }else if (user[0].profile_pic === "mrsIncredibleAvatar") {
+      return mrsIncredible
     }
     else return null;
   }
