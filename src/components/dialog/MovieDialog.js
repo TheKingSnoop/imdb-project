@@ -41,23 +41,23 @@ const MovieDialog = ({ API_HOST, dialogText, dialogTitle, movies, index, isDarkM
                 }} />
             </Card>
             <Dialog aria-labelledby='dialog-title' aria-describedby='dialog-description' open={open} onClose={() => setOpen(false)}>
-                <DialogTitle textAlign='center' id='dialog-title' sx={{ bgcolor: 'primary.light', color: 'white' }}>
+                <DialogTitle textAlign='center' id='dialog-title' sx={{ bgcolor: 'primary.light', color: 'white', padding:'8px' }}>
                     <Stack direction='row' sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center' }}>
-                        <Typography variant='h5' sx={{ fontFamily: 'Russo One', marginRight: '10px' }}>{movie.title}</Typography>
+                        <Typography variant='h6' sx={{ fontFamily: 'Russo One', marginRight: '10px' }}>{movie.title}</Typography>
                         <Typography sx={{ fontFamily: 'Russo One', color: isDarkMode ? "#8f8f8f" : 'dimGrey' }}>{movie.release_date.slice(0, 4)}</Typography>
                     </Stack>
                 </DialogTitle>
-                <DialogContent sx={{ bgcolor: 'primary.light', display: 'flex', flexDirection:{xs:'column', sm:'row'} }}>
-                    <Box sx={{ width: {xs:'100%', sm:'100%'}, display: 'flex', justifyContent: 'center', marginBottom: '10px', marginRight: '15px' }}>
-                        <Card sx={{ width: { xs: '150px', sm: '250px' } }}>
+                <DialogContent sx={{ bgcolor: 'primary.light', display: 'flex', padding:'0px 16px 0px 16px', flexDirection:{xs:'column', sm:'row'}, alignItems:'center' }}>
+                    <Box component='img' src={movie.image} sx={{ borderRadius:'5px', width: {xs:'50%', sm:'40%'}, display: 'flex', justifyContent: 'center', marginBottom: '10px', marginRight:{xs:'0px', sm:'15px'}  }}>
+                        {/* <Card sx={{ width: { xs: '150px', sm: '250px' } }}>
                             <CardMedia component='img' width='100%' image={movie.image} />
-                        </Card>
+                        </Card> */}
                     </Box>
-                    <DialogContentText sx={{ border: '2px solid red' }}>
-                        <Typography sx={{ overflowX: "hidden", color: 'white', height: { xs: '100px', sm: 'auto' }, lineHeight: '20px' }}>
+                    <DialogContentText>
+                        <Typography sx={{ overflowX: "hidden", color: 'white', height: { xs: '100px', sm: 'auto' }, lineHeight: {xs:'16px',sm:'20px'}, fontSize:{xs:'14px'} }}>
                             {movie.description}
                         </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-start', gap: '10px', padding: '10px 0' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-start', gap: '10px', padding: '0' }}>
                             <StarOutlineIcon sx={{ color: colourRating }} />
                             <Typography variant='body2' sx={{ color: colourRating }}>{Math.round(movie.rating * 10) / 10}</Typography>
                         </Box>

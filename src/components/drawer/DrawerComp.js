@@ -36,7 +36,7 @@ const DrawerComp = ({ currentUser, logout, isDarkMode, setIsDarkMode}) => {
                         <>
                         <NavLink to='/mymovies'>
                             <ListItemIcon >
-                                <ListItemText>MY MOVIES</ListItemText>
+                                <ListItemText>MOVIES SEEN</ListItemText>
                             </ListItemIcon>
                         </NavLink>
                         <NavLink to='/mywatchlist'>
@@ -50,18 +50,17 @@ const DrawerComp = ({ currentUser, logout, isDarkMode, setIsDarkMode}) => {
                                 <ListItemText>USERS</ListItemText>
                             </ListItemIcon>
                         </NavLink>
-                         <NavLink to='/' onClick={logout}>
-                            <ListItemIcon >
-                                <ListItemText>LOG OUT</ListItemText>
-                            </ListItemIcon>
-                        </NavLink>
                         </>}
                         <ListItemIcon onClick={() => setIsDarkMode(prev => !prev)}>
                                 <ListItemText>{isDarkMode ? 'LIGHT MODE' : 'DARK MODE'}</ListItemText>
                             </ListItemIcon>
+                        {currentUser && <NavLink to='/' onClick={logout}>
+                            <ListItemIcon >
+                                <ListItemText>LOG OUT</ListItemText>
+                            </ListItemIcon>
+                        </NavLink>}
                     </ListItemButton>
-
-
+                    
                 </List>
             </Drawer>
             <IconButton sx={{ color: "white", marginLeft: "auto" }} onClick={() => setOpenDrawer(!openDrawer)}>

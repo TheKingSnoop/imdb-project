@@ -49,8 +49,8 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     const data = await response.json()
     if (data && data.error && data.error.message === "Unauthorized") {
       alert('Session expired, please login again.')
-      cookies.remove('jwt');
       navigate('/login')
+      cookies.remove('jwt');
     } else {
       setMovies(data)
       setFilterUserInput("")
@@ -70,6 +70,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     if (data && data.error && data.error.message === "Unauthorized") {
       alert('Session expired, please login again.')
       navigate('/login')
+      cookies.remove('jwt');
     } else {
       setProfileName(data.username);
     }

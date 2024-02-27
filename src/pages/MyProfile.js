@@ -46,8 +46,8 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
 
         if(data && data.error && data.error.message === "Unauthorized") {
             alert('Session expired, please login again.')
-            cookies.remove('jwt');
             navigate('/login')
+            cookies.remove('jwt');
           } else {
            setUserDetails(data);
            setUserInput({
