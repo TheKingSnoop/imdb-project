@@ -11,6 +11,12 @@ import woody from '../images/woodyAvatar.png';
 import maggie from '../images/maggieAvatar.png';
 import babyYoda from '../images/babyyodaAvatar.png';
 import wonderWoman from '../images/wonderWomanAvatar.png';
+import ariel from '../images/arielAvatar.png';
+import indianaJones from '../images/indianaJonesAvatar.png';
+import terminator from '../images/terminatorAvatar.png';
+import hermione from '../images/hermioneAvatar.png';
+import spiderman from '../images/spidermanAvatar.png';
+import mrsIncredible from '../images/mrsIncredibleAvatar.png';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -22,9 +28,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
 
-const MyProfile = ({API_HOST, isDarkMode}) => {
-  const [open, setOpen] = useState(false)
-    const [ userDetails, setUserDetails] = useState({})
+const MyProfile = ({ API_HOST, isDarkMode }) => {
+    const [open, setOpen] = useState(false)
+    const [moreAvatars, setMoreAvatars] = useState(false)
+    const [userDetails, setUserDetails] = useState({})
     const [userInput, setUserInput] = useState({
         profilePic: "",
         favMovie: "",
@@ -41,22 +48,22 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
         const user_Id = user.id
         const response = await fetch(`http://${API_HOST}/auth/user/${user_Id}`, {
             headers: { "Authorization": "Bearer " + token.token, "Content-Type": "application/json" },
-          });
+        });
         const data = await response.json();
 
-        if(data && data.error && data.error.message === "Unauthorized") {
+        if (data && data.error && data.error.message === "Unauthorized") {
             alert('Session expired, please login again.')
             navigate('/login')
             cookies.remove('jwt');
-          } else {
-           setUserDetails(data);
-           setUserInput({
-            profilePic: data.profile_pic,
-            favMovie: data.fav_movie,
-            favQuote: data.fav_quote,
-            favGenre: data.fav_genre
-           })
-          }  ;
+        } else {
+            setUserDetails(data);
+            setUserInput({
+                profilePic: data.profile_pic,
+                favMovie: data.fav_movie,
+                favQuote: data.fav_quote,
+                favGenre: data.fav_genre
+            })
+        };
     };
 
     const updateProfile = async () => {
@@ -79,7 +86,7 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
     }
     useEffect(() => {
         getUserDetailsById();
-    },[]) 
+    }, [])
 
     const profileImages = [{
         value: "shrekAvatar",
@@ -110,6 +117,36 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
         value: "wonderWomanAvatar",
         src: wonderWoman,
         name: "wonder woman"
+    },
+    {
+        value: "arielAvatar",
+        src: ariel,
+        name: "ariel"
+    },
+    {
+        value: "indianaJonesAvatar",
+        src: indianaJones,
+        name: "indiana jones"
+    },
+    {
+        value: "terminatorAvatar",
+        src: terminator,
+        name: "terminator"
+    },
+    {
+        value: "hermioneAvatar",
+        src: hermione,
+        name: "hermione"
+    },
+    {
+        value: "spidermanAvatar",
+        src: spiderman,
+        name: "spiderman"
+    },
+    {
+        value: "mrsIncredibleAvatar",
+        src: mrsIncredible,
+        name: "mrsIncredible"
     }
     ]
     const profilePic = (currentUser) => {
@@ -125,6 +162,18 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
             return maggie
         } else if (currentUser === "wonderWomanAvatar") {
             return wonderWoman
+        } else if (currentUser === "arielAvatar") {
+            return ariel
+        } else if (currentUser === "indianaJonesAvatar") {
+            return indianaJones
+        } else if (currentUser === "terminatorAvatar") {
+            return terminator
+        } else if (currentUser === "hermioneAvatar") {
+            return hermione
+        } else if (currentUser === "spidermanAvatar") {
+            return spiderman
+        } else if (currentUser === "mrsIncredibleAvatar") {
+            return mrsIncredible
         } else return null;
     }
 
@@ -141,36 +190,41 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
 
     }
     return (
-        <Box sx={{  margin: '20px', minWidth: { sm: '550px', xs: '300px' } }}>
-            <Typography variant='h4'sx={{textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode && "white"}}  >My Profile</Typography>
+        <Box sx={{ margin: '20px', minWidth: { sm: '550px', xs: '300px' } }}>
+            <Typography variant='h4' sx={{ textAlign: 'center', fontFamily: 'Russo One', color: isDarkMode && "white" }}  >My Profile</Typography>
             <Card sx={{ color: isDarkMode && "white", bgcolor: isDarkMode && "primary.light", padding: '20px', width: { sm: '700px', xs: '350px' } }}>
                 <form onSubmit={handleSubmit}><Grid container spacing={2}>
 
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-                        {userDetails.profile_pic ? <CardMedia sx={{ marginBottom:'25px', borderRadius: '50%', height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' } }} component='img' image={profilePic(userInput.profilePic)} width='100%' /> : <Avatar sx={{ height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' }, bgcolor: '#d32f2f' }} />}
+                        {userDetails.profile_pic ? <CardMedia sx={{ marginBottom: '25px', borderRadius: '50%', height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' } }} component='img' image={profilePic(userInput.profilePic)} width='100%' /> : <Avatar sx={{ height: { md: '300px', sm: '200px', xs: '150px' }, width: { md: '300px', sm: '200px', xs: '150px' }, bgcolor: '#d32f2f' }} />}
                     </Grid>
-                    <Box sx={{ width:'100%', display:'flex', justifyContent:'center'}}>
-                            <Typography>Change Profile Picture:</Typography>
+                    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <Typography>Change Profile Picture:</Typography>
                     </Box>
-                    <Grid item xs={12} sx={{display:'flex', justifyContent:'center'}}>
+                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <FormControl>
                             <RadioGroup
                                 row
                                 aria-labelledby="Profile picture options"
                                 name="profilePic"
                             >
-                                <Container sx={{ width:'100%', display:'flex'}}>
-                                    <Grid container  sx={{ display: 'flex', justifyContent:'center', alignItems:'center', paddingBottom:'15px'}}>
+                                <Container sx={{ width: '100%', display: 'flex' }}>
+                                    <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '15px' }}>
 
-                                    {profileImages.map((image, index) => {
-                                        return (
-                                        <Grid item key={index} sm={2} xs={6} sx={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
-                                            <Box  component='img' src={image.src} alt={image.name} sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }}>
-                                            </Box>
-                                            <FormControlLabel value={image.value} onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px', color: isDarkMode && 'grey' }} />} />
-                                        </Grid>
-                                        )
-                                    })}</Grid></Container>
+                                        {profileImages.map((image, index) => {
+                                            if (index < (!moreAvatars ? 6 : 12))
+                                                return (
+                                                    <Grid item key={index} sm={2} xs={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Box component='img' src={image.src} alt={image.name} sx={{ width: '75px', height: '75px', borderRadius: '50%', margin: '10px' }}>
+                                                        </Box>
+                                                        <FormControlLabel value={image.value} onChange={handleInputChange} sx={{ padding: '0px', margin: '0px' }} control={<Radio sx={{ padding: '0px', margin: '0px', color: isDarkMode && 'grey' }} />} />
+                                                    </Grid>
+                                                )
+                                        })}</Grid>
+                                </Container>
+                                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                    <Typography onClick={() => setMoreAvatars(prev => !prev)} sx={{ '&:hover': { cursor: 'pointer' } }}>{moreAvatars ? 'View less' : 'View more'}</Typography>
+                                </Box>
                             </RadioGroup>
                         </FormControl>
                     </Grid>
@@ -188,13 +242,13 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
                         {/* <Typography gutterBottom textAlign='left'> Favourite Movie: {userDetails.fav_movie}</Typography> */}
-                        <TextField fullWidth type={"text"} label='Favourite Movie' placeholder='Titanic' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} focused color={isDarkMode ? 'secondary' : 'primary'} sx={{"& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'}}}/>
+                        <TextField fullWidth type={"text"} label='Favourite Movie' placeholder='Titanic' onChange={handleInputChange} name='favMovie' value={userInput.favMovie} focused color={isDarkMode ? 'secondary' : 'primary'} sx={{ "& .MuiInputBase-root": { height: { xs: '40px', sm: '100%' }, color: isDarkMode ? 'white' : 'primary' } }} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' margin='0px 20px'>
-                        <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} focused color={isDarkMode ? 'secondary' : 'primary'} sx={{"& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'}}}/>
+                        <TextField fullWidth type={"text"} label='Favourite Quote' placeholder='Keep the change ya filthy animal' onChange={handleInputChange} name='favQuote' value={userInput.favQuote} focused color={isDarkMode ? 'secondary' : 'primary'} sx={{ "& .MuiInputBase-root": { height: { xs: '40px', sm: '100%' }, color: isDarkMode ? 'white' : 'primary' } }} />
                     </Grid>
                     <Grid item xs={12} textAlign='left' marginLeft='20px'>
-                        <FormControl focused color={isDarkMode ? 'secondary' : 'primary'}  sx={{ minWidth: 180, "& .MuiInputBase-root": {height: {xs:'40px', sm:'100%'}, color: isDarkMode ? 'white' : 'primary'} }}>
+                        <FormControl focused color={isDarkMode ? 'secondary' : 'primary'} sx={{ minWidth: 180, "& .MuiInputBase-root": { height: { xs: '40px', sm: '100%' }, color: isDarkMode ? 'white' : 'primary' } }}>
                             <InputLabel>Favourite Genre</InputLabel>
                             <Select
                                 value={userInput.favGenre}
@@ -221,18 +275,18 @@ const MyProfile = ({API_HOST, isDarkMode}) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <Box sx={{display:'flex', justifyContent:'center', padding:'20px'}}>
-                    <Button type='submit' variant='contained' color='primary'>Update Profile</Button>
-                <Snackbar 
-                message='Profile Updated' 
-                autoHideDuration={2000}
-                open={open}
-                onClose={() => setOpen(false)}
-                anchorOrigin={{
-                  vertical:'bottom',
-                  horizontal:'center'
-                }}/></Box></form>
-                
+                    <Box sx={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+                        <Button type='submit' variant='contained' color='primary'>Update Profile</Button>
+                        <Snackbar
+                            message='Profile Updated'
+                            autoHideDuration={2000}
+                            open={open}
+                            onClose={() => setOpen(false)}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center'
+                            }} /></Box></form>
+
             </Card>
         </Box>
     )
