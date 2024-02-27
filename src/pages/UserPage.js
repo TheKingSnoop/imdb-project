@@ -50,6 +50,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     if (data && data.error && data.error.message === "Unauthorized") {
       alert('Session expired, please login again.')
       navigate('/login')
+      cookies.remove('jwt');
     } else {
       setMovies(data)
       setFilterUserInput("")
@@ -69,6 +70,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     if (data && data.error && data.error.message === "Unauthorized") {
       alert('Session expired, please login again.')
       navigate('/login')
+      cookies.remove('jwt');
     } else {
       setProfileName(data.username);
     }
@@ -81,7 +83,6 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     try{
     const response = await fetch(`http://${API_HOST}/watchlist/getWatchList/${userPageId}`)
     const data = await response.json()
-    console.log(data, "look")
     setWatchlistMovies(data)
     } catch(error){
       console.log(error)
@@ -99,7 +100,7 @@ const UserPage = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
       <HeroSection />
       <Box maxWidth='1240px'  sx={{ margin: '20px 0px' }}>
         <Typography gutterBottom textAlign='center' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'26px', sm:'30px'} }} variant='h4'> {profileName.endsWith('s') ? profileName + "'" : profileName + "'s"} Movies</Typography>
-        <Typography variant='h5' marginLeft='24px' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'20px', sm:'24px'} }}>Watch list</Typography>
+        <Typography variant='h5' marginLeft='24px' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'20px', sm:'24px'} }}>Watchlist</Typography>
         <CarouselComponent watchlistMovies={watchlistMovies} isDarkMode={isDarkMode}/>
         <Box>
         <Typography variant='h5' marginLeft='24px' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'20px', sm:'24px'} }}>Seen</Typography>

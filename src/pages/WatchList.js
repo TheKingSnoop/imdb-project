@@ -25,7 +25,7 @@ const WatchList = ({ API_HOST, movies, setMovies, currentUser, movieDescription,
         <>
             <HeroSection />
             <Box maxWidth='1240px' sx={{ py: 6, padding: '0px' }}>
-                <Typography textAlign='center' variant='h4' marginY='15px' sx={{ fontFamily: 'Russo one', color: isDarkMode ? 'white' : 'black' }}>My Watch List</Typography>
+                <Typography textAlign='center' variant='h4' marginY='15px' sx={{ fontFamily: 'Russo one', color: isDarkMode ? 'white' : 'black' }}>My Watchlist</Typography>
                 <Container sx={{ padding: '0px' }}>
                     <WatchListContainer API_HOST={API_HOST} movies={movies} currentUser={currentUser} isDarkMode={isDarkMode} getWatchList={getWatchList} />
                 </Container>

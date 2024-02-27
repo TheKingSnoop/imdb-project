@@ -46,6 +46,7 @@ const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, 
     if (data && data.error && data.error.message === "Unauthorized") {
       alert('Session expired, please login again.')
       navigate('/login')
+      cookies.remove('jwt');
     } else {
       setMovies(data)
       setFilterUserInput("")
