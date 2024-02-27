@@ -42,7 +42,6 @@ const SlickerCarousel = ({ movies, isDarkMode, currentUser, title}) => {
         ]
     };
     return (
-        
         <Container sx={{ display: 'flex', flexDirection:'column', justifyContent: 'center', width: '90%'}}>
             <Typography sx={{color:isDarkMode? 'white' : 'black', fontFamily:'Russo One'}}>{title}</Typography>
             <Box sx={{ maxWidth: '100%', height: 'auto', padding: { md: '30px' } }}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Card, CardMedia, CardContent, Typography, Stack, Grid } from '@mui/material';
-import { lineHeight } from '@mui/system';
 import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardService'
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 

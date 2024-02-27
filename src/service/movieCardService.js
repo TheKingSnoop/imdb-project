@@ -1,12 +1,12 @@
-export function addToSeenIt(props) {
+export function addToSeenIt(movie, currentUser) {
     const addMovie = {
-      user_Id: props.currentUser.id,
-      tmdb_Id: props.movies[props.index].tmdb_Id,
-      title: props.movies[props.index].title,
-      description: props.movies[props.index].description,
-      rating: props.movies[props.index].rating,
-      image: props.movies[props.index].image,
-      release_date: props.movies[props.index].release_date
+      user_Id: currentUser.id,
+      tmdb_Id: movie.tmdb_Id,
+      title: movie.title,
+      description: movie.description,
+      rating: movie.rating,
+      image: movie.image,
+      release_date: movie.release_date
     }
     return addMovie
   }
