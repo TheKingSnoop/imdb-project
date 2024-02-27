@@ -57,7 +57,7 @@ const Top20SlickerCarousel = ({ API_HOST, movies, isDarkMode, currentUser, title
                         )
                     })}
                 </Slider>
-                <SnackBarComponent setOpen={setOpenWatchListSnackBar} open={openWatchListSnackBar} message={'Added to My Watch List. Click here to view watch list.'} path={"/mywatchlist"} />
+                <SnackBarComponent setOpen={setOpenWatchListSnackBar} open={openWatchListSnackBar} message={'Added to My Watchlist. Click here to view Watchlist.'} path={"/mywatchlist"} />
                 <SnackBarComponent setOpen={setOpenSeenItSnackBar} open={openSeenItSnackBar} message={'Added to My Movies. Click here to review now.'} path={"/myMovies"} />
             </Box>
         </Container>

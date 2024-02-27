@@ -3,7 +3,6 @@ import { Typography, Box, Card, CardContent, CardActions, Button, CardMedia, Sta
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { addToSeenIt, dynamicRating, formatDate } from '../../service/movieCardService'
 import Cookies from 'universal-cookie'
-import SnackBarComponent from '../snackBar/SnackBarComponent';
 
 const MovieCard = ({movie, API_HOST, currentUser, setOpenSeenItSnackBar, setOpenWatchListSnackBar}) => {
   const cookies = new Cookies();
@@ -40,17 +39,18 @@ const MovieCard = ({movie, API_HOST, currentUser, setOpenSeenItSnackBar, setOpen
         </Tooltip>
         <CardContent sx={{ paddingBottom: '0px' }}>
           <Typography variant='body2' sx={{ display: "flex", flexDirection: "column", overflowX: "hidden", height: "90px" }}>{movie.description}</Typography> 
-          <Stack direction="row" spacing={1}>
-            <Box sx={{display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-start', gap: '10px',  padding: '10px 0'}}>
+          <Stack direction="row" spacing={1} sx={{display:'flex', alignItems:'center'}}>
+            <Box sx={{display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-start', gap: '10px',  padding: '5px 0'}}>
               <StarOutlineIcon sx={{ color: colourRating }} />
               <Typography variant='body2' sx={{ color: colourRating }}>{Math.round(movie.rating * 10) / 10}</Typography>
             </Box>
+              <Typography variant='body2'>{releaseYear}</Typography>
           </Stack>
-          <Typography variant='body2'>{releaseYear}</Typography>
+          
         </CardContent>
         {/* signed in and home page */}
         {currentUser && 
-            <CardActions>
+            <CardActions sx={{paddingTop:'0px', display:'flex', justifyContent:'center'}}>
               <Tooltip title='Add to my movies seen'>
                 <Button onClick={()=> handleSubmit("movie/addMovie", setOpenSeenItSnackBar)} size='medium' color='secondary' sx={{
                   bgcolor: "primary.main", '&:hover': {
@@ -60,12 +60,12 @@ const MovieCard = ({movie, API_HOST, currentUser, setOpenSeenItSnackBar, setOpen
                 </Button>
               </Tooltip>
 
-              <Tooltip title='Add to your watch list'>
+              <Tooltip title='Add to your watchlist'>
                 <Button onClick={()=> handleSubmit("watchlist/addMovie", setOpenWatchListSnackBar)} size='medium' color='secondary' sx={{
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
-                }}>+ Watch List
+                }}>+ Watchlist
                 </Button>
               </Tooltip>
              </CardActions>

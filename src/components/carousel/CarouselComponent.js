@@ -37,7 +37,7 @@ const CarouselComponent = ({ watchlistMovies, isDarkMode }) => {
             })}
         </Carousel> :
         <Typography variant='h5' sx={{ fontFamily: 'Russo One', color: isDarkMode && "white", fontSize:{xs:'16px', sm:'20px'} }}>
-            No movies added in watch list</Typography>}
+            No movies added in Watchlist</Typography>}
             
         </Container>
     )

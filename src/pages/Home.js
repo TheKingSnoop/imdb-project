@@ -51,9 +51,9 @@ const Home = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDa
       <Container maxWidth='1249px' sx={{ py: 3, px: '0px'}}>
         <SearchBar API_HOST={API_HOST} setMovies={setMovies} isDarkMode={isDarkMode} getTop20Movies={getTop20Movies} setLandingPageText={setLandingPageText} />
         <Top20SlickerCarousel movies={movies} isDarkMode={isDarkMode} currentUser={currentUser} title={landingPageText} API_HOST={API_HOST}/>
-        <SlickerCarousel movies={horrorMovies} isDarkMode={isDarkMode} title={'Horror'} currentUser={currentUser}/>
-        <SlickerCarousel movies={comedyMovies} isDarkMode={isDarkMode} title={'Comedy'} currentUser={currentUser}/>
-        <SlickerCarousel movies={sciFiMovies} isDarkMode={isDarkMode} title={'Sci-Fi'} currentUser={currentUser}/>
+        <SlickerCarousel movies={horrorMovies} isDarkMode={isDarkMode} title={'Horror'} currentUser={currentUser} API_HOST={API_HOST}/>
+        <SlickerCarousel movies={comedyMovies} isDarkMode={isDarkMode} title={'Comedy'} currentUser={currentUser} API_HOST={API_HOST}/>
+        <SlickerCarousel movies={sciFiMovies} isDarkMode={isDarkMode} title={'Sci-Fi'} currentUser={currentUser} API_HOST={API_HOST}/>
         {/* <MovieContainer API_HOST={API_HOST} movies={movies} currentUser={currentUser} landingPageText={landingPageText} isDarkMode={isDarkMode} /> */}
        </Container>
     </>

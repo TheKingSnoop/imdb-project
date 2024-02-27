@@ -5,8 +5,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import { CardMedia, Typography, Card, Container, Box } from '@mui/material';
 import './SlickerCarousel.css'
 import MovieDialog from '../dialog/MovieDialog';
+import SnackBarComponent from '../snackBar/SnackBarComponent';
 
-const SlickerCarousel = ({ movies, isDarkMode, currentUser, title}) => {
+const SlickerCarousel = ({ movies, isDarkMode, currentUser, title, API_HOST}) => {
+    const [openSeenItSnackBar, setOpenSeenItSnackBar] = useState(false);
+    const [openWatchListSnackBar, setOpenWatchListSnackBar] = useState(false);
+
     const settings = {
         dots: false,
         infinite: false,
@@ -48,10 +52,12 @@ const SlickerCarousel = ({ movies, isDarkMode, currentUser, title}) => {
                 <Slider {...settings}>
                     {movies.map((movie, index) => {
                         return (
-                            <MovieDialog movie={movie} key={index} isDarkMode={isDarkMode} currentUser={currentUser}/>
+                            <MovieDialog movie={movie} key={index} API_HOST={API_HOST} isDarkMode={isDarkMode} currentUser={currentUser} setOpenWatchListSnackBar={setOpenWatchListSnackBar} setOpenSeenItSnackBar={setOpenSeenItSnackBar}/>
                         )
                     })}
                 </Slider>
+                <SnackBarComponent setOpen={setOpenWatchListSnackBar} open={openWatchListSnackBar} message={'Added to My Watchlist. Click here to view Watchlist.'} path={"/mywatchlist"} />
+                <SnackBarComponent setOpen={setOpenSeenItSnackBar} open={openSeenItSnackBar} message={'Added to My Movies. Click here to review now.'} path={"/myMovies"} />
             </Box>
         </Container>
     )

@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 const DrawerComp = ({ currentUser, logout, isDarkMode, setIsDarkMode}) => {
     const [openDrawer, setOpenDrawer] = useState(false);
-    const menuListItems = [{itemName: "Seen", navLink: '/mymovies'}, {itemName: "Watch List", navLink: '/mywatchlist'}]
+    // const menuListItems = [{itemName: "Seen", navLink: '/mymovies'}, {itemName: "Watchlist", navLink: '/mywatchlist'}]
     return (
         <React.Fragment>
             <Drawer open={openDrawer} anchor='right' onClose={() => setOpenDrawer(false)}>

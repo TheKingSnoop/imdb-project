@@ -21,7 +21,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
         navigate('/');
         window.location.reload();
     };
-    const menuListItems = [{itemName: "Seen", navLink: '/mymovies'}, {itemName: "Watch List", navLink: '/mywatchlist'}]
+    const menuListItems = [{itemName: "Seen", navLink: '/mymovies'}, {itemName: "Watchlist", navLink: '/mywatchlist'}]
     return (
         <React.Fragment>
             <CssBaseline />
