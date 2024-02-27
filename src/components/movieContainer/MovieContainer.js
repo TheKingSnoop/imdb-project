@@ -12,15 +12,8 @@ const MovieContainer = ({ API_HOST, movies, currentUser, readOnly, landingPageTe
                     return <Grid key={index} item md={3} sm={6} xs={12} >
                         <MovieCard
                         API_HOST={API_HOST}
-                        movies={movies}
-                        index={index}
                         currentUser={currentUser}
-                        title={movie.title}
-                        rating={movie.rating}
-                        description={movie.description}
-                        release_date={movie.release_date}
-                        image={movie.image}
-                        id={movie.tmdb_id}
+                        movie={movie}
                         readOnly={readOnly}
                         />
                     </Grid>

@@ -13,7 +13,7 @@ import MovieIcon from '@mui/icons-material/Movie';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, isDarkMode }) => {
   const ukDateFormat = formatDate(user[0].date_joined);
   const navigate = useNavigate();
   const handleClick = () => {
@@ -37,33 +37,33 @@ const UserCard = ({ user }) => {
   }
 
   return (
-    <Card onClick={handleClick} sx={{ height: '100%', backgroundImage: 'linear-gradient(to bottom right, #c5dffc, #6AAFF8)', '&:hover': { cursor: 'pointer' }, }}>
-      <Box sx={{ padding: '5px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', marginBottom: '10px', backgroundImage: 'linear-gradient(to bottom right, #3d93f5, #167df3)' }}>
+    <Card onClick={handleClick} sx={{ color:"white", height: '100%', backgroundImage: isDarkMode? 'linear-gradient(to bottom right, #333333, #0a0a0a)' : 'linear-gradient(to bottom right, #ef5350, #ef5350)' , '&:hover': { cursor: 'pointer' }, }}>
+      <Box sx={{ padding: '5px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', marginBottom: '10px', backgroundImage: 'linear-gradient(to bottom right, #ef5350, #c62828)' }}>
         <Typography align='center' sx={{ fontFamily: 'Russo One', zIndex: '1' }}>{user[0].username}</Typography>
-        {user[0].profile_pic ? <CardMedia sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-20%)', border: '2px solid #3d93f5', borderRadius: '50%', height: '70px', width: '70px' }} component='img' image={profilePic(user[0].profile_pic)} width='100%' /> : <Avatar sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-20%)', border: '2px solid #3d93f5', borderRadius: '50%', height: '70px', width: '70px', bgcolor: '#d32f2f' }} />}
+        {user[0].profile_pic ? <CardMedia sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-20%)', border: '2px solid #c62828', borderRadius: '50%', height: '70px', width: '70px' }} component='img' image={profilePic(user[0].profile_pic)} width='100%' /> : <Avatar sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-20%)', border: '2px solid #c62828', borderRadius: '50%', height: '70px', width: '70px', bgcolor: '#d32f2f' }} />}
       </Box>
       <Box sx={{ padding: '0px 10px 10px 10px' }}>
         <Box marginBottom='5px' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <CalendarMonthIcon fontSize='small'/>
-            <Typography color='dimGray'  variant='body2' sx={{ fontFamily: 'Acme' }}>Date Joined:</Typography>
+            <CalendarMonthIcon sx={{color: isDarkMode? '#B8B8B8': '#E0E0E0'}} fontSize='small'/>
+            <Typography color= {isDarkMode? '#B8B8B8': '#E0E0E0' }variant='body2' sx={{ fontFamily: 'Acme' }}>Date Joined:</Typography>
           </Box>
           <Typography variant='body2' gutterBottom sx={{ fontFamily: 'Acme' }}> {ukDateFormat}</Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <MovieIcon fontSize='small'/>
-          <Typography color='dimGray' variant='body2' sx={{ fontFamily: 'Acme' }}>Favourite Movie:</Typography>
+          <MovieIcon sx={{color: isDarkMode? '#B8B8B8': '#E0E0E0'}} fontSize='small'/>
+          <Typography color= {isDarkMode? '#B8B8B8': '#E0E0E0' } variant='body2' sx={{ fontFamily: 'Acme' }}>Favourite Movie:</Typography>
         </Box>
         <Typography variant='body2' marginLeft='24px' gutterBottom sx={{ fontFamily: 'Acme' }}>{user[0].fav_movie}</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <FormatQuoteIcon fontSize='small' />
-          <Typography color='dimGray' variant='body2' sx={{ fontFamily: 'Acme' }}>Favourite Movie Quote:</Typography>
+          <FormatQuoteIcon sx={{color: isDarkMode? '#B8B8B8': '#E0E0E0'}} fontSize='small' />
+          <Typography color= {isDarkMode? '#B8B8B8': '#E0E0E0' } variant='body2' sx={{ fontFamily: 'Acme' }}>Favourite Movie Quote:</Typography>
         </Box>
         <Typography variant='body2' marginLeft='24px' gutterBottom sx={{ fontFamily: 'Acme' }}>{user[0].fav_quote === '""' ? "" : user[0].fav_quote}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <TheaterComedyIcon fontSize='small'/>
-            <Typography color='dimGray' variant='body2' gutterBottom sx={{ fontFamily: 'Acme' }}>Favourite Movie Genre:</Typography>
+            <TheaterComedyIcon sx={{color: isDarkMode? '#B8B8B8': '#E0E0E0'}} fontSize='small'/>
+            <Typography color= {isDarkMode? '#B8B8B8': '#E0E0E0' } variant='body2' gutterBottom sx={{ fontFamily: 'Acme' }}>Favourite Movie Genre:</Typography>
           </Box>
           <Typography variant='body2' gutterBottom sx={{ fontFamily: 'Acme' }}> {user[0].fav_genre}</Typography>
         </Box>
