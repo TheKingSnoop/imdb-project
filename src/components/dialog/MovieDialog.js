@@ -47,7 +47,7 @@ const MovieDialog = ({ API_HOST, dialogText, dialogTitle, movies, index, isDarkM
                         <Typography sx={{ fontFamily: 'Russo One', color: isDarkMode ? "#8f8f8f" : 'dimGrey' }}>{movie.release_date.slice(0, 4)}</Typography>
                     </Stack>
                 </DialogTitle>
-                <DialogContent sx={{ bgcolor: 'primary.light', display: 'flex', padding:'0px 16px 0px 16px', flexDirection:{xs:'column', sm:'row'}, alignItems:'center' }}>
+                <DialogContent sx={{ bgcolor: 'primary.light', display: 'flex', padding:'0px 16px 10px 16px', flexDirection:{xs:'column', sm:'row'}, alignItems:'center' }}>
                     <Box component='img' src={movie.image} sx={{ borderRadius:'5px', width: {xs:'50%', sm:'40%'}, display: 'flex', justifyContent: 'center', marginBottom: '10px', marginRight:{xs:'0px', sm:'15px'}  }}>
                         {/* <Card sx={{ width: { xs: '150px', sm: '250px' } }}>
                             <CardMedia component='img' width='100%' image={movie.image} />
@@ -64,10 +64,10 @@ const MovieDialog = ({ API_HOST, dialogText, dialogTitle, movies, index, isDarkM
                     </DialogContentText>
 
                 </DialogContent>
-                {currentUser && <DialogActions sx={{ bgcolor: 'primary.light' }}>
+                {currentUser && <DialogActions sx={{ bgcolor: 'primary.light', paddingTop:'0px' }}>
                     <Grid container spacing={1}>
                         <Grid item sm={4} xs={12}>
-                            <Button variant='contained' autoFocus onClick={() => handleSubmit("movie/addMovie", setOpenSeenItSnackBar)} sx={{ width: '100%' }}>
+                            <Button variant='contained' autoFocus onClick={() => handleSubmit("movie/addMovie", setOpenSeenItSnackBar)} sx={{ width: '100%', '&:active': { marginTop: '2px', marginBottom: '-2px', boxShadow: '0px 0px' } }}>
                                 + Seen It
                             </Button>
                         </Grid>

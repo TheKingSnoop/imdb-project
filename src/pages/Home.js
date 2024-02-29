@@ -3,8 +3,8 @@ import MovieContainer from '../components/movieContainer/MovieContainer'
 import SearchBar from '../components/searchBar/SearchBar'
 import { Container, Box, Typography, Button } from '@mui/material'
 import HeroSection from '../components/heroSection/HeroSection'
-import SlickerCarousel from '../components/carousel/SlickerCarousel'
-import Top20SlickerCarousel from '../components/carousel/Top20SlickerCarousel'
+import ElasticCarousel from '../components/carousel/ElasticCarousel'
+import Top20ElasticCarousel from '../components/carousel/Top20ElasticCarousel'
 import SnackBarComponent from '../components/snackBar/SnackBarComponent'
 
 const Home = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
@@ -48,12 +48,12 @@ const Home = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDa
   return (
     <>
       <HeroSection movies={movies} />
-      <Container maxWidth='1249px' sx={{ py: 3, px: '0px'}}>
+      <Container maxWidth='1024px' sx={{ py: 3, px: '0px'}}>
         <SearchBar API_HOST={API_HOST} setMovies={setMovies} isDarkMode={isDarkMode} getTop20Movies={getTop20Movies} setLandingPageText={setLandingPageText} />
-        <Top20SlickerCarousel movies={movies} isDarkMode={isDarkMode} currentUser={currentUser} title={landingPageText} API_HOST={API_HOST}/>
-        <SlickerCarousel movies={horrorMovies} isDarkMode={isDarkMode} title={'Horror'} currentUser={currentUser} API_HOST={API_HOST}/>
-        <SlickerCarousel movies={comedyMovies} isDarkMode={isDarkMode} title={'Comedy'} currentUser={currentUser} API_HOST={API_HOST}/>
-        <SlickerCarousel movies={sciFiMovies} isDarkMode={isDarkMode} title={'Sci-Fi'} currentUser={currentUser} API_HOST={API_HOST}/>
+        <Top20ElasticCarousel movies={movies} isDarkMode={isDarkMode} currentUser={currentUser} title={landingPageText} API_HOST={API_HOST}/>
+        <ElasticCarousel movies={horrorMovies} isDarkMode={isDarkMode} title={'Horror'} currentUser={currentUser} API_HOST={API_HOST}/>
+        <ElasticCarousel movies={comedyMovies} isDarkMode={isDarkMode} title={'Comedy'} currentUser={currentUser} API_HOST={API_HOST}/>
+        <ElasticCarousel movies={sciFiMovies} isDarkMode={isDarkMode} title={'Sci-Fi'} currentUser={currentUser} API_HOST={API_HOST}/>
         {/* <MovieContainer API_HOST={API_HOST} movies={movies} currentUser={currentUser} landingPageText={landingPageText} isDarkMode={isDarkMode} /> */}
        </Container>
     </>
