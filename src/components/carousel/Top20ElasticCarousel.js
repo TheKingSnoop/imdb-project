@@ -24,7 +24,7 @@ const Top20ElasticCarousel = ({ API_HOST, movies, isDarkMode, currentUser, title
                 <Carousel breakPoints={breakPoints}>
                     {movies.map((movie, index) => {
                         return (
-                            <MovieCard index={index} movie={movie} isDarkMode={isDarkMode} currentUser={currentUser} API_HOST={API_HOST} setOpenWatchListSnackBar={setOpenWatchListSnackBar} setOpenSeenItSnackBar={setOpenSeenItSnackBar}/>
+                            <MovieCard key={index} movie={movie} isDarkMode={isDarkMode} currentUser={currentUser} API_HOST={API_HOST} setOpenWatchListSnackBar={setOpenWatchListSnackBar} setOpenSeenItSnackBar={setOpenSeenItSnackBar}/>
                         )
                     })}
                 </Carousel>

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import Slider from 'react-slick';
 import Carousel from 'react-elastic-carousel'
-import {Typography, Card, Container, Box } from '@mui/material';
-import './SlickerCarousel.css'
+import {Typography, Box } from '@mui/material';
 import MovieDialog from '../dialog/MovieDialog';
 import SnackBarComponent from '../snackBar/SnackBarComponent';
 
