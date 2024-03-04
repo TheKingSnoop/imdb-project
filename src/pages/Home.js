@@ -53,13 +53,13 @@ const Home = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   return (
     <>
       <HeroSection movies={movies} />
-      <Container maxWidth='1024px' sx={{ py: 3, px: '0px'}}>
+      <Container sx={{ py: 3, px: '0px', maxWidth:'1024px'}}>
         <SearchBar API_HOST={API_HOST} setMovies={setMovies} isDarkMode={isDarkMode} getTop20Movies={getTop20Movies} setLandingPageText={setLandingPageText} />
         <Top20ElasticCarousel movies={movies} isDarkMode={isDarkMode} currentUser={currentUser} title={landingPageText} API_HOST={API_HOST} />
         <ElasticCarousel movies={horrorMovies} isDarkMode={isDarkMode} title={'Horror'} currentUser={currentUser} API_HOST={API_HOST} />
         <ElasticCarousel movies={comedyMovies} isDarkMode={isDarkMode} title={'Comedy'} currentUser={currentUser} API_HOST={API_HOST} />
         <ElasticCarousel movies={sciFiMovies} isDarkMode={isDarkMode} title={'Sci-Fi'} currentUser={currentUser} API_HOST={API_HOST} />
-        <ElasticCarousel movies={topRatedMovies} isDarkMode={isDarkMode} title={'Must Watch Before You Die'} currentUser={currentUser} API_HOST={API_HOST} />
+        <ElasticCarousel movies={topRatedMovies} isDarkMode={isDarkMode} title={'Must Watch'} currentUser={currentUser} API_HOST={API_HOST} />
       </Container>
     </>
   )

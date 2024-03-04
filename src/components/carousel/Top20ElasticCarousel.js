@@ -18,8 +18,8 @@ const Top20ElasticCarousel = ({ API_HOST, movies, isDarkMode, currentUser, title
 
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', paddingX:{xs:'10px', md:'63px'} }}>
-            <Typography sx={{ color: isDarkMode ? 'white' : 'black', fontFamily: 'Russo One', marginLeft:{xs:'20px', md:'70px'} }}>{title}</Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', paddingX:{xs:'10px', md:'0px'} }}>
+            <Typography sx={{ color: isDarkMode ? 'white' : 'black', fontFamily: 'Russo One', marginLeft:{xs:'20px', sm:'25px', md:'70px'} }}>{title}</Typography>
             <Box sx={{ maxWidth: '100%', height: 'auto',  }}>
                 <Carousel breakPoints={breakPoints}>
                     {movies.map((movie, index) => {

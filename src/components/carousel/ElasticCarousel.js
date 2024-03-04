@@ -12,10 +12,11 @@ const ElasticCarousel = ({ movies, isDarkMode, currentUser, title, API_HOST}) =>
         {width:1, itemsToShow: 2.25},
         {width:400, itemsToShow: 5.5, itemsToScroll: 5},
         {width:1024, itemsToShow: 7.5, itemsToScroll: 7},
+        {width:1500, itemsToShow: 9.5, itemsToScroll: 7}
     ]
 
     return (
-        <Box sx={{ display: 'flex', flexDirection:'column', justifyContent: 'center', width: '100%', paddingX:{xs:'10px', md:'63px'}}}>
+        <Box sx={{ display: 'flex', flexDirection:'column', justifyContent: 'center', width:'100%', paddingX:{xs:'10px', md:'0px'}}}>
             <Typography sx={{marginY:'10px', color:isDarkMode? 'white' : 'black', fontFamily:'Russo One', marginLeft:{xs:'20px', md:'70px'} }}>{title}</Typography>
             <Box sx={{ maxWidth: '100%', height: 'auto',  }}>
                 <Carousel breakPoints={breakPoints}>
