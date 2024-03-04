@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 import WatchListContainer from '../components/movieContainer/WatchListContainer';
 import { Box, Container } from '@mui/system';
 
-const WatchList = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
+const WatchList = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
     const cookies = new Cookies()
     const token = cookies.get('jwt')
     const user = { name: jwtDecode(token.token).username, id: jwtDecode(token.token).userId }

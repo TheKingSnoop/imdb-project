@@ -8,7 +8,7 @@ const SearchBar = ({ API_HOST, setMovies, isDarkMode, getTop20Movies, setLanding
     e.preventDefault();
 
     const getMovie = async () => {
-      const response = await fetch(`http://${API_HOST}/tmdb/${userInput}`)
+      const response = await fetch(`http://${API_HOST}/tmdb/title/${userInput}`)
       const data = await response.json();
       setMovies(data.payload)
     }

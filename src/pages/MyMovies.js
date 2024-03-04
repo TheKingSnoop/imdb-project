@@ -7,7 +7,7 @@ import { Typography, Container, Stack, Box } from '@mui/material';
 import HeroSection from '../components/heroSection/HeroSection';
 import { useNavigate } from 'react-router-dom';
 
-const MyMovies = ({ API_HOST, movies, setMovies, currentUser, movieDescription, isDarkMode }) => {
+const MyMovies = ({ API_HOST, movies, setMovies, currentUser, isDarkMode }) => {
   const [filterUserInput, setFilterUserInput] = useState("");
   const [isFavourite, setIsFavourite] = useState("all");
   
@@ -75,7 +75,7 @@ useEffect(() => {
           </Stack>
         </Box>
       <Container sx={{ padding: '0px' }}>
-        {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} movieDescription={movieDescription} getMyMovies={getMyMovies}/> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
+        {movies.length ? <MyMoviesMovieContainer API_HOST={API_HOST} setMovies={setMovies} movies={filteredFavMovieList} currentUser={currentUser} getMyMovies={getMyMovies}/> : <Typography>You haven't added any movies. You can add movies in the home page or no movie title matched the filter request.</Typography>}
       </Container>
     </Box>
   </>)

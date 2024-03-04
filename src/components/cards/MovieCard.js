@@ -33,7 +33,7 @@ const MovieCard = ({movie, API_HOST, currentUser, setOpenSeenItSnackBar, setOpen
   return (
 
     <Box width='200' sx={{ margin: '10px' }}>
-      <Card sx={{ minHeight: "400px", maxHeight: 'auto', minWidth: '120px', bgcolor: "primary.light", color: 'white' }}>
+      <Card sx={{ minHeight: "400px", maxWidth: '200px', minWidth: '120px', bgcolor: "primary.light", color: 'white' }}>
         <Tooltip title={movie.title}>
           <CardMedia component='img' width='100%' image={movie.image} sx={{ objectFit: 'contain', maxWidth: '100%' }} />
         </Tooltip>
@@ -52,7 +52,7 @@ const MovieCard = ({movie, API_HOST, currentUser, setOpenSeenItSnackBar, setOpen
         {currentUser && 
             <CardActions sx={{paddingTop:'0px', display:'flex', justifyContent:'center'}}>
               <Tooltip title='Add to my movies seen'>
-                <Button onClick={()=> handleSubmit("movie/addMovie", setOpenSeenItSnackBar)} size='medium' color='secondary' sx={{
+                <Button onClick={()=> handleSubmit("movie/addMovie", setOpenSeenItSnackBar)} size='small' color='secondary' sx={{
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
@@ -61,7 +61,7 @@ const MovieCard = ({movie, API_HOST, currentUser, setOpenSeenItSnackBar, setOpen
               </Tooltip>
 
               <Tooltip title='Add to your watchlist'>
-                <Button onClick={()=> handleSubmit("watchlist/addMovie", setOpenWatchListSnackBar)} size='medium' color='secondary' sx={{
+                <Button onClick={()=> handleSubmit("watchlist/addMovie", setOpenWatchListSnackBar)} size='small' color='secondary' sx={{
                   bgcolor: "primary.main", '&:hover': {
                     backgroundColor: 'primary.dark'
                   }
