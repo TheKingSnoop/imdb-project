@@ -1,7 +1,8 @@
 import React from 'react';
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
-
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Box, AppBar, CssBaseline, Typography, Toolbar, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import DrawerComp from '../drawer/DrawerComp';
@@ -79,7 +80,7 @@ const Navbar = ({ currentUser, isDarkMode, setIsDarkMode }) => {
                                 </NavLink>
                                 <Button onClick={logout} variant='contained' sx={{ backgroundColor: 'primary.light', marginLeft: '10px' }}>Log out</Button>
                             </>}
-                            <Button onClick={() => setIsDarkMode(prev => !prev)} variant='contained' sx={{ backgroundColor: 'primary.dark', marginLeft: '10px', '&:hover': { backgroundColor: 'primary.light' } }}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</Button>
+                            <Button onClick={() => setIsDarkMode(prev => !prev)} variant='contained' sx={{ backgroundColor: 'primary.dark', marginLeft: '10px', '&:hover': { backgroundColor: 'primary.light' }, '&:active': { marginTop: '2px', marginBottom: '-2px', boxShadow: '0px 0px' }  }}>{isDarkMode ? <> Light Mode <LightModeIcon fontSize='small' sx={{marginLeft:'5px', color:'yellow'}}/> </>: <>Dark Mode<DarkModeIcon fontSize='small' sx={{marginLeft:'5px', color:'#333333'}}/></>}</Button>
                         </Stack>
                     </>}
                 </Toolbar></Box>
